@@ -16,7 +16,7 @@ class TaiSan(models.Model):
 
     ma_tai_san = fields.Char("Mã Tài sản", required=True)
     ten_tai_san = fields.Char("Tên Tài sản", required=True)
-    so_serial = fields.Char("Số serial", required=True)
+    so_serial = fields.Char("Số serial", required=True, copy=False, readonly=True, default="New")
     ngay_mua = fields.Date("Ngày mua")
     ngay_het_han_bao_hanh = fields.Date("Ngày hết hạn bảo hành")
     gia_tien_mua = fields.Float("Giá tiền mua", digits=(16, 2))
@@ -56,3 +56,9 @@ class TaiSan(models.Model):
                 years = relativedelta(fields.Date.today(), record.ngay_mua).years
                 depreciation_rate = 0.1  # 10% mỗi năm
                 record.gia_tri_hien_tai = max(0, record.gia_tien_mua * (1 - depreciation_rate * years))
+
+    @api.model
+    def create(self, vals):
+        if vals.get('so_serial', 'New') == 'New':
+            vals['so_serial'] = self.env['ir.sequence'].next_by_code('tai.san.serial') or 'New'
+        return super(TaiSan, self).create(vals)
