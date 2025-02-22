@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tai_san,tai_san.tai_san,model_tai_san,base.group_user,1,1,1,1
+access_loai_tai_san,loai_tai_san.loai_tai_san,model_loai_tai_san,base.group_user,1,1,1,1
