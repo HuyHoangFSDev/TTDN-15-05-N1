@@ -12,6 +12,7 @@
                             <field name="ten_tai_san"/>
                             <field name="so_serial" attrs="{'readonly': [('id', '!=', False)]}"/>
                             <field name="loai_tai_san_id"/>
+                            <field name="nha_cung_cap_id"/>
                             <field name="vi_tri_id"/>
                             <field name="lich_su_su_dung_ids"/>
                             <field name="khau_hao_ids"/>
@@ -42,6 +43,7 @@
                     <field name="ma_tai_san"/>
                     <field name="so_serial" attrs="{'readonly': [('id', '!=', False)]}"/>
                     <field name="loai_tai_san_id"/>
+                    <field name="nha_cung_cap_id"/>
                     <field name="vi_tri_id"/>
                     <field name="lich_su_su_dung_ids"/>
                     <field name="khau_hao_ids"/>

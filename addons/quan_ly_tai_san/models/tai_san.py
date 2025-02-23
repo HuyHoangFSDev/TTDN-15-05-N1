@@ -53,7 +53,7 @@ class TaiSan(models.Model):
         store=True
     )
     khau_hao_ids = fields.One2many(
-        comodel_name='khau_hao_id',
+        comodel_name='khau_hao',
         inverse_name='tai_san_id',
         string="Khấu hao",
         store=True

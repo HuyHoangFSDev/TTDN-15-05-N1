@@ -48,5 +48,17 @@
                   sequence="1"
                   action="action_lich_su_su_dung"
         />
+        <menuitem name="Quản lý lịch sử bảo trì"
+                  id="menu_lich_su_bao_tri"
+                  parent="menu_root"
+                  sequence="1"
+                  action="action_lich_su_bao_tri"
+        />
+        <menuitem name="Quản lý khấu hao"
+                  id="menu_khau_hao"
+                  parent="menu_root"
+                  sequence="1"
+                  action="action_khau_hao"
+        />
     </data>
 </odoo>

@@ -12,7 +12,7 @@
                             <field name="phuong_phap_khau_hao"/>
                             <field name="ngay_khau_hao"/>
                             <field name="gia_tri_khau_hao"/>
-                            <field name="chi_phi"/>
+                            <field name="gia_tri_con_lai"/>
                             <field name="tai_san_id"/>
                         </group>
                     </sheet>
@@ -44,7 +44,7 @@
                     <field name="phuong_phap_khau_hao"/>
                     <field name="ngay_khau_hao"/>
                     <field name="gia_tri_khau_hao"/>
-                    <field name="chi_phi"/>
+                    <field name="gia_tri_con_lai"/>
                     <field name="tai_san_id"/>
                 </search>
             </field>

@@ -10,11 +10,11 @@ class PhongBan(models.Model):
     _rec_name = "ten_phong_ban"
     _order = 'ma_phong_ban'
     _sql_constraints = [
-        ('ma_phong_ban_unique', 'unique(ma_phong_ban)', 'Mã vị trí phải là duy nhất!'),
+        ('ma_phong_ban_unique', 'unique(ma_phong_ban)', 'Mã phòng ban phải là duy nhất!'),
     ]
 
-    ma_phong_ban = fields.Char("Mã vị trí", required=True)
-    ten_phong_ban = fields.Char("Tên vị trí", required=True)
+    ma_phong_ban = fields.Char("Mã phòng ban", required=True)
+    ten_phong_ban = fields.Char("Tên phòng ban", required=True)
     mo_ta = fields.Char("Mô tả")
     nhan_vien_ids = fields.One2many(comodel_name="nhan_vien", inverse_name="phong_ban_id", string= "Nhân viên",store=True)
 
