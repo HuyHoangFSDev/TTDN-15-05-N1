@@ -24,3 +24,9 @@ class LichSuBaoTri(models.Model):
         for record in self:
             if not re.fullmatch(r'LSBT-\d{4}', record.ma_lich_su_bao_tri):
                 raise ValidationError("Mã phải có định dạng LSBT-XXXX (ví dụ: LSBT-1234)")
+
+    @api.model
+    def create(self, vals):
+        if vals.get('ma_lich_su_bao_tri', 'New') == 'New':
+            vals['ma_lich_su_bao_tri'] = self.env['ir.sequence'].next_by_code('lich_su_bao_tri') or 'New'
+        return super(LichSuBaoTri, self).create(vals)

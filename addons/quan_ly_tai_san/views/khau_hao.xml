@@ -51,7 +51,7 @@
         </record>
 
         <record id="action_khau_hao" model="ir.actions.act_window">
-            <field name="name">Lịch sử bảo trì</field>
+            <field name="name">Khấu hao</field>
             <field name="res_model">khau_hao</field>
             <field name="view_mode">tree,form</field>
             <field name="search_view_id" ref="khau_hao_search"/>

@@ -8,12 +8,12 @@
                 <form>
                     <sheet>
                         <group>
-                            <field name="ma_lich_su_su_dung"/>
+                            <field name="ma_lich_su_su_dung" readonly="1"/>
                             <field name="ngay_muon"/>
                             <field name="ngay_tra"/>
-                            <field name="ghi_chu"/>
                             <field name="nhan_vien_id"/>
                             <field name="tai_san_id"/>
+                            <field name="ghi_chu"/>
                         </group>
                     </sheet>
                 </form>
@@ -25,12 +25,12 @@
             <field name="model">lich_su_su_dung</field>
             <field name="arch" type="xml">
                 <tree string="Danh sách lịch sử sử dụng">
-                    <field name="ma_lich_su_su_dung"/>
+                    <field name="ma_lich_su_su_dung" readonly="1"/>
                     <field name="ngay_muon"/>
                     <field name="ngay_tra"/>
-                    <field name="ghi_chu"/>
                     <field name="nhan_vien_id"/>
                     <field name="tai_san_id"/>
+                    <field name="ghi_chu"/>
                 </tree>
             </field>
         </record>
@@ -40,12 +40,12 @@
             <field name="model">lich_su_su_dung</field>
             <field name="arch" type="xml">
                 <search>
-                    <field name="ma_lich_su_su_dung"/>
+                    <field name="ma_lich_su_su_dung" readonly="1"/>
                     <field name="ngay_muon"/>
                     <field name="ngay_tra"/>
-                    <field name="ghi_chu"/>
                     <field name="nhan_vien_id"/>
                     <field name="tai_san_id"/>
+                    <field name="ghi_chu"/>
                 </search>
             </field>
         </record>

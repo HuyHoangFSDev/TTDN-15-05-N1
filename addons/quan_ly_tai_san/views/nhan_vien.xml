@@ -7,7 +7,7 @@
             <field name="arch" type="xml">
                 <form>
                     <sheet>
-                        <grsoup>
+                        <group>
                             <field name="ma_nhan_vien"/>
                             <field name="ten_nhan_vien"/>
                             <field name="ngay_sinh"/>
@@ -15,7 +15,7 @@
                             <field name="dia_chi"/>
                             <field name="phong_ban_id"/>
                             <field name="lich_su_su_dung_ids"/>
-                        </grsoup>
+                        </group>
                     </sheet>
                 </form>
             </field>
@@ -53,7 +53,7 @@
         </record>
 
         <record id="action_nhan_vien" model="ir.actions.act_window">
-            <field name="name">Phòng ban</field>
+            <field name="name">Nhân viên</field>
             <field name="res_model">nhan_vien</field>
             <field name="view_mode">tree,form</field>
             <field name="search_view_id" ref="nhan_vien_search"/>

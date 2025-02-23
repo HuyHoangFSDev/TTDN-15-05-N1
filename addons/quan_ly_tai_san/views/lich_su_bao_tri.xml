@@ -8,12 +8,12 @@
                 <form>
                     <sheet>
                         <group>
-                            <field name="ma_lich_su_bao_tri"/>
+                            <field name="ma_lich_su_bao_tri" readonly="1"/>
                             <field name="ngay_bao_tri"/>
                             <field name="ngay_tra"/>
                             <field name="chi_phi"/>
-                            <field name="ghi_chu"/>
                             <field name="tai_san_id"/>
+                            <field name="ghi_chu"/>
                         </group>
                     </sheet>
                 </form>
@@ -25,12 +25,12 @@
             <field name="model">lich_su_bao_tri</field>
             <field name="arch" type="xml">
                 <tree string="Danh sách lịch sử bảo trì">
-                    <field name="ma_lich_su_bao_tri"/>
+                    <field name="ma_lich_su_bao_tri" readonly="1"/>
                     <field name="ngay_bao_tri"/>
                     <field name="ngay_tra"/>
                     <field name="chi_phi"/>
-                    <field name="ghi_chu"/>
                     <field name="tai_san_id"/>
+                    <field name="ghi_chu"/>
                 </tree>
             </field>
         </record>
@@ -40,12 +40,12 @@
             <field name="model">lich_su_bao_tri</field>
             <field name="arch" type="xml">
                 <search>
-                    <field name="ma_lich_su_bao_tri"/>
+                    <field name="ma_lich_su_bao_tri" readonly="1"/>
                     <field name="ngay_bao_tri"/>
                     <field name="ngay_tra"/>
                     <field name="chi_phi"/>
-                    <field name="ghi_chu"/>
                     <field name="tai_san_id"/>
+                    <field name="ghi_chu"/>
                 </search>
             </field>
         </record>
