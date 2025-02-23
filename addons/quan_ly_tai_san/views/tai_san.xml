@@ -13,6 +13,9 @@
                             <field name="so_serial" attrs="{'readonly': [('id', '!=', False)]}"/>
                             <field name="loai_tai_san_id"/>
                             <field name="vi_tri_id"/>
+                            <field name="lich_su_su_dung_ids"/>
+                            <field name="khau_hao_ids"/>
+
                             <field name="trang_thai" widget="selection"/>
                         </group>
                         <notebook>
@@ -40,6 +43,8 @@
                     <field name="so_serial" attrs="{'readonly': [('id', '!=', False)]}"/>
                     <field name="loai_tai_san_id"/>
                     <field name="vi_tri_id"/>
+                    <field name="lich_su_su_dung_ids"/>
+                    <field name="khau_hao_ids"/>
                     <field name="ngay_mua"/>
                     <field name="gia_tien_mua" widget="monetary"/>
                     <field name="gia_tri_hien_tai" widget="monetary"/>

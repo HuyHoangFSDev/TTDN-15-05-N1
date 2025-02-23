@@ -46,6 +46,18 @@ class TaiSan(models.Model):
         string="Lịch sử sử dụng",
         store=True
     )
+    lich_su_bao_tri_ids = fields.One2many(
+        comodel_name='lich_su_bao_tri',
+        inverse_name='tai_san_id',
+        string="Lịch sử bảo trì",
+        store=True
+    )
+    khau_hao_ids = fields.One2many(
+        comodel_name='khau_hao_id',
+        inverse_name='tai_san_id',
+        string="Khấu hao",
+        store=True
+    )
 
     @api.depends()
     def _compute_vi_tri(self):

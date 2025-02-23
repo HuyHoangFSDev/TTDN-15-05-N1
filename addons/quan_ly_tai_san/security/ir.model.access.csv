@@ -6,5 +6,7 @@ access_nha_cung_cap,nha_cung_cap.nha_cung_cap,model_nha_cung_cap,base.group_user
 access_phong_ban,phong_ban.phong_ban,model_phong_ban,base.group_user,1,1,1,1
 access_nhan_vien,nhan_vien.nhan_vien,model_nhan_vien,base.group_user,1,1,1,1
 access_lich_su_su_dung,lich_su_su_dung.lich_su_su_dung,model_lich_su_su_dung,base.group_user,1,1,1,1
+access_lich_su_bao_tri,lich_su_bao_tri.lich_su_bao_tri,model_lich_su_bao_tri,base.group_user,1,1,1,1
+access_khau_hao,khau_hao.khau_hao,model_khau_hao,base.group_user,1,1,1,1
 
 

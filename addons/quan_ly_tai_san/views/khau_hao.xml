@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_khau_hao_form" model="ir.ui.view">
+            <field name="name">khau_hao_form</field>
+            <field name="model">khau_hao</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="ma_khau_hao"/>
+                            <field name="phuong_phap_khau_hao"/>
+                            <field name="ngay_khau_hao"/>
+                            <field name="gia_tri_khau_hao"/>
+                            <field name="chi_phi"/>
+                            <field name="tai_san_id"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_khau_hao_tree" model="ir.ui.view">
+            <field name="name">khau_hao_tree</field>
+            <field name="model">khau_hao</field>
+            <field name="arch" type="xml">
+                <tree string="Danh sách khấu hao">
+                    <field name="ma_khau_hao"/>
+                    <field name="phuong_phap_khau_hao"/>
+                    <field name="ngay_khau_hao"/>
+                    <field name="gia_tri_khau_hao"/>
+                    <field name="gia_tri_con_lai"/>
+                    <field name="tai_san_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="khau_hao_search" model="ir.ui.view">
+            <field name="name">khau_hao_search</field>
+            <field name="model">khau_hao</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="ma_khau_hao"/>
+                    <field name="phuong_phap_khau_hao"/>
+                    <field name="ngay_khau_hao"/>
+                    <field name="gia_tri_khau_hao"/>
+                    <field name="chi_phi"/>
+                    <field name="tai_san_id"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_khau_hao" model="ir.actions.act_window">
+            <field name="name">Lịch sử bảo trì</field>
+            <field name="res_model">khau_hao</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="khau_hao_search"/>
+        </record>
+    </data>
+</odoo>

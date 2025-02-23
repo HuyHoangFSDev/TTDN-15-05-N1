@@ -33,6 +33,8 @@
         'views/phong_ban.xml',
         'views/nhan_vien.xml',
         'views/lich_su_su_dung.xml',
+        'views/lich_su_bao_tri.xml',
+        'views/khau_hao.xml',
         'views/menu.xml',
     ],
     # only loaded in demonstration mode
