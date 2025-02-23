@@ -10,6 +10,7 @@ class TaiSan(models.Model):
     _name = 'tai_san'
     _description = 'Bảng chứa thông tin tài sản'
     _order = 'ma_tai_san'
+    _rec_name = 'ten_tai_san'
     _sql_constraints = [
         ('ma_tai_san_unique', 'unique(ma_tai_san)', 'Mã tài sản phải là duy nhất!')
     ]
@@ -30,7 +31,27 @@ class TaiSan(models.Model):
     ]
 
     trang_thai = fields.Selection(TRANG_THAI, string="Trạng thái", default="LuuTru", tracking=True)
+
+    ## Quan hệ các bảng
     loai_tai_san_id = fields.Many2one(comodel_name='loai_tai_san', string="Loại tài sản", required=True)
+    vi_tri_id = fields.Many2one('vi_tri', string="Vị trí", compute='_compute_vi_tri', store=True)
+    nha_cung_cap_id = fields.Many2one(
+        comodel_name='nha_cung_cap',
+        string="Nhà cung cấp",
+        store=True
+    )
+    lich_su_su_dung_ids = fields.One2many(
+        comodel_name='lich_su_su_dung',
+        inverse_name='tai_san_id',
+        string="Lịch sử sử dụng",
+        store=True
+    )
+
+    @api.depends()
+    def _compute_vi_tri(self):
+        for asset in self:
+            vi_tri = self.env['vi_tri'].search([('tai_san_id', '=', asset.id)], limit=1)
+            asset.vi_tri_id = vi_tri.id if vi_tri else False
 
     @api.constrains('ngay_mua', 'ngay_het_han_bao_hanh')
     def _check_dates(self):

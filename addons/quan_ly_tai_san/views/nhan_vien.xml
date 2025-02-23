@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_nhan_vien_form" model="ir.ui.view">
+            <field name="name">nhan_vien_form</field>
+            <field name="model">nhan_vien</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <grsoup>
+                            <field name="ma_nhan_vien"/>
+                            <field name="ten_nhan_vien"/>
+                            <field name="ngay_sinh"/>
+                            <field name="email"/>
+                            <field name="dia_chi"/>
+                            <field name="phong_ban_id"/>
+                            <field name="lich_su_su_dung_ids"/>
+                        </grsoup>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_nhan_vien_tree" model="ir.ui.view">
+            <field name="name">nhan_vien_tree</field>
+            <field name="model">nhan_vien</field>
+            <field name="arch" type="xml">
+                <tree string="Danh sách phòng ban">
+                    <field name="ma_nhan_vien"/>
+                    <field name="ten_nhan_vien"/>
+                    <field name="ngay_sinh"/>
+                    <field name="email"/>
+                    <field name="dia_chi"/>
+                    <field name="phong_ban_id"/>
+                    <field name="lich_su_su_dung_ids"/>
+                </tree>
+            </field>
+        </record>
+        <record id="nhan_vien_search" model="ir.ui.view">
+            <field name="name">nhan_vien_search</field>
+            <field name="model">nhan_vien</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="ma_nhan_vien"/>
+                    <field name="ten_nhan_vien"/>
+                    <field name="ngay_sinh"/>
+                    <field name="email"/>
+                    <field name="dia_chi"/>
+                    <field name="phong_ban_id"/>
+                    <field name="lich_su_su_dung_ids"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_nhan_vien" model="ir.actions.act_window">
+            <field name="name">Phòng ban</field>
+            <field name="res_model">nhan_vien</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="nhan_vien_search"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,11 @@
+<odoo>
+    <data>
+        <record id="seq_tai_san_serial" model="ir.sequence">
+            <field name="name">Sequence Số Serial Tài Sản</field>
+            <field name="code">tai.san.serial</field>
+            <field name="prefix">TS-SERIAL-</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>

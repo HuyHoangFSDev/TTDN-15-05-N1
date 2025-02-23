@@ -18,5 +18,35 @@
                   sequence="1"
                   action="action_loai_tai_san"
         />
+        <menuitem name="Quản lý vị trí"
+                  id="menu_vi_tri"
+                  parent="menu_root"
+                  sequence="1"
+                  action="action_vi_tri"
+        />
+        <menuitem name="Quản lý nhà cung cấp"
+                  id="menu_nha_cung_cap"
+                  parent="menu_root"
+                  sequence="1"
+                  action="action_nha_cung_cap"
+        />
+        <menuitem name="Quản lý nhân viên"
+                  id="menu_nhan_vien"
+                  parent="menu_root"
+                  sequence="1"
+                  action="action_nhan_vien"
+        />
+        <menuitem name="Quản lý phòng ban"
+                  id="menu_phong_ban"
+                  parent="menu_root"
+                  sequence="1"
+                  action="action_phong_ban"
+        />
+        <menuitem name="Quản lý lịch sử sử dụng"
+                  id="menu_lich_su_su_dung"
+                  parent="menu_root"
+                  sequence="1"
+                  action="action_lich_su_su_dung"
+        />
     </data>
 </odoo>

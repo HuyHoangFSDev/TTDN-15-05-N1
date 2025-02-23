@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_vi_tri_form" model="ir.ui.view">
+            <field name="name">vi_tri_form</field>
+            <field name="model">vi_tri</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="ma_vi_tri"/>
+                            <field name="ten_vi_tri"/>
+                            <field name="tai_san_id"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_vi_tri_tree" model="ir.ui.view">
+            <field name="name">vi_tri_tree</field>
+            <field name="model">vi_tri</field>
+            <field name="arch" type="xml">
+                <tree string="Danh sách vị trí">
+                    <field name="ma_vi_tri"/>
+                    <field name="ten_vi_tri"/>
+                    <field name="tai_san_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="vi_tri_search" model="ir.ui.view">
+            <field name="name">vi_tri_search</field>
+            <field name="model">vi_tri</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="ma_vi_tri"/>
+                    <field name="ten_vi_tri"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_vi_tri" model="ir.actions.act_window">
+            <field name="name">Vị trí</field>
+            <field name="res_model">vi_tri</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="vi_tri_search"/>
+        </record>
+    </data>
+</odoo>

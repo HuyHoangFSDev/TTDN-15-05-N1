@@ -10,8 +10,9 @@
                         <group>
                             <field name="ma_tai_san"/>
                             <field name="ten_tai_san"/>
-                            <field name="so_serial"/>
+                            <field name="so_serial" attrs="{'readonly': [('id', '!=', False)]}"/>
                             <field name="loai_tai_san_id"/>
+                            <field name="vi_tri_id"/>
                             <field name="trang_thai" widget="selection"/>
                         </group>
                         <notebook>
@@ -36,8 +37,9 @@
                 <tree decoration-info="trang_thai=='Muon'" decoration-danger="trang_thai=='Hong'">
                     <field name="ten_tai_san"/>
                     <field name="ma_tai_san"/>
-                    <field name="so_serial"/>
+                    <field name="so_serial" attrs="{'readonly': [('id', '!=', False)]}"/>
                     <field name="loai_tai_san_id"/>
+                    <field name="vi_tri_id"/>
                     <field name="ngay_mua"/>
                     <field name="gia_tien_mua" widget="monetary"/>
                     <field name="gia_tri_hien_tai" widget="monetary"/>
@@ -54,7 +56,6 @@
                     <field name="ma_tai_san"/>
                     <field name="ten_tai_san"/>
                     <field name="trang_thai"/>
-
                     <filter string="Mới mua" name="moi_mua" domain="[('ngay_mua', '&gt;=', context_today())]"/>
                     <filter string="Đã hết bảo hành" name="het_bh"
                             domain="[('ngay_het_han_bao_hanh', '&lt;', context_today())]"/>
