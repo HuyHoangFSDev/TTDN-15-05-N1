@@ -18,7 +18,7 @@
             <field name="company_id" eval="False"/>
         </record>
 
-        !-- Sequence cho Lịch Sử Bảo Trì -->
+        <!-- Sequence cho Lịch Sử Bảo Trì -->
         <record id="seq_lich_su_bao_tri" model="ir.sequence">
             <field name="name">Sequence Lịch Sử Bảo Trì</field>
             <field name="code">lich_su_bao_tri</field>
