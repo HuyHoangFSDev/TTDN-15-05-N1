@@ -3,8 +3,8 @@ access_tai_san,tai_san.tai_san,model_tai_san,base.group_user,1,1,1,1
 access_loai_tai_san,loai_tai_san.loai_tai_san,model_loai_tai_san,base.group_user,1,1,1,1
 access_vi_tri,vi_tri.vi_tri,model_vi_tri,base.group_user,1,1,1,1
 access_nha_cung_cap,nha_cung_cap.nha_cung_cap,model_nha_cung_cap,base.group_user,1,1,1,1
-access_phong_ban,phong_ban.phong_ban,model_phong_ban,base.group_user,1,1,1,1
-access_nhan_vien,nhan_vien.nhan_vien,model_nhan_vien,base.group_user,1,1,1,1
+access_bo_phan,bo_phan.bo_phan,model_bo_phan,base.group_user,1,1,1,1
+access_nhan_su,nhan_su.nhan_su,model_nhan_su,base.group_user,1,1,1,1
 access_lich_su_su_dung,lich_su_su_dung.lich_su_su_dung,model_lich_su_su_dung,base.group_user,1,1,1,1
 access_lich_su_bao_tri,lich_su_bao_tri.lich_su_bao_tri,model_lich_su_bao_tri,base.group_user,1,1,1,1
 access_khau_hao,khau_hao.khau_hao,model_khau_hao,base.group_user,1,1,1,1

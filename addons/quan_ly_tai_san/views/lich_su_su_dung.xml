@@ -11,7 +11,7 @@
                             <field name="ma_lich_su_su_dung" readonly="1"/>
                             <field name="ngay_muon"/>
                             <field name="ngay_tra"/>
-                            <field name="nhan_vien_id"/>
+                            <field name="nhan_su_id"/>
                             <field name="tai_san_id"/>
                             <field name="ghi_chu"/>
                         </group>
@@ -28,7 +28,7 @@
                     <field name="ma_lich_su_su_dung" readonly="1"/>
                     <field name="ngay_muon"/>
                     <field name="ngay_tra"/>
-                    <field name="nhan_vien_id"/>
+                    <field name="nhan_su_id"/>
                     <field name="tai_san_id"/>
                     <field name="ghi_chu"/>
                 </tree>
@@ -43,7 +43,7 @@
                     <field name="ma_lich_su_su_dung" readonly="1"/>
                     <field name="ngay_muon"/>
                     <field name="ngay_tra"/>
-                    <field name="nhan_vien_id"/>
+                    <field name="nhan_su_id"/>
                     <field name="tai_san_id"/>
                     <field name="ghi_chu"/>
                 </search>

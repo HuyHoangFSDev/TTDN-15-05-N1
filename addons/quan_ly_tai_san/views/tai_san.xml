@@ -64,8 +64,9 @@
                     <field name="ten_tai_san"/>
                     <searchpanel>
                         <field name="trang_thai" select="multi"/>
-                        <field name="lich_su_su_dung_ids" select="multi"/>
-                        <field name="khau_hao_ids" select="multi"/>
+                        <field name="loai_tai_san_id" select="multi"/>
+                        <field name="vi_tri_id" select="multi"/>
+                        <field name="nha_cung_cap_id" select="multi"/>
                     </searchpanel>
                     <filter string=" Mới mua" name="moi_mua" domain="[('ngay_mua', '&gt;=', context_today())]"/>
                     <filter string="Đã hết bảo hành" name="het_bh"

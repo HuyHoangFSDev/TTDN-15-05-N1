@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_bo_phan_form" model="ir.ui.view">
+            <field name="name">bo_phan_form</field>
+            <field name="model">bo_phan</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="ma_bo_phan"/>
+                            <field name="ten_bo_phan"/>
+                            <field name="mo_ta"/>
+                            <field name="nhan_su_ids"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_bo_phan_tree" model="ir.ui.view">
+            <field name="name">bo_phan_tree</field>
+            <field name="model">bo_phan</field>
+            <field name="arch" type="xml">
+                <tree string="Danh sách phòng ban">
+                    <field name="ma_bo_phan"/>
+                    <field name="ten_bo_phan"/>
+                    <field name="mo_ta"/>
+                    <field name="nhan_su_ids"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="bo_phan_search" model="ir.ui.view">
+            <field name="name">bo_phan_search</field>
+            <field name="model">bo_phan</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="ma_bo_phan"/>
+                    <field name="ten_bo_phan"/>
+                    <field name="mo_ta"/>
+                    <field name="nhan_su_ids"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_bo_phan" model="ir.actions.act_window">
+            <field name="name">Phòng ban</field>
+            <field name="res_model">bo_phan</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="bo_phan_search"/>
+        </record>
+    </data>
+</odoo>

@@ -14,9 +14,10 @@
                             <field name="que_quan"/>
                             <field name="email"/>
                             <field name="phong_ban_ids" widget="many2many_tags"/>
+                            <field name="chung_chi_ids"/>
                         </group>
                         <notebook>
-                            <page string="Danh sách lịch sử công tác" >
+                            <page string="Danh sách lịch sử công tác">
                                 <field name="lich_su_cong_tac_ids">
                                     <tree editable="bottom">
                                         <field name="nhan_vien_id"/>
@@ -42,6 +43,7 @@
                     <field name="que_quan"/>
                     <field name="email"/>
                     <field name="phong_ban_ids" widget="many2many_tags"/>
+                    <field name="chung_chi_ids"/>
                 </tree>
             </field>
         </record>
@@ -55,6 +57,7 @@
                     <field name="que_quan"/>
                     <field name="email"/>
                     <field name="phong_ban_ids" widget="many2many_tags"/>
+                    <field name="chung_chi_ids"/>
                 </search>
             </field>
         </record>

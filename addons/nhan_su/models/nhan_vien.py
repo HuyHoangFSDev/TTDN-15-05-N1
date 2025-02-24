@@ -21,6 +21,8 @@ class NhanVien(models.Model):
     phong_ban_ids = fields.Many2many(comodel_name='phong_ban', string="Phòng ban")
     lich_su_cong_tac_ids = fields.One2many(comodel_name='lich_su_cong_tac', inverse_name="nhan_vien_id",
                                            string="Lịch sử công tác")
+    chung_chi_ids = fields.One2many(comodel_name='chung_chi', inverse_name="nhan_vien_id",
+                                           string="Chứng chỉ")
     tuoi = fields.Integer(string="Tuổi", compute='_compute_tuoi', store=True)
     thang_sinh = fields.Integer(string="Tháng sinh", compute='_compute_thang_sinh', store=True)
 
