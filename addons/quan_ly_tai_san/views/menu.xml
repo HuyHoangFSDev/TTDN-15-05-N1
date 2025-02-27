@@ -3,71 +3,95 @@
     <data>
         <menuitem
                 id="menu_root"
-                name="QLTS"
-                sequence="0"/>
-
-        <menuitem name="Quản lý tài sản"
-                  id="menu_tai_san"
-                  parent="menu_root"
-                  sequence="1"
-                  action="action_tai_san"
+                name="Quản lý tài sản (QLTS)"
+                sequence="0"
         />
 
-        <!-- Menu lớn: Danh mục -->
-        <menuitem name="Danh mục"
-                  id="menu_danh_muc"
-                  parent="menu_root"
-                  sequence="2"
+        <menuitem
+                name="Quản lý tài sản"
+                id="menu_tai_san"
+                parent="menu_root"
+                sequence="1"
+                action="action_tai_san"
         />
 
-        <menuitem name="Loại tài sản"
-                  id="menu_loai_tai_san"
-                  parent="menu_danh_muc"
-                  sequence="1"
-                  action="action_loai_tai_san"
-        />
-        <menuitem name="Vị trí"
-                  id="menu_vi_tri"
-                  parent="menu_danh_muc"
-                  sequence="2"
-                  action="action_vi_tri"
-        />
-        <menuitem name="Phòng ban"
-                  id="menu_bo_phan"
-                  parent="menu_danh_muc"
-                  sequence="3"
-                  action="action_bo_phan"
-        />
-        <menuitem name="Nhân viên"
-                  id="menu_nhan_su"
-                  parent="menu_danh_muc"
-                  sequence="4"
-                  action="action_nhan_su"
-        />
-        <menuitem name="Nhà cung cấp"
-                  id="menu_nha_cung_cap"
-                  parent="menu_danh_muc"
-                  sequence="5"
-                  action="action_nha_cung_cap"
+        <menuitem
+                name="Danh mục"
+                id="menu_danh_muc"
+                parent="menu_root"
+                sequence="2"
         />
 
-        <menuitem name="Lịch sử sử dụng"
-                  id="menu_lich_su_su_dung"
-                  parent="menu_root"
-                  sequence="3"
-                  action="action_lich_su_su_dung"
+        <menuitem
+                name="Loại tài sản"
+                id="menu_loai_tai_san"
+                parent="menu_danh_muc"
+                sequence="1"
+                action="action_loai_tai_san"
         />
-        <menuitem name="Lịch sử bảo trì"
-                  id="menu_lich_su_bao_tri"
-                  parent="menu_root"
-                  sequence="4"
-                  action="action_lich_su_bao_tri"
+        <menuitem
+                name="Vị trí"
+                id="menu_vi_tri"
+                parent="menu_danh_muc"
+                sequence="2"
+                action="action_vi_tri"
         />
-        <menuitem name="Khấu hao"
-                  id="menu_khau_hao"
-                  parent="menu_root"
-                  sequence="5"
-                  action="action_khau_hao"
+        <menuitem
+                name="Nhà cung cấp"
+                id="menu_nha_cung_cap"
+                parent="menu_danh_muc"
+                sequence="3"
+                action="action_nha_cung_cap"
+        />
+
+        <menuitem
+                name="Quản lý phiếu &amp; Lịch sử"
+                id="menu_quan_ly_phieu_lich_su"
+                parent="menu_root"
+                sequence="3"
+        />
+
+        <menuitem
+                name="Phiếu mượn"
+                id="menu_phieu_muon"
+                parent="menu_quan_ly_phieu_lich_su"
+                sequence="1"
+                action="action_phieu_muon"
+        />
+        <menuitem
+                name="Phiếu bảo trì"
+                id="menu_phieu_bao_tri"
+                parent="menu_quan_ly_phieu_lich_su"
+                sequence="2"
+                action="action_phieu_bao_tri"
+        />
+        <menuitem
+                name="Lịch sử di chuyển"
+                id="menu_lich_su_di_chuyen"
+                parent="menu_quan_ly_phieu_lich_su"
+                sequence="3"
+                action="action_lich_su_di_chuyen"
+        />
+        <menuitem
+                name="Lịch sử sử dụng"
+                id="menu_lich_su_su_dung"
+                parent="menu_quan_ly_phieu_lich_su"
+                sequence="4"
+                action="action_lich_su_su_dung"
+        />
+        <menuitem
+                name="Lịch sử bảo trì"
+                id="menu_lich_su_bao_tri"
+                parent="menu_quan_ly_phieu_lich_su"
+                sequence="5"
+                action="action_lich_su_bao_tri"
+        />
+        <menuitem
+                name="Khấu hao"
+                id="menu_khau_hao"
+                parent="menu_quan_ly_phieu_lich_su"
+                sequence="6"
+                action="action_khau_hao"
         />
     </data>
 </odoo>

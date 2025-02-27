@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_phieu_muon_form" model="ir.ui.view">
+            <field name="name">phieu_muon_form</field>
+            <field name="model">phieu_muon</field>
+            <field name="arch" type="xml">
+                <form string="Phiếu mượn tài sản" class="o_form_full_width">
+                    <header>
+                        <field name="state" widget="statusbar" clickable="1" options="{'fold_field': 'state'}"/>
+                        <button name="action_approve" string="Duyệt" type="object" class="btn-primary" states="draft"/>
+                        <button name="action_done" string="Hoàn thành" type="object" class="btn-success"
+                                states="approved"/>
+                        <button name="action_cancel" string="Hủy" type="object" class="btn-danger"
+                                states="draft,approved"/>
+                        <button name="action_reset_to_draft" string="Quay lại Nháp" type="object" class="btn-warning"
+                                states="approved,cancelled"/>
+                    </header>
+                    <sheet class="o_form_sheet_full">
+                        <group class="o_form_group_full">
+                            <group string="Thông tin phiếu mượn" class="o_2col">
+                                <field name="ma_phieu_muon" class="oe_inline" readonly="1" options="{'no_open': True}"/>
+                                <field name="ngay_muon" widget="date" required="1" placeholder="Chọn ngày mượn..."/>
+                                <field name="ngay_tra" widget="date" required="1" placeholder="Chọn ngày trả..."/>
+                                <field name="nhan_vien_id" widget="selection" required="1"
+                                       placeholder="Chọn nhân sự..."/>
+                                <field name="tai_san_id" widget="selection" required="1" placeholder="Chọn tài sản..."/>
+                            </group>
+                            <group string="Ghi chú">
+                                <field name="ghi_chu" placeholder="Ghi chú thêm..." widget="textarea"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter"/>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_phieu_muon_tree" model="ir.ui.view">
+            <field name="name">phieu_muon_tree</field>
+            <field name="model">phieu_muon</field>
+            <field name="arch" type="xml">
+                <tree string="Danh sách phiếu mượn"
+                      decoration-info="state=='approved'"
+                      decoration-danger="state=='cancelled'"
+                      class="o_list_full_width">
+                    <field name="ma_phieu_muon" class="oe_inline"/>
+                    <field name="ngay_muon" widget="date"/>
+                    <field name="ngay_tra" widget="date"/>
+                    <field name="nhan_vien_id" widget="selection"/>
+                    <field name="tai_san_id" widget="selection"/>
+                    <field name="state" widget="badge"
+                           options="{'clickable': True, 'class_mapping': {'draft': 'warning', 'approved': 'info', 'done': 'success', 'cancelled': 'danger'}}"/>
+                    <button name="action_approve" string="Duyệt" type="object" class="btn-primary" states="draft"/>
+                    <button name="action_done" string="Hoàn thành" type="object" class="btn-success" states="approved"/>
+                    <button name="action_cancel" string="Hủy" type="object" class="btn-danger" states="draft,approved"/>
+                    <button name="action_reset_to_draft" string="Quay lại Nháp" type="object" class="btn-warning"
+                            states="approved,cancelled"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="phieu_muon_search" model="ir.ui.view">
+            <field name="name">phieu_muon_search</field>
+            <field name="model">phieu_muon</field>
+            <field name="arch" type="xml">
+                <search string="Tìm kiếm phiếu mượn">
+                    <field name="ma_phieu_muon" string="Mã phiếu mượn"/>
+                    <field name="nhan_vien_id" string="Nhân sự"/>
+                    <field name="tai_san_id" string="Tài sản"/>
+                    <filter string="Nháp" name="draft" domain="[('state', '=', 'draft')]"/>
+                    <filter string="Đã duyệt" name="approved" domain="[('state', '=', 'approved')]"/>
+                    <filter string="Hoàn thành" name="done" domain="[('state', '=', 'done')]"/>
+                    <filter string="Đã hủy" name="cancelled" domain="[('state', '=', 'cancelled')]"/>
+                    <group expand="1" string="Lọc theo">
+                        <filter name="state" string="Trạng thái" context="{'group_by': 'state'}"/>
+                        <filter name="nhan_vien" string="Nhân sự" context="{'group_by': 'nhan_vien_id'}"/>
+                        <filter name="tai_san" string="Tài sản" context="{'group_by': 'tai_san_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_phieu_muon" model="ir.actions.act_window">
+            <field name="name">Phiếu mượn</field>
+            <field name="res_model">phieu_muon</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="phieu_muon_search"/>
+            <field name="context">{'default_state': 'draft'}</field>
+        </record>
+
+        <record id="seq_phieu_muon" model="ir.sequence">
+            <field name="name">Phiếu mượn</field>
+            <field name="code">phieu_muon</field>
+            <field name="prefix">PM-</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+        <record id="seq_lich_su_su_dung" model="ir.sequence">
+            <field name="name">Lịch sử sử dụng</field>
+            <field name="code">lich_su_su_dung</field>
+            <field name="prefix">LS-</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+    </data>
+</odoo>

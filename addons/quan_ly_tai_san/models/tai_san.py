@@ -1,10 +1,7 @@
 import re
-
 from dateutil.relativedelta import relativedelta
-
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError
-
 
 class TaiSan(models.Model):
     _name = 'tai_san'
@@ -15,7 +12,7 @@ class TaiSan(models.Model):
         ('ma_tai_san_unique', 'unique(ma_tai_san)', 'Mã tài sản phải là duy nhất!')
     ]
 
-    ma_tai_san = fields.Char("Mã Tài sản", required=True)
+    ma_tai_san = fields.Char("Mã Tài sản", required=True, copy=False, readonly=True, default="New")
     ten_tai_san = fields.Char("Tên Tài sản", required=True)
     so_serial = fields.Char("Số serial", required=True, copy=False, readonly=True, default="New")
     ngay_mua = fields.Date("Ngày mua")
@@ -32,9 +29,13 @@ class TaiSan(models.Model):
 
     trang_thai = fields.Selection(TRANG_THAI, string="Trạng thái", default="LuuTru", tracking=True)
 
-    ## Quan hệ các bảng
+
     loai_tai_san_id = fields.Many2one(comodel_name='loai_tai_san', string="Loại tài sản", required=True)
-    vi_tri_id = fields.Many2one('vi_tri', string="Vị trí", compute='_compute_vi_tri', store=True)
+    vi_tri_hien_tai_id = fields.Many2one(
+        comodel_name='vi_tri',
+        string="Vị trí hiện tại",
+        store=True
+    )
     nha_cung_cap_id = fields.Many2one(
         comodel_name='nha_cung_cap',
         string="Nhà cung cấp",
@@ -58,12 +59,18 @@ class TaiSan(models.Model):
         string="Khấu hao",
         store=True
     )
+    lich_su_di_chuyen_ids = fields.One2many(
+        comodel_name='lich_su_di_chuyen',
+        inverse_name='tai_san_id',
+        string="Lịch sử di chuyển",
+        readonly=True
+    )
 
     @api.depends()
     def _compute_vi_tri(self):
         for asset in self:
-            vi_tri = self.env['vi_tri'].search([('tai_san_id', '=', asset.id)], limit=1)
-            asset.vi_tri_id = vi_tri.id if vi_tri else False
+
+            pass
 
     @api.constrains('ngay_mua', 'ngay_het_han_bao_hanh')
     def _check_dates(self):
@@ -87,7 +94,7 @@ class TaiSan(models.Model):
                     raise ValidationError("Ngày mua không thể lớn hơn ngày hiện tại!")
 
                 years = relativedelta(fields.Date.today(), record.ngay_mua).years
-                depreciation_rate = 0.1  # 10% mỗi năm
+                depreciation_rate = 0.1
                 record.gia_tri_hien_tai = max(0, record.gia_tien_mua * (1 - depreciation_rate * years))
 
     @api.model
@@ -95,3 +102,17 @@ class TaiSan(models.Model):
         if vals.get('so_serial', 'New') == 'New':
             vals['so_serial'] = self.env['ir.sequence'].next_by_code('tai.san.serial') or 'New'
         return super(TaiSan, self).create(vals)
+
+    def action_di_chuyen_tai_san(self):
+        for record in self:
+            return {
+                'name': 'Di chuyển tài sản',
+                'type': 'ir.actions.act_window',
+                'res_model': 'lich_su_di_chuyen',
+                'view_mode': 'form',
+                'target': 'new',
+                'context': {
+                    'default_tai_san_id': record.id,
+                    'default_vi_tri_id': record.vi_tri_hien_tai_id.id,
+                },
+            }

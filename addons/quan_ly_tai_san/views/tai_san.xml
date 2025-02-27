@@ -1,85 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
+
         <record id="view_tai_san_form" model="ir.ui.view">
             <field name="name">tai_san_form</field>
             <field name="model">tai_san</field>
             <field name="arch" type="xml">
-                <form>
-                    <sheet>
-                        <group>
-                            <field name="ma_tai_san"/>
-                            <field name="ten_tai_san"/>
-                            <field name="so_serial" attrs="{'readonly': [('id', '!=', False)]}"/>
-                            <field name="loai_tai_san_id"/>
-                            <field name="nha_cung_cap_id"/>
-                            <field name="vi_tri_id"/>
-                            <field name="lich_su_su_dung_ids"/>
-                            <field name="khau_hao_ids"/>
-
-                            <field name="trang_thai" widget="selection"/>
+                <form string="Thông tin tài sản" class="o_form_full_width">
+                    <header>
+                        <field name="trang_thai" widget="statusbar" clickable="1" options="{'fold_field': 'state'}"/>
+                    </header>
+                    <sheet class="o_form_sheet_full">
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_di_chuyen_tai_san" string="Di chuyển tài sản" type="object"
+                                    class="btn-primary"/>
+                        </div>
+                        <group class="o_form_group_full">
+                            <group string="Thông tin cơ bản" class="o_3col">
+                                <field name="ma_tai_san" class="oe_inline" readonly="1" options="{'no_open': True}"/>
+                                <field name="ten_tai_san" placeholder="Nhập tên tài sản..." required="1"/>
+                                <field name="so_serial" attrs="{'readonly': [('id', '!=', False)]}"
+                                       placeholder="Số serial"/>
+                                <field name="loai_tai_san_id" widget="selection" placeholder="Chọn loại tài sản..."/>
+                            </group>
+                            <group string="Vị trí &amp; Nhà cung cấp" class="o_2col">
+                                <field name="nha_cung_cap_id" widget="selection" placeholder="Chọn nhà cung cấp..."/>
+                                <field name="vi_tri_hien_tai_id" widget="selection" placeholder="Vị trí hiện tại..."
+                                       readonly="1"/>
+                            </group>
                         </group>
-                        <notebook>
-                            <page string="Thông tin thêm" style="border-radius: 8px;">
-                                <group>
-                                    <field name="ngay_mua"/>
-                                    <field name="ngay_het_han_bao_hanh"/>
-                                    <field name="gia_tien_mua" widget="monetary"/>
-                                    <field name="gia_tri_hien_tai" widget="monetary"/>
+                        <notebook class="o_notebook_full">
+                            <page string="Thông tin bổ sung" class="oe_grey">
+                                <group class="o_2col">
+                                    <field name="ngay_mua" widget="date" placeholder="Ngày mua"/>
+                                    <field name="ngay_het_han_bao_hanh" widget="date" placeholder="Ngày hết bảo hành"/>
+                                    <field name="gia_tien_mua" widget="monetary"
+                                           options="{'currency_field': 'currency_id'}"/>
+                                    <field name="gia_tri_hien_tai" widget="monetary"
+                                           options="{'currency_field': 'currency_id'}"/>
                                 </group>
+                            </page>
+                            <page string="Lịch sử sử dụng">
+                                <field name="lich_su_su_dung_ids" nolabel="1">
+                                    <tree editable="bottom" class="o_list_full_width">
+                                        <field name="ma_lich_su_su_dung" readonly="1"/>
+                                        <field name="ngay_muon"/>
+                                        <field name="ngay_tra"/>
+                                        <field name="nhan_vien_id"/>
+                                        <field name="tai_san_id"/>
+                                        <field name="ghi_chu"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Khấu hao">
+                                <field name="khau_hao_ids" nolabel="1">
+                                    <tree editable="bottom" class="o_list_full_width">
+                                        <field name="ma_khau_hao"/>
+                                        <field name="phuong_phap_khau_hao"/>
+                                        <field name="ngay_khau_hao"/>
+                                        <field name="gia_tri_khau_hao"/>
+                                        <field name="gia_tri_con_lai"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Lịch sử bảo trì">
+                                <field name="lich_su_bao_tri_ids" nolabel="1">
+                                    <tree editable="bottom" class="o_list_full_width">
+                                        <field name="ma_lich_su_bao_tri" readonly="1"/>
+                                        <field name="ngay_bao_tri"/>
+                                        <field name="ngay_tra"/>
+                                        <field name="chi_phi"/>
+                                        <field name="tai_san_id"/>
+                                        <field name="ghi_chu"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Lịch sử di chuyển">
+                                <field name="lich_su_di_chuyen_ids" nolabel="1">
+                                    <tree editable="bottom" class="o_list_full_width">
+                                        <field name="vi_tri_id" widget="selection"/>
+                                        <field name="ngay_di_chuyen" widget="date"/>
+                                        <field name="ghi_chu"/>
+                                    </tree>
+                                </field>
                             </page>
                         </notebook>
                     </sheet>
+                    <div class="oe_chatter"/>
                 </form>
             </field>
         </record>
+
 
         <record id="view_tai_san_tree" model="ir.ui.view">
             <field name="name">tai_san_tree</field>
             <field name="model">tai_san</field>
             <field name="arch" type="xml">
-                <tree decoration-info="trang_thai=='Muon'" decoration-danger="trang_thai=='Hong'">
-                    <field name="ten_tai_san"/>
-                    <field name="ma_tai_san"/>
+                <tree string="Danh sách tài sản"
+                      decoration-info="trang_thai=='Muon'"
+                      decoration-danger="trang_thai=='Hong'"
+                      decoration-muted="trang_thai=='ThanhLy'"
+                      class="o_list_full_width">
+                    <field name="ma_tai_san" class="oe_inline"/>
+                    <field name="ten_tai_san" class="oe_bold"/>
                     <field name="so_serial" attrs="{'readonly': [('id', '!=', False)]}"/>
-                    <field name="loai_tai_san_id"/>
-                    <field name="nha_cung_cap_id"/>
-                    <field name="vi_tri_id"/>
-                    <field name="lich_su_su_dung_ids"/>
-                    <field name="khau_hao_ids"/>
-                    <field name="ngay_mua"/>
+                    <field name="loai_tai_san_id" widget="selection"/>
+                    <field name="vi_tri_hien_tai_id" widget="selection"/>
+                    <field name="nha_cung_cap_id" widget="selection"/>
+                    <field name="ngay_mua" widget="date"/>
                     <field name="gia_tien_mua" widget="monetary"/>
                     <field name="gia_tri_hien_tai" widget="monetary"/>
-                    <field name="trang_thai"/>
+                    <field name="trang_thai" widget="badge"
+                           options="{'clickable': True, 'class_mapping': {'Muon': 'info', 'Hong': 'danger', 'SanSang': 'success'}}"/>
                 </tree>
             </field>
         </record>
+
 
         <record id="tai_san_search" model="ir.ui.view">
             <field name="name">tai_san_search</field>
             <field name="model">tai_san</field>
             <field name="arch" type="xml">
-                <search>
-                    <field name="ma_tai_san"/>
-                    <field name="ten_tai_san"/>
-                    <searchpanel>
-                        <field name="trang_thai" select="multi"/>
-                        <field name="loai_tai_san_id" select="multi"/>
-                        <field name="vi_tri_id" select="multi"/>
-                        <field name="nha_cung_cap_id" select="multi"/>
-                    </searchpanel>
-                    <filter string=" Mới mua" name="moi_mua" domain="[('ngay_mua', '&gt;=', context_today())]"/>
-                    <filter string="Đã hết bảo hành" name="het_bh"
+                <search string="Tìm kiếm tài sản">
+                    <field name="ma_tai_san" string="Mã tài sản"/>
+                    <field name="ten_tai_san" string="Tên tài sản"/>
+                    <filter string="Mới mua" name="moi_mua" domain="[('ngay_mua', '>=', context_today())]"/>
+                    <filter string="Hết bảo hành" name="het_bh"
                             domain="[('ngay_het_han_bao_hanh', '&lt;', context_today())]"/>
+                    <group expand="1" string="Lọc theo">
+                        <filter name="trang_thai" string="Trạng thái" context="{'group_by': 'trang_thai'}"/>
+                        <filter name="loai_tai_san" string="Loại tài sản" context="{'group_by': 'loai_tai_san_id'}"/>
+                        <filter name="vi_tri" string="Vị trí" context="{'group_by': 'vi_tri_hien_tai_id'}"/>
+                        <filter name="nha_cung_cap" string="Nhà cung cấp" context="{'group_by': 'nha_cung_cap_id'}"/>
+                    </group>
+                    <searchpanel>
+                        <field name="trang_thai" select="multi" string="Trạng thái"/>
+                        <field name="loai_tai_san_id" select="multi" string="Loại tài sản"/>
+                        <field name="vi_tri_hien_tai_id" select="multi" string="Vị trí hiện tại"/>
+                        <field name="nha_cung_cap_id" select="multi" string="Nhà cung cấp"/>
+                    </searchpanel>
                 </search>
             </field>
         </record>
+
 
         <record id="action_tai_san" model="ir.actions.act_window">
             <field name="name">Tài sản</field>
             <field name="res_model">tai_san</field>
             <field name="view_mode">tree,form</field>
             <field name="search_view_id" ref="tai_san_search"/>
+            <field name="context">{'default_trang_thai': 'SanSang'}</field>
         </record>
     </data>
 </odoo>

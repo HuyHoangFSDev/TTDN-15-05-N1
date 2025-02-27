@@ -1,51 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
+
         <record id="view_loai_tai_san_form" model="ir.ui.view">
             <field name="name">loai_tai_san_form</field>
             <field name="model">loai_tai_san</field>
             <field name="arch" type="xml">
-                <form>
-                    <sheet>
-                        <group>
-                            <field name="ma_loai_tai_san"/>
-                            <field name="ten_loai_tai_san"/>
-                            <field name="mo_ta"/>
+                <form string="Thông tin loại tài sản" class="o_form_full_width">
+                    <header>
+
+                    </header>
+                    <sheet class="o_form_sheet_full">
+                        <div class="oe_button_box" name="button_box">
+
+                        </div>
+                        <group class="o_form_group_full">
+                            <group string="Thông tin cơ bản" class="o_2col">
+                                <field name="ma_loai_tai_san" class="oe_inline" readonly="1"
+                                       options="{'no_open': True}"/>
+                                <field name="ten_loai_tai_san" placeholder="Nhập tên loại tài sản..." required="1"/>
+                            </group>
+                            <group string="Mô tả">
+                                <field name="mo_ta" placeholder="Mô tả chi tiết loại tài sản..." widget="textarea"/>
+                            </group>
                         </group>
                     </sheet>
+                    <div class="oe_chatter"/>
                 </form>
             </field>
         </record>
+
 
         <record id="view_loai_tai_san_tree" model="ir.ui.view">
             <field name="name">loai_tai_san_tree</field>
             <field name="model">loai_tai_san</field>
             <field name="arch" type="xml">
-                <tree>
-                    <field name="ma_loai_tai_san"/>
-                    <field name="ten_loai_tai_san"/>
+                <tree string="Danh sách loại tài sản"
+                      class="o_list_full_width"
+                      decoration-muted="mo_ta == ''">
+                    <field name="ma_loai_tai_san" class="oe_inline"/>
+                    <field name="ten_loai_tai_san" class="oe_bold"/>
                     <field name="mo_ta"/>
                 </tree>
             </field>
         </record>
 
+
         <record id="loai_tai_san_search" model="ir.ui.view">
             <field name="name">loai_tai_san_search</field>
             <field name="model">loai_tai_san</field>
             <field name="arch" type="xml">
-                <search>
-                    <field name="ma_loai_tai_san"/>
-                    <field name="ten_loai_tai_san"/>
-                    <field name="mo_ta"/>
+                <search string="Tìm kiếm loại tài sản">
+                    <field name="ma_loai_tai_san" string="Mã loại tài sản"/>
+                    <field name="ten_loai_tai_san" string="Tên loại tài sản"/>
+                    <field name="mo_ta" string="Mô tả" filter_domain="[('mo_ta', 'ilike', self)]"/>
+                    <filter string="Không có mô tả" name="khong_mo_ta" domain="[('mo_ta', '=', '')]"/>
+                    <group expand="1" string="Lọc theo">
+                        <filter name="ten_loai" string="Tên loại tài sản" context="{'group_by': 'ten_loai_tai_san'}"/>
+                    </group>
                 </search>
             </field>
         </record>
+
 
         <record id="action_loai_tai_san" model="ir.actions.act_window">
             <field name="name">Loại tài sản</field>
             <field name="res_model">loai_tai_san</field>
             <field name="view_mode">tree,form</field>
             <field name="search_view_id" ref="loai_tai_san_search"/>
+            <field name="context">{'default_ten_loai_tai_san': 'Loại mới'}</field>
         </record>
     </data>
 </odoo>

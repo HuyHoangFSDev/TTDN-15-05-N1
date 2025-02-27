@@ -3,7 +3,6 @@ from odoo import models, fields, api
 class LichSuCongTac(models.Model):
     _name = 'lich_su_cong_tac'
     _description = 'Bảng chứa thông tin nhân viên'
-    _inherit = ['mail.thread', 'mail.activity.mixin']
 
     nhan_vien_id = fields.Many2one(comodel_name="nhan_vien", string="Nhân viên", required=True)
     phong_ban_id = fields.Many2one(comodel_name="phong_ban", string="Phòng Ban", required=True)

@@ -26,5 +26,14 @@
             <field name="padding">4</field>
             <field name="company_id" eval="False"/>
         </record>
+
+        <!-- Sequence cho Vị trí -->
+        <record id="seq_vi_tri" model="ir.sequence">
+            <field name="name">Sequence Vị trí</field>
+            <field name="code">vi_tri</field>
+            <field name="prefix">VT-</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
     </data>
 </odoo>
