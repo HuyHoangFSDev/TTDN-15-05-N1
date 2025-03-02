@@ -13,61 +13,73 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button name="action_duyet" string="Duyệt" type="object" invisible="[('trang_thai', '!=', 'nhap')]"
-                            class="btn-primary oe_right"/>
-                    <button name="action_hoan_thanh" string="Hoàn thành" type="object"
-                            invisible="[('trang_thai', '!=', 'duyet')]" class="btn-success oe_right"/>
-                    <button name="action_huy" string="Hủy" type="object"
-                            invisible="[('trang_thai', 'not in', ('nhap', 'duyet'))]" class="btn-danger oe_right"/>
-                    <field name="trang_thai" widget="statusbar" statusbar_visible="nhap,duyet,hoan_thanh"
-                           statusbar_colors='{"nhap":"blue", "duyet":"orange", "hoan_thanh":"green", "huy":"red"}'
-                           class="oe_inline"/>
+                    <button name="action_duyet" string="Duyệt" type="object" invisible="[('trang_thai', '!=', 'nhap')]" class="btn-primary o_form_button"/>
+                    <button name="action_hoan_thanh" string="Hoàn thành" type="object" invisible="[('trang_thai', '!=', 'duyet')]" class="btn-success o_form_button"/>
+                    <button name="action_huy" string="Hủy" type="object" invisible="[('trang_thai', 'not in', ('nhap', 'duyet'))]" class="btn-danger o_form_button"/>
+                    <field name="trang_thai" widget="statusbar" statusbar_visible="nhap,duyet,hoan_thanh" statusbar_colors='{"nhap":"blue", "duyet":"orange", "hoan_thanh":"green", "huy":"red"}'/>
                 </header>
                 <sheet>
-                    <div class="row"
-                         style="background: linear-gradient(135deg, #ffffff, #f0f4f8); padding: 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); transition: all 0.3s ease;">
-                        <div class="col-6">
-                            <label for="tai_san" class="oe_edit_only"
-                                   style="font-weight: bold; color: #2c3e50; display: block; margin-bottom: 5px;"/>
-                            <field name="tai_san" attrs="{'readonly': [('trang_thai', '!=', 'nhap')]}"
-                                   options="{'no_quick_create': True}"
-                                   class="oe_inline"
-                                   style="width: 100%; padding: 8px; border: 1px solid #dfe6e9; border-radius: 5px; background-color: #fff; box-shadow: inset 0 1px 3px rgba(0,0,0,0.05); transition: border-color 0.3s ease;"
-                                   placeholder="Chọn tài sản..."
-                                   on_change="border-color: #4a90e2;"/>
-                            <label for="vi_tri_hien_tai"
-                                   style="font-weight: bold; color: #2c3e50; display: block; margin-top: 15px; margin-bottom: 5px;"/>
-                            <field name="vi_tri_hien_tai" readonly="1"
-                                   class="oe_inline"
-                                   style="width: 100%; padding: 8px; border: 1px solid #dfe6e9; border-radius: 5px; background-color: #f7f9fc;"/>
-                            <label for="vi_tri_moi" class="oe_edit_only"
-                                   style="font-weight: bold; color: #2c3e50; display: block; margin-top: 15px; margin-bottom: 5px;"/>
-                            <field name="vi_tri_moi" attrs="{'readonly': [('trang_thai', '!=', 'nhap')]}"
-                                   options="{'no_quick_create': True}"
-                                   class="oe_inline"
-                                   style="width: 100%; padding: 8px; border: 1px solid #dfe6e9; border-radius: 5px; background-color: #fff; box-shadow: inset 0 1px 3px rgba(0,0,0,0.05); transition: border-color 0.3s ease;"
-                                   placeholder="Chọn vị trí mới..."
-                                   on_change="border-color: #4a90e2;"/>
-                        </div>
-                        <div class="col-6">
-                            <label for="ngay_dieu_chuyen" class="oe_edit_only"
-                                   style="font-weight: bold; color: #2c3e50; display: block; margin-bottom: 5px;"/>
-                            <field name="ngay_dieu_chuyen" attrs="{'readonly': [('trang_thai', '!=', 'nhap')]}"
-                                   class="oe_inline"
-                                   style="width: 100%; padding: 8px; border: 1px solid #dfe6e9; border-radius: 5px; background-color: #fff; box-shadow: inset 0 1px 3px rgba(0,0,0,0.05); transition: border-color 0.3s ease;"
-                                   placeholder="Chọn ngày..."
-                                   on_change="border-color: #4a90e2;"/>
-                        </div>
+                    <!-- Tiêu đề cố định, có icon -->
+                    <div class="oe_title bg-light">
+                        <h2 class="text-dark d-flex align-items-center">
+                            <i class="fa fa-file-text-o mr-2" aria-hidden="true"></i>
+                            <field name="ten_phieu" readonly="1"/>
+                        </h2>
+                        <span class="text-muted d-flex align-items-center">
+                            <i class="fa fa-truck mr-2" aria-hidden="true"></i>
+                            Phiếu Điều Chuyển Tài Sản
+                        </span>
                     </div>
 
-                    <notebook
-                            style="margin-top: 25px; background-color: #fff; border: 1px solid #e0e6ed; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
-                        <page string="Ghi chú" style="padding: 15px;">
-                            <field name="ghi_chu" placeholder="Nhập ghi chú nếu cần..."
-                                   style="width: 100%; min-height: 120px; padding: 10px; border: 1px solid #dfe6e9; border-radius: 5px; background-color: #f9fbfc; resize: vertical; transition: border-color 0.3s ease;"
-                                   on_change="border-color: #4a90e2;"/>
-                        </page>
-                    </notebook>
+                    <!-- Grid layout cố định vị trí các trường -->
+                    <group class="o_form_group bg-white border rounded p-3 shadow-sm">
+                        <group class="row">
+                            <div class="col-md-6">
+                                <field name="tai_san"
+                                       attrs="{'readonly': [('trang_thai', '!=', 'nhap')]}"
+                                       options="{'no_quick_create': True}"
+                                       placeholder="Chọn tài sản"
+                                       class="o_field_many2one"
+                                       help="Chọn tài sản cần điều chuyển"
+                                       string="Tài sản <i class='fa fa-laptop mr-1' aria-hidden='true'></i>"/>
+                            </div>
+                            <div class="col-md-6">
+                                <field name="ngay_dieu_chuyen"
+                                       attrs="{'readonly': [('trang_thai', '!=', 'nhap')]}"
+                                       widget="date"
+                                       options="{'datepicker': {'showOn': 'button'}}"
+                                       placeholder="Chọn ngày"
+                                       class="o_field_date"
+                                       help="Chọn ngày điều chuyển tài sản"
+                                       string="Ngày điều chuyển <i class='fa fa-calendar mr-1' aria-hidden='true'></i>"/>
+                            </div>
+                        </group>
+                        <group class="row mt-2">
+                            <div class="col-md-6">
+                                <field name="vi_tri_hien_tai"
+                                       readonly="1"
+                                       class="o_field_many2one o_readonly"
+                                       help="Vị trí hiện tại của tài sản"
+                                       string="Vị trí hiện tại <i class='fa fa-map-marker mr-1' aria-hidden='true'></i>"/>
+                            </div>
+                            <div class="col-md-6">
+                                <field name="vi_tri_moi"
+                                       attrs="{'readonly': [('trang_thai', '!=', 'nhap')]}"
+                                       options="{'no_quick_create': True}"
+                                       placeholder="Chọn vị trí mới"
+                                       class="o_field_many2one"
+                                       help="Chọn vị trí mới cho tài sản"
+                                       string="Vị trí mới <i class='fa fa-map-marker mr-1' aria-hidden='true'></i>"/>
+                            </div>
+                        </group>
+                        <group class="mt-3">
+                            <field name="ghi_chu"
+                                   placeholder="Ghi chú (nếu có)"
+                                   class="o_field_text"
+                                   help="Thêm ghi chú nếu cần"
+                                   string="Ghi chú <i class='fa fa-sticky-note mr-1' aria-hidden='true'></i>"/>
+                        </group>
+                    </group>
                 </sheet>
             </form>
         </field>
@@ -77,8 +89,7 @@
         <field name="name">phieu_dieu_chuyen.tree</field>
         <field name="model">phieu_dieu_chuyen</field>
         <field name="arch" type="xml">
-            <tree decoration-danger="trang_thai == 'huy'" decoration-success="trang_thai == 'hoan_thanh'"
-                  decoration-info="trang_thai == 'nhap'" decoration-warning="trang_thai == 'duyet'">
+            <tree decoration-danger="trang_thai == 'huy'" decoration-success="trang_thai == 'hoan_thanh'" decoration-info="trang_thai == 'nhap'" decoration-warning="trang_thai == 'duyet'">
                 <field name="ten_phieu"/>
                 <field name="tai_san"/>
                 <field name="vi_tri_hien_tai"/>
@@ -96,6 +107,10 @@
             <search string="Phiếu Điều Chuyển">
                 <field name="ten_phieu"/>
                 <field name="tai_san"/>
+                <filter string="Nháp" name="nhap" domain="[('trang_thai', '=', 'nhap')]"/>
+                <filter string="Đã duyệt" name="duyet" domain="[('trang_thai', '=', 'duyet')]"/>
+                <filter string="Hoàn thành" name="hoan_thanh" domain="[('trang_thai', '=', 'hoan_thanh')]"/>
+                <filter string="Hủy" name="huy" domain="[('trang_thai', '=', 'huy')]"/>
             </search>
         </field>
     </record>
