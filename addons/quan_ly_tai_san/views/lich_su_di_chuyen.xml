@@ -6,13 +6,13 @@
             <field name="name">lich_su_di_chuyen_form</field>
             <field name="model">lich_su_di_chuyen</field>
             <field name="arch" type="xml">
-                <form string="Lịch sử di chuyển tài sản" class="o_form_full_width">
+                <form string="Lịch sử điều chuyển tài sản" class="o_form_full_width">
                     <sheet class="o_form_sheet_full">
                         <group class="o_form_group_full">
-                            <group string="Thông tin di chuyển" class="o_2col">
+                            <group string="Thông tin điều chuyển" class="o_2col">
                                 <field name="tai_san_id" widget="selection" placeholder="Chọn tài sản..." required="1"/>
                                 <field name="vi_tri_id" widget="selection" placeholder="Chọn vị trí..." required="1"/>
-                                <field name="ngay_di_chuyen" widget="date" placeholder="Chọn ngày di chuyển..."
+                                <field name="ngay_di_chuyen" widget="date" placeholder="Chọn ngày điều chuyển..."
                                        required="1"/>
                             </group>
                             <group string="Ghi chú">
@@ -30,7 +30,7 @@
             <field name="name">lich_su_di_chuyen_tree</field>
             <field name="model">lich_su_di_chuyen</field>
             <field name="arch" type="xml">
-                <tree string="Danh sách lịch sử di chuyển"
+                <tree string="Danh sách lịch sử điều chuyển"
                       class="o_list_full_width">
                     <field name="tai_san_id" widget="selection"/>
                     <field name="vi_tri_id" widget="selection"/>
@@ -45,15 +45,15 @@
             <field name="name">lich_su_di_chuyen_search</field>
             <field name="model">lich_su_di_chuyen</field>
             <field name="arch" type="xml">
-                <search string="Tìm kiếm lịch sử di chuyển">
+                <search string="Tìm kiếm lịch sử điều chuyển">
                     <field name="tai_san_id" string="Tài sản"/>
                     <field name="vi_tri_id" string="Vị trí"/>
-                    <field name="ngay_di_chuyen" string="Ngày di chuyển"/>
+                    <field name="ngay_di_chuyen" string="Ngày điều chuyển"/>
                     <field name="ghi_chu" string="Ghi chú"/>
                     <group expand="1" string="Lọc theo">
                         <filter name="tai_san" string="Tài sản" context="{'group_by': 'tai_san_id'}"/>
                         <filter name="vi_tri" string="Vị trí" context="{'group_by': 'vi_tri_id'}"/>
-                        <filter name="ngay_di_chuyen" string="Ngày di chuyển" context="{'group_by': 'ngay_di_chuyen'}"/>
+                        <filter name="ngay_di_chuyen" string="Ngày điều chuyển" context="{'group_by': 'ngay_di_chuyen'}"/>
                     </group>
                 </search>
             </field>
@@ -61,7 +61,7 @@
 
 
         <record id="action_lich_su_di_chuyen" model="ir.actions.act_window">
-            <field name="name">Lịch sử di chuyển</field>
+            <field name="name">Lịch sử điều chuyển</field>
             <field name="res_model">lich_su_di_chuyen</field>
             <field name="view_mode">tree,form</field>
             <field name="search_view_id" ref="lich_su_di_chuyen_search"/>

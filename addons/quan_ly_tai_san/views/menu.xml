@@ -66,24 +66,31 @@
                 action="action_phieu_bao_tri"
         />
         <menuitem
-                name="Lịch sử di chuyển"
-                id="menu_lich_su_di_chuyen"
+                name="Phiếu điều chuyển"
+                id="menu_phieu_dieu_chuyen"
                 parent="menu_quan_ly_phieu_lich_su"
                 sequence="3"
+                action="action_phieu_dieu_chuyen"
+        />
+        <menuitem
+                name="Lịch sử điều chuyển"
+                id="menu_lich_su_di_chuyen"
+                parent="menu_quan_ly_phieu_lich_su"
+                sequence="4"
                 action="action_lich_su_di_chuyen"
         />
         <menuitem
                 name="Lịch sử sử dụng"
                 id="menu_lich_su_su_dung"
                 parent="menu_quan_ly_phieu_lich_su"
-                sequence="4"
+                sequence="5"
                 action="action_lich_su_su_dung"
         />
         <menuitem
                 name="Lịch sử bảo trì"
                 id="menu_lich_su_bao_tri"
                 parent="menu_quan_ly_phieu_lich_su"
-                sequence="5"
+                sequence="6"
                 action="action_lich_su_bao_tri"
         />
         <menuitem

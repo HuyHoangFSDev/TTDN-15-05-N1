@@ -2,7 +2,7 @@ from odoo import models, fields, api
 
 class LichSuDiChuyen(models.Model):
     _name = 'lich_su_di_chuyen'
-    _description = 'Lịch sử di chuyển tài sản'
+    _description = 'Lịch sử điều chuyển tài sản'
     _order = 'ngay_di_chuyen desc'
 
     tai_san_id = fields.Many2one(
@@ -17,7 +17,7 @@ class LichSuDiChuyen(models.Model):
         required=True
     )
     ngay_di_chuyen = fields.Date(
-        "Ngày di chuyển",
+        "Ngày điều chuyển",
         default=fields.Date.context_today,
         required=True
     )

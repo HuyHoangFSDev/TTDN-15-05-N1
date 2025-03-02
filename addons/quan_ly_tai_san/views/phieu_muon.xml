@@ -8,30 +8,49 @@
                 <form string="Phiếu mượn tài sản" class="o_form_full_width">
                     <header>
                         <field name="state" widget="statusbar" clickable="1" options="{'fold_field': 'state'}"/>
-                        <button name="action_approve" string="Duyệt" type="object" class="btn-primary" states="draft"/>
-                        <button name="action_done" string="Hoàn thành" type="object" class="btn-success"
+                        <button name="action_approve"
+                                string="Duyệt"
+                                type="object"
+                                class="btn-primary"
+                                states="draft"/>
+                        <button name="action_done"
+                                string="Hoàn thành"
+                                type="object"
+                                class="btn-success"
                                 states="approved"/>
-                        <button name="action_cancel" string="Hủy" type="object" class="btn-danger"
+                        <button name="action_cancel"
+                                string="Hủy"
+                                type="object"
+                                class="btn-danger"
                                 states="draft,approved"/>
-                        <button name="action_reset_to_draft" string="Quay lại Nháp" type="object" class="btn-warning"
-                                states="approved,cancelled"/>
+                        <button name="action_reset_to_draft"
+                                string="Quay lại Nháp"
+                                type="object"
+                                class="btn-warning"
+                                attrs="{'readonly': [('state', 'in', ['approved', 'done'])]}"/>
                     </header>
                     <sheet class="o_form_sheet_full">
                         <group class="o_form_group_full">
                             <group string="Thông tin phiếu mượn" class="o_2col">
                                 <field name="ma_phieu_muon" class="oe_inline" readonly="1" options="{'no_open': True}"/>
-                                <field name="ngay_muon" widget="date" required="1" placeholder="Chọn ngày mượn..."/>
-                                <field name="ngay_tra" widget="date" required="1" placeholder="Chọn ngày trả..."/>
+                                <field name="ngay_muon_du_kien" widget="date" required="1"
+                                       placeholder="Chọn ngày mượn dự kiến..."/>
+                                <field name="ngay_muon_thuc_te" widget="date" required="1"
+                                       placeholder="Chọn ngày mượn thực tế..."/>
+                                <field name="ngay_tra_du_kien" widget="date" required="1"
+                                       placeholder="Chọn ngày trả dự kiến..."/>
+                                <field name="ngay_tra_thuc_te" widget="date" required="1"
+                                       placeholder="Chọn ngày trả thực tế..."/>
                                 <field name="nhan_vien_id" widget="selection" required="1"
                                        placeholder="Chọn nhân sự..."/>
-                                <field name="tai_san_id" widget="selection" required="1" placeholder="Chọn tài sản..."/>
+                                <field name="tai_san_id" widget="selection" required="1"
+                                       placeholder="Chọn tài sản..."/>
                             </group>
                             <group string="Ghi chú">
                                 <field name="ghi_chu" placeholder="Ghi chú thêm..." widget="textarea"/>
                             </group>
                         </group>
                     </sheet>
-                    <div class="oe_chatter"/>
                 </form>
             </field>
         </record>
@@ -45,17 +64,34 @@
                       decoration-danger="state=='cancelled'"
                       class="o_list_full_width">
                     <field name="ma_phieu_muon" class="oe_inline"/>
-                    <field name="ngay_muon" widget="date"/>
-                    <field name="ngay_tra" widget="date"/>
+                    <field name="ngay_muon_du_kien" widget="date"/>
+                    <field name="ngay_tra_du_kien" widget="date"/>
+                    <field name="ngay_muon_thuc_te" widget="date"/>
+                    <field name="ngay_tra_thuc_te" widget="date"/>
                     <field name="nhan_vien_id" widget="selection"/>
                     <field name="tai_san_id" widget="selection"/>
                     <field name="state" widget="badge"
                            options="{'clickable': True, 'class_mapping': {'draft': 'warning', 'approved': 'info', 'done': 'success', 'cancelled': 'danger'}}"/>
-                    <button name="action_approve" string="Duyệt" type="object" class="btn-primary" states="draft"/>
-                    <button name="action_done" string="Hoàn thành" type="object" class="btn-success" states="approved"/>
-                    <button name="action_cancel" string="Hủy" type="object" class="btn-danger" states="draft,approved"/>
-                    <button name="action_reset_to_draft" string="Quay lại Nháp" type="object" class="btn-warning"
-                            states="approved,cancelled"/>
+                    <button name="action_approve"
+                            string="Duyệt"
+                            type="object"
+                            class="btn-primary"
+                            states="draft"/>
+                    <button name="action_done"
+                            string="Hoàn thành"
+                            type="object"
+                            class="btn-success"
+                            states="approved"/>
+                    <button name="action_cancel"
+                            string="Hủy"
+                            type="object"
+                            class="btn-danger"
+                            states="draft,approved"/>
+                    <button name="action_reset_to_draft"
+                            string="Quay lại Nháp"
+                            type="object"
+                            class="btn-warning"
+                            attrs="{'invisible': [('state', '!=', 'cancelled')]}"/>
                 </tree>
             </field>
         </record>

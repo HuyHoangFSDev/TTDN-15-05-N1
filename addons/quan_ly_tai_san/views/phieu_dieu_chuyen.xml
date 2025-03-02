@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="seq_phieu_dieu_chuyen" model="ir.sequence">
+        <field name="name">Phiếu Điều Chuyển</field>
+        <field name="code">phieu_dieu_chuyen</field>
+        <field name="prefix">PDC/</field>
+        <field name="padding">5</field>
+    </record>
+
+    <record id="view_phieu_dieu_chuyen_form" model="ir.ui.view">
+        <field name="name">phieu_dieu_chuyen.form</field>
+        <field name="model">phieu_dieu_chuyen</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_duyet" string="Duyệt" type="object" invisible="[('trang_thai', '!=', 'nhap')]"
+                            class="btn-primary oe_right"/>
+                    <button name="action_hoan_thanh" string="Hoàn thành" type="object"
+                            invisible="[('trang_thai', '!=', 'duyet')]" class="btn-success oe_right"/>
+                    <button name="action_huy" string="Hủy" type="object"
+                            invisible="[('trang_thai', 'not in', ('nhap', 'duyet'))]" class="btn-danger oe_right"/>
+                    <field name="trang_thai" widget="statusbar" statusbar_visible="nhap,duyet,hoan_thanh"
+                           statusbar_colors='{"nhap":"blue", "duyet":"orange", "hoan_thanh":"green", "huy":"red"}'
+                           class="oe_inline"/>
+                </header>
+                <sheet>
+                    <div class="row"
+                         style="background: linear-gradient(135deg, #ffffff, #f0f4f8); padding: 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); transition: all 0.3s ease;">
+                        <div class="col-6">
+                            <label for="tai_san" class="oe_edit_only"
+                                   style="font-weight: bold; color: #2c3e50; display: block; margin-bottom: 5px;"/>
+                            <field name="tai_san" attrs="{'readonly': [('trang_thai', '!=', 'nhap')]}"
+                                   options="{'no_quick_create': True}"
+                                   class="oe_inline"
+                                   style="width: 100%; padding: 8px; border: 1px solid #dfe6e9; border-radius: 5px; background-color: #fff; box-shadow: inset 0 1px 3px rgba(0,0,0,0.05); transition: border-color 0.3s ease;"
+                                   placeholder="Chọn tài sản..."
+                                   on_change="border-color: #4a90e2;"/>
+                            <label for="vi_tri_hien_tai"
+                                   style="font-weight: bold; color: #2c3e50; display: block; margin-top: 15px; margin-bottom: 5px;"/>
+                            <field name="vi_tri_hien_tai" readonly="1"
+                                   class="oe_inline"
+                                   style="width: 100%; padding: 8px; border: 1px solid #dfe6e9; border-radius: 5px; background-color: #f7f9fc;"/>
+                            <label for="vi_tri_moi" class="oe_edit_only"
+                                   style="font-weight: bold; color: #2c3e50; display: block; margin-top: 15px; margin-bottom: 5px;"/>
+                            <field name="vi_tri_moi" attrs="{'readonly': [('trang_thai', '!=', 'nhap')]}"
+                                   options="{'no_quick_create': True}"
+                                   class="oe_inline"
+                                   style="width: 100%; padding: 8px; border: 1px solid #dfe6e9; border-radius: 5px; background-color: #fff; box-shadow: inset 0 1px 3px rgba(0,0,0,0.05); transition: border-color 0.3s ease;"
+                                   placeholder="Chọn vị trí mới..."
+                                   on_change="border-color: #4a90e2;"/>
+                        </div>
+                        <div class="col-6">
+                            <label for="ngay_dieu_chuyen" class="oe_edit_only"
+                                   style="font-weight: bold; color: #2c3e50; display: block; margin-bottom: 5px;"/>
+                            <field name="ngay_dieu_chuyen" attrs="{'readonly': [('trang_thai', '!=', 'nhap')]}"
+                                   class="oe_inline"
+                                   style="width: 100%; padding: 8px; border: 1px solid #dfe6e9; border-radius: 5px; background-color: #fff; box-shadow: inset 0 1px 3px rgba(0,0,0,0.05); transition: border-color 0.3s ease;"
+                                   placeholder="Chọn ngày..."
+                                   on_change="border-color: #4a90e2;"/>
+                        </div>
+                    </div>
+
+                    <notebook
+                            style="margin-top: 25px; background-color: #fff; border: 1px solid #e0e6ed; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+                        <page string="Ghi chú" style="padding: 15px;">
+                            <field name="ghi_chu" placeholder="Nhập ghi chú nếu cần..."
+                                   style="width: 100%; min-height: 120px; padding: 10px; border: 1px solid #dfe6e9; border-radius: 5px; background-color: #f9fbfc; resize: vertical; transition: border-color 0.3s ease;"
+                                   on_change="border-color: #4a90e2;"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_phieu_dieu_chuyen_tree" model="ir.ui.view">
+        <field name="name">phieu_dieu_chuyen.tree</field>
+        <field name="model">phieu_dieu_chuyen</field>
+        <field name="arch" type="xml">
+            <tree decoration-danger="trang_thai == 'huy'" decoration-success="trang_thai == 'hoan_thanh'"
+                  decoration-info="trang_thai == 'nhap'" decoration-warning="trang_thai == 'duyet'">
+                <field name="ten_phieu"/>
+                <field name="tai_san"/>
+                <field name="vi_tri_hien_tai"/>
+                <field name="vi_tri_moi"/>
+                <field name="ngay_dieu_chuyen" widget="date"/>
+                <field name="trang_thai"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_phieu_dieu_chuyen_search" model="ir.ui.view">
+        <field name="name">phieu_dieu_chuyen.search</field>
+        <field name="model">phieu_dieu_chuyen</field>
+        <field name="arch" type="xml">
+            <search string="Phiếu Điều Chuyển">
+                <field name="ten_phieu"/>
+                <field name="tai_san"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_phieu_dieu_chuyen" model="ir.actions.act_window">
+        <field name="name">Phiếu Điều Chuyển</field>
+        <field name="res_model">phieu_dieu_chuyen</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Nhấn "Tạo" để thêm phiếu điều chuyển mới.</p>
+        </field>
+    </record>
+</odoo>

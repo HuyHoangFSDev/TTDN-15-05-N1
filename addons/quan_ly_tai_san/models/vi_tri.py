@@ -36,7 +36,7 @@ class ViTri(models.Model):
     def action_di_chuyen_tai_san(self):
         for record in self:
             return {
-                'name': 'Di chuyển tài sản',
+                'name': 'điều chuyển tài sản',
                 'type': 'ir.actions.act_window',
                 'res_model': 'lich_su_di_chuyen',
                 'view_mode': 'form',

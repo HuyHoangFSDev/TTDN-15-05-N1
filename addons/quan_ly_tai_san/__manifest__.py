@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 {
     'name': "Quản lý tài sản",
 
@@ -18,10 +17,8 @@
     'category': 'Human Resources/Assets',
     'version': '0.1',
 
-    # Các module cần thiết để module này hoạt động
     'depends': ['base', 'nhan_su'],
 
-    # Các file dữ liệu luôn được tải
     'data': [
         'security/ir.model.access.csv',
         'sequences.xml',
@@ -34,23 +31,21 @@
         'views/lich_su_su_dung.xml',
         'views/lich_su_bao_tri.xml',
         'views/lich_su_di_chuyen.xml',
+        'views/phieu_dieu_chuyen.xml',
         'views/khau_hao.xml',
         'views/menu.xml',
     ],
 
-    # Các file demo chỉ tải khi chạy ở chế độ demo
     'demo': [
         'demo/demo.xml',
     ],
 
-    # Tài sản (CSS, JS) được tải vào giao diện backend
     'assets': {
         'web.assets_backend': [
             'quan_ly_tai_san/static/src/css/tai_san.css',
         ],
     },
 
-    # Đảm bảo module có thể cài đặt
     'installable': True,
-    'application': True,  # Nếu muốn module hiển thị như một ứng dụng trong Apps
+    'application': True,
 }

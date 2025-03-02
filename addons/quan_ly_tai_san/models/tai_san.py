@@ -3,6 +3,7 @@ from dateutil.relativedelta import relativedelta
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError
 
+
 class TaiSan(models.Model):
     _name = 'tai_san'
     _description = 'Bảng chứa thông tin tài sản'
@@ -14,21 +15,20 @@ class TaiSan(models.Model):
 
     ma_tai_san = fields.Char("Mã Tài sản", required=True, copy=False, readonly=True, default="New")
     ten_tai_san = fields.Char("Tên Tài sản", required=True)
-    so_serial = fields.Char("Số serial", required=True, copy=False, readonly=True, default="New")
+    so_serial = fields.Char("Số serial", required=True, copy=False)
     ngay_mua = fields.Date("Ngày mua")
     ngay_het_han_bao_hanh = fields.Date("Ngày hết hạn bảo hành")
     gia_tien_mua = fields.Float("Giá tiền mua", digits=(16, 2))
     gia_tri_hien_tai = fields.Float("Giá trị hiện tại", digits=(16, 2))
 
     TRANG_THAI = [
+        ("LuuTru", "Lưu trữ"),
         ("Muon", "Mượn"),
         ("BaoTri", "Bảo trì"),
-        ("LuuTru", "Lưu trữ"),
         ("Hong", "Hỏng"),
     ]
 
     trang_thai = fields.Selection(TRANG_THAI, string="Trạng thái", default="LuuTru", tracking=True)
-
 
     loai_tai_san_id = fields.Many2one(comodel_name='loai_tai_san', string="Loại tài sản", required=True)
     vi_tri_hien_tai_id = fields.Many2one(
@@ -62,14 +62,13 @@ class TaiSan(models.Model):
     lich_su_di_chuyen_ids = fields.One2many(
         comodel_name='lich_su_di_chuyen',
         inverse_name='tai_san_id',
-        string="Lịch sử di chuyển",
+        string="Lịch sử điều chuyển",
         readonly=True
     )
 
     @api.depends()
     def _compute_vi_tri(self):
         for asset in self:
-
             pass
 
     @api.constrains('ngay_mua', 'ngay_het_han_bao_hanh')
@@ -99,14 +98,14 @@ class TaiSan(models.Model):
 
     @api.model
     def create(self, vals):
-        if vals.get('so_serial', 'New') == 'New':
-            vals['so_serial'] = self.env['ir.sequence'].next_by_code('tai.san.serial') or 'New'
+        if vals.get('ma_tai_san', 'New') == 'New':
+            vals['ma_tai_san'] = self.env['ir.sequence'].next_by_code('tai_san') or 'New'
         return super(TaiSan, self).create(vals)
 
     def action_di_chuyen_tai_san(self):
         for record in self:
             return {
-                'name': 'Di chuyển tài sản',
+                'name': 'điều chuyển tài sản',
                 'type': 'ir.actions.act_window',
                 'res_model': 'lich_su_di_chuyen',
                 'view_mode': 'form',
