@@ -10,10 +10,10 @@
                         <field name="trang_thai" widget="statusbar" clickable="1" options="{'fold_field': 'state'}"/>
                     </header>
                     <sheet class="o_form_sheet_full">
-                        <div class="oe_button_box" name="button_box">
+                        <div class="oe_button_box p-2" name="button_box">
                             <button name="action_di_chuyen_tai_san" type="object" class="btn btn-primary">
-                                <i class="fa fa-exchange"/>
-                                điều chuyển tài sản
+                                <i class="fa px-2 fa-exchange"/>
+                                Điều chuyển tài sản
                             </button>
                         </div>
 
@@ -33,7 +33,7 @@
                         <notebook class="o_notebook_full">
                             <page string="Thông tin bổ sung" class="oe_grey">
                                 <group class="o_2col">
-                                    <field name="ngay_mua" widget="date" placeholder="Ngày mua"/>
+                                    <field name="ngay_mua" widget="datetime" placeholder="Ngày mua"/>
                                     <field name="ngay_het_han_bao_hanh" widget="date" placeholder="Ngày hết bảo hành"/>
                                     <field name="gia_tien_mua" widget="monetary"
                                            options="{'currency_field': 'currency_id'}"/>
@@ -53,17 +53,7 @@
                                     </tree>
                                 </field>
                             </page>
-                            <page string="Khấu hao">
-                                <field name="khau_hao_ids" nolabel="1">
-                                    <tree editable="bottom" class="o_list_full_width">
-                                        <field name="ma_khau_hao"/>
-                                        <field name="phuong_phap_khau_hao"/>
-                                        <field name="ngay_khau_hao"/>
-                                        <field name="gia_tri_khau_hao"/>
-                                        <field name="gia_tri_con_lai"/>
-                                    </tree>
-                                </field>
-                            </page>
+
                             <page string="Lịch sử bảo trì">
                                 <field name="lich_su_bao_tri_ids" nolabel="1">
                                     <tree editable="bottom" class="o_list_full_width">
@@ -79,9 +69,23 @@
                             <page string="Lịch sử điều chuyển">
                                 <field name="lich_su_di_chuyen_ids" nolabel="1">
                                     <tree editable="bottom" class="o_list_full_width">
-                                        <field name="vi_tri_id" widget="selection"/>
-                                        <field name="ngay_di_chuyen" widget="date"/>
+                                        <field name="is_current_location" invisible="1"/>
+                                        <field name="vi_tri_chuyen_id" widget="selection"/>
+                                        <field name="vi_tri_den_id" widget="selection"
+                                               decoration-success="is_current_location"/>
+                                        <field name="ngay_di_chuyen" widget="datetime"/>
                                         <field name="ghi_chu"/>
+                                    </tree>
+                                </field>
+                            </page>
+                             <page string="Khấu hao">
+                                <field name="khau_hao_ids" nolabel="1">
+                                    <tree editable="bottom" class="o_list_full_width">
+                                        <field name="ma_khau_hao"/>
+                                        <field name="phuong_phap_khau_hao"/>
+                                        <field name="ngay_khau_hao"/>
+                                        <field name="gia_tri_khau_hao"/>
+                                        <field name="gia_tri_con_lai"/>
                                     </tree>
                                 </field>
                             </page>
@@ -107,7 +111,7 @@
                     <field name="loai_tai_san_id" widget="selection"/>
                     <field name="vi_tri_hien_tai_id" widget="selection"/>
                     <field name="nha_cung_cap_id" widget="selection"/>
-                    <field name="ngay_mua" widget="date"/>
+                    <field name="ngay_mua" widget="datetime"/>
                     <field name="gia_tien_mua" widget="monetary"/>
                     <field name="gia_tri_hien_tai" widget="monetary"/>
                     <field name="trang_thai" widget="badge"

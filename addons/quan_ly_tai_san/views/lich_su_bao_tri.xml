@@ -10,8 +10,8 @@
                     <sheet>
                         <group>
                             <field name="ma_lich_su_bao_tri" />
-                            <field name="ngay_bao_tri" />
-                            <field name="ngay_tra" />
+                            <field name="ngay_bao_tri" widget="datetime"/>
+                            <field name="ngay_tra" widget="datetime"/>
                             <field name="chi_phi" />
                             <field name="tai_san_id" />
                             <field name="ghi_chu" />

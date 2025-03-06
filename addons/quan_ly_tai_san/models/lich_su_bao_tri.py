@@ -13,8 +13,8 @@ class LichSuBaoTri(models.Model):
     ]
 
     ma_lich_su_bao_tri = fields.Char("Mã lịch sử bảo trì", required=True)
-    ngay_bao_tri = fields.Date("Ngày bảo trì", required=True)
-    ngay_tra = fields.Date("Ngày trả", required=True)
+    ngay_bao_tri = fields.Date("Thời gian bảo trì", required=True)
+    ngay_tra = fields.Date("Thời gian trả", required=True)
     chi_phi = fields.Integer("Chi phi", required=True)
     ghi_chu = fields.Char("Ghi chú")
     tai_san_id = fields.Many2one(comodel_name="tai_san", string= "Tài sản",store=True)

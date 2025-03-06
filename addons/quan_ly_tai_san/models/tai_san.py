@@ -16,7 +16,7 @@ class TaiSan(models.Model):
     ma_tai_san = fields.Char("Mã Tài sản", required=True, copy=False, readonly=True, default="New")
     ten_tai_san = fields.Char("Tên Tài sản", required=True)
     so_serial = fields.Char("Số serial", required=True, copy=False)
-    ngay_mua = fields.Date("Ngày mua")
+    ngay_mua = fields.Datetime("Ngày mua")
     ngay_het_han_bao_hanh = fields.Date("Ngày hết hạn bảo hành")
     gia_tien_mua = fields.Float("Giá tiền mua", digits=(16, 2))
     gia_tri_hien_tai = fields.Float("Giá trị hiện tại", digits=(16, 2))
@@ -65,11 +65,6 @@ class TaiSan(models.Model):
         string="Lịch sử điều chuyển",
         readonly=True
     )
-
-    @api.depends()
-    def _compute_vi_tri(self):
-        for asset in self:
-            pass
 
     @api.constrains('ngay_mua', 'ngay_het_han_bao_hanh')
     def _check_dates(self):

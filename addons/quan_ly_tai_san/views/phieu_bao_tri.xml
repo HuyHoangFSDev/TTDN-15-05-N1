@@ -5,35 +5,31 @@
             <field name="name">phieu_bao_tri_form</field>
             <field name="model">phieu_bao_tri</field>
             <field name="arch" type="xml">
-                <form string="Phiếu bảo trì tài sản" class="o_form_full_width">
+                <form string="Phiếu bảo trì tài sản">
                     <header>
-                        <field name="state" widget="statusbar" clickable="1" options="{'fold_field': 'state'}"/>
-                        <button name="action_approve" string="Duyệt" type="object" class="btn-primary" states="draft"/>
-                        <button name="action_done" string="Hoàn thành" type="object" class="btn-success"
-                                states="approved"/>
-                        <button name="action_cancel" string="Hủy" type="object" class="btn-danger"
-                                states="draft,approved"/>
-                        <button name="action_reset_to_draft" string="Quay lại Nháp" type="object" class="btn-warning"
-                                states="approved,cancelled"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,approved,done"/>
+                        <button name="action_approve" string="Duyệt" type="object" states="draft" class="btn-primary"/>
+                        <button name="action_done" string="Hoàn thành" type="object" states="approved" class="btn-success"/>
+                        <button name="action_cancel" string="Hủy" type="object" states="draft,approved" class="btn-danger"/>
                     </header>
-                    <sheet class="o_form_sheet_full">
-                        <group class="o_form_group_full">
-                            <group string="Thông tin phiếu bảo trì" class="o_3col">
-                                <field name="ma_phieu_bao_tri" class="oe_inline" readonly="1"
-                                       options="{'no_open': True}"/>
-                                <field name="ngay_bao_tri" widget="date" required="1"
-                                       placeholder="Chọn ngày bảo trì..."/>
-                                <field name="ngay_tra" widget="date" required="1" placeholder="Chọn ngày trả..."/>
-                                <field name="tai_san_id" widget="selection" required="1" placeholder="Chọn tài sản..."/>
-                            </group>
-                            <group string="Chi phí &amp; Ghi chú" class="o_2col">
-                                <field name="chi_phi" widget="monetary" options="{'currency_field': 'currency_id'}"
-                                       placeholder="Nhập chi phí bảo trì..." required="1"/>
+                    <sheet class="bg-white border rounded shadow-sm">
+                        <field name="ma_phieu_bao_tri" readonly="1"/>
+                        <notebook class="mt-3 border rounded shadow-sm">
+                            <page string="Thông tin bảo trì" class="p-3 bg-light">
+                                <group class="o_form_group">
+                                    <field name="ngay_bao_tri" widget="datetime" placeholder="Chọn ngày bảo trì dự kiến..." required="1"/>
+                                    <field name="ngay_bao_tri_thuc_te" widget="datetime" placeholder="Chọn ngày bảo trì thực tế..." required="0"/>
+                                    <field name="ngay_tra" widget="datetime" placeholder="Chọn ngày trả dự kiến..." required="1"/>
+                                    <field name="ngay_tra_thuc_te" widget="datetime" placeholder="Chọn ngày trả thực tế..." required="0"/>
+                                    <field name="tai_san_id" placeholder="Chọn tài sản..." required="1"/>
+                                    <field name="chi_phi" placeholder="Nhập chi phí bảo trì..." required="1"/>
+                                </group>
+                            </page>
+                            <page string="Ghi chú" class="p-3 bg-light">
                                 <field name="ghi_chu" placeholder="Ghi chú thêm..." widget="textarea"/>
-                            </group>
-                        </group>
+                            </page>
+                        </notebook>
                     </sheet>
-                    <div class="oe_chatter"/>
                 </form>
             </field>
         </record>
@@ -42,24 +38,17 @@
             <field name="name">phieu_bao_tri_tree</field>
             <field name="model">phieu_bao_tri</field>
             <field name="arch" type="xml">
-                <tree string="Danh sách phiếu bảo trì"
-                      class="o_list_full_width"
-                      decoration-info="state=='approved'"
-                      decoration-danger="state=='cancelled'">
-
-                    <field name="ma_phieu_bao_tri" class="oe_inline"/>
-                    <field name="ngay_bao_tri" widget="date"/>
-                    <field name="ngay_tra" widget="date"/>
-                    <field name="chi_phi" widget="monetary"/>
-                    <field name="tai_san_id" widget="selection"/>
-                    <field name="state" widget="badge"
-                           options="{'clickable': True, 'class_mapping': {'draft': 'warning', 'approved': 'info', 'done': 'success', 'cancelled': 'danger'}}"/>
-                    <button name="action_approve" string="Duyệt" type="object" class="btn-primary" states="draft"/>
-                    <button name="action_done" string="Hoàn thành" type="object" class="btn-success" states="approved"/>
-                    <button name="action_cancel" string="Hủy" type="object" class="btn-danger" states="draft,approved"/>
-                    <button name="action_reset_to_draft" string="Quay lại Nháp" type="object" class="btn-warning"
-                            states="approved,cancelled"/>
-
+                <tree string="Danh sách phiếu bảo trì">
+                    <field name="ma_phieu_bao_tri"/>
+                    <field name="ngay_bao_tri" widget="datetime"/>
+                    <field name="ngay_tra" widget="datetime"/>
+                    <field name="chi_phi"/>
+                    <field name="tai_san_id"/>
+                    <field name="state"/>
+                    <button name="action_approve" string="Duyệt" type="object" states="draft" class="btn-primary"/>
+                    <button name="action_done" string="Hoàn thành" type="object" states="approved" class="btn-success"/>
+                    <button name="action_cancel" string="Hủy" type="object" states="draft,approved" class="btn-danger"/>
+                    <button name="action_reset_to_draft" string="Quay lại Nháp" type="object" states="cancelled" class="btn-warning"/>
                 </tree>
             </field>
         </record>
@@ -69,20 +58,11 @@
             <field name="model">phieu_bao_tri</field>
             <field name="arch" type="xml">
                 <search string="Tìm kiếm phiếu bảo trì">
-                    <field name="ma_phieu_bao_tri" string="Mã phiếu bảo trì"/>
-                    <field name="ngay_bao_tri" string="Ngày bảo trì"/>
-                    <field name="ngay_tra" string="Ngày trả"/>
-                    <field name="chi_phi" string="Chi phí"/>
-                    <field name="tai_san_id" string="Tài sản"/>
-                    <filter string="Nháp" name="draft" domain="[('state', '=', 'draft')]"/>
-                    <filter string="Đã duyệt" name="approved" domain="[('state', '=', 'approved')]"/>
-                    <filter string="Hoàn thành" name="done" domain="[('state', '=', 'done')]"/>
-                    <filter string="Đã hủy" name="cancelled" domain="[('state', '=', 'cancelled')]"/>
-                    <group expand="1" string="Lọc theo">
-                        <filter name="state" string="Trạng thái" context="{'group_by': 'state'}"/>
-                        <filter name="tai_san" string="Tài sản" context="{'group_by': 'tai_san_id'}"/>
-                        <filter name="ngay_bao_tri" string="Ngày bảo trì" context="{'group_by': 'ngay_bao_tri'}"/>
-                    </group>
+                    <field name="ma_phieu_bao_tri"/>
+                    <field name="ngay_bao_tri"/>
+                    <field name="ngay_tra"/>
+                    <field name="chi_phi"/>
+                    <field name="tai_san_id"/>
                 </search>
             </field>
         </record>
@@ -91,8 +71,6 @@
             <field name="name">Phiếu bảo trì</field>
             <field name="res_model">phieu_bao_tri</field>
             <field name="view_mode">tree,form</field>
-            <field name="search_view_id" ref="phieu_bao_tri_search"/>
-            <field name="context">{'default_state': 'draft'}</field>
         </record>
 
         <record id="seq_phieu_bao_tri" model="ir.sequence">
@@ -100,8 +78,6 @@
             <field name="code">phieu_bao_tri</field>
             <field name="prefix">PB-</field>
             <field name="padding">4</field>
-            <field name="number_next">1</field>
-            <field name="number_increment">1</field>
         </record>
     </data>
 </odoo>

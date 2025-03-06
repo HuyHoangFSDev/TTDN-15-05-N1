@@ -7,13 +7,7 @@
             <field name="model">nha_cung_cap</field>
             <field name="arch" type="xml">
                 <form string="Thông tin nhà cung cấp" class="o_form_full_width">
-                    <header>
-
-                    </header>
                     <sheet class="o_form_sheet_full">
-                        <div class="oe_button_box" name="button_box">
-
-                        </div>
                         <group class="o_form_group_full">
                             <group string="Thông tin cơ bản" class="o_2col">
                                 <field name="ma_nha_cung_cap" class="oe_inline" readonly="1" options="{'no_open': True}" />
@@ -24,7 +18,7 @@
                                 <field name="so_dien_thoai" placeholder="Nhập số điện thoại..." widget="phone" />
                                 <field name="email" placeholder="Nhập email..." widget="email" />
                             </group>
-                            <group string="Tài sản liên quan">
+                            <group string="Tài sản liên quan" class="o_group_col_12">
                                 <field name="tai_san_ids" nolabel="1">
                                     <tree editable="bottom" class="o_list_full_width">
                                         <field name="ma_tai_san" readonly="1" />
@@ -35,7 +29,6 @@
                             </group>
                         </group>
                     </sheet>
-                    <div class="oe_chatter" />
                 </form>
             </field>
         </record>

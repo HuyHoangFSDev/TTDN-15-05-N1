@@ -1,7 +1,7 @@
 import re
-from odoo import models, fields, api
-from odoo.exceptions import ValidationError
 
+from odoo import models, fields, api
+from odoo.exceptions import ValidationError, UserError
 
 class PhieuBaoTri(models.Model):
     _name = 'phieu_bao_tri'
@@ -16,12 +16,18 @@ class PhieuBaoTri(models.Model):
 
     ma_phieu_bao_tri = fields.Char("Mã phiếu bảo trì", required=True, copy=False, readonly=True, default="New",
                                    states={'draft': [('readonly', False)]})
-    ngay_bao_tri = fields.Date("Ngày bảo trì", required=True,
+    ngay_bao_tri = fields.Datetime("Thời gian bảo trì dự kiến", required=True,
                                states={'approved': [('readonly', True)], 'done': [('readonly', True)],
                                        'cancelled': [('readonly', True)]})
-    ngay_tra = fields.Date("Ngày trả", required=True,
+    ngay_bao_tri_thuc_te = fields.Datetime("Thời gian bảo trì thực tế", required=False,
+                                       states={'draft': [('readonly', True)], 'approved': [('readonly', False)],
+                                               'done': [('readonly', True)], 'cancelled': [('readonly', True)]})
+    ngay_tra = fields.Datetime("Thời gian trả dự kiến", required=True,
                            states={'approved': [('readonly', True)], 'done': [('readonly', True)],
                                    'cancelled': [('readonly', True)]})
+    ngay_tra_thuc_te = fields.Datetime("Thời gian trả thực tế", required=False,
+                                   states={'draft': [('readonly', True)], 'approved': [('readonly', False)],
+                                           'done': [('readonly', True)], 'cancelled': [('readonly', True)]})
     chi_phi = fields.Integer("Chi phí", required=True,
                              states={'approved': [('readonly', True)], 'done': [('readonly', True)],
                                      'cancelled': [('readonly', True)]})
@@ -62,7 +68,21 @@ class PhieuBaoTri(models.Model):
     def action_done(self):
         for record in self:
             if record.state == 'approved':
+                if not all([record.ngay_bao_tri_thuc_te, record.ngay_tra_thuc_te, record.chi_phi]):
+                    raise UserError(_('Vui lòng nhập đầy đủ Ngày bảo trì thực tế, Ngày trả thực tế và Chi phí trước khi hoàn thành.'))
                 record.state = 'done'
+                lich_su = self.env['lich_su_bao_tri'].search([
+                    ('tai_san_id', '=', record.tai_san_id.id),
+                    ('ngay_bao_tri', '=', record.ngay_bao_tri),
+                    ('ngay_tra', '=', record.ngay_tra),
+                    ('chi_phi', '=', record.chi_phi),
+                    ('ghi_chu', '=', record.ghi_chu)
+                ], limit=1)
+                if lich_su:
+                    lich_su.write({
+                        'ngay_bao_tri': record.ngay_bao_tri_thuc_te,
+                        'ngay_tra': record.ngay_tra_thuc_te
+                    })
 
     def action_cancel(self):
         for record in self:
