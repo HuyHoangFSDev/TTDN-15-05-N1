@@ -1,8 +1,6 @@
 import re
-
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError, UserError
-
 
 class PhieuMuon(models.Model):
     _name = 'phieu_muon'
@@ -43,7 +41,6 @@ class PhieuMuon(models.Model):
     state = fields.Selection(
         [('draft', 'Nháp'), ('approved', 'Đã duyệt'), ('done', 'Hoàn thành'), ('cancelled', 'Hủy')],
         default='draft', string="Trạng thái")
-
     trang_thai_muon = fields.Char('Trạng thái mượn', compute='_compute_trang_thai_muon', store=True)
 
     @api.constrains('ma_phieu_muon')
@@ -62,17 +59,15 @@ class PhieuMuon(models.Model):
     def _compute_trang_thai_muon(self):
         for record in self:
             muon_do_muon = (
-                    record.ngay_muon_thuc_te
-                    and record.ngay_muon_du_kien
-                    and record.ngay_muon_thuc_te > record.ngay_muon_du_kien
+                record.ngay_muon_thuc_te
+                and record.ngay_muon_du_kien
+                and record.ngay_muon_thuc_te > record.ngay_muon_du_kien
             )
-
             tra_do_muon = (
-                    record.ngay_tra_thuc_te
-                    and record.ngay_tra_du_kien
-                    and record.ngay_tra_thuc_te > record.ngay_tra_du_kien
+                record.ngay_tra_thuc_te
+                and record.ngay_tra_du_kien
+                and record.ngay_tra_thuc_te > record.ngay_tra_du_kien
             )
-
             if muon_do_muon and tra_do_muon:
                 record.trang_thai_muon = 'Mượn muộn và trả muộn'
             elif muon_do_muon:
@@ -98,7 +93,10 @@ class PhieuMuon(models.Model):
                     'tai_san_id': record.tai_san_id.id,
                 })
                 record.state = 'approved'
-                record.tai_san_id.write({'trang_thai': 'Muon'})
+                record.tai_san_id.write({
+                    'trang_thai': 'Muon',
+                    'nguoi_dang_dung_id': record.nhan_vien_id.id
+                })
 
     def action_done(self):
         for record in self:
@@ -117,7 +115,10 @@ class PhieuMuon(models.Model):
                         'ngay_muon': record.ngay_muon_thuc_te,
                         'ngay_tra': record.ngay_tra_thuc_te
                     })
-                record.tai_san_id.write({'trang_thai': 'LuuTru'})
+                record.tai_san_id.write({
+                    'trang_thai': 'LuuTru',
+                    'nguoi_dang_dung_id': False
+                })
 
     def action_cancel(self):
         for record in self:
@@ -132,10 +133,16 @@ class PhieuMuon(models.Model):
                 if lich_su_su_dung:
                     lich_su_su_dung.unlink()
                 record.state = 'cancelled'
-                record.tai_san_id.write({'trang_thai': 'LuuTru'})
+                record.tai_san_id.write({
+                    'trang_thai': 'LuuTru',
+                    'nguoi_dang_dung_id': False
+                })
 
     def action_reset_to_draft(self):
         for record in self:
             if record.state == 'cancelled':
                 record.state = 'draft'
-                record.tai_san_id.write({'trang_thai': 'LuuTru'})
+                record.tai_san_id.write({
+                    'trang_thai': 'LuuTru',
+                    'nguoi_dang_dung_id': False
+                })

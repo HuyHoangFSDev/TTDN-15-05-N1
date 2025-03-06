@@ -17,15 +17,17 @@
                             </button>
                         </div>
 
-                        <group class="o_form_group_full">
-                            <group string="Thông tin cơ bản" class="o_3col">
+                        <group string="Thông tin cơ bản" class="o_form_group_full">
+                            <group class="o_3col">
                                 <field name="ma_tai_san" class="oe_inline" readonly="1" options="{'no_open': True}"/>
                                 <field name="ten_tai_san" placeholder="Nhập tên tài sản..." required="1"/>
                                 <field name="so_serial" placeholder="Số serial"/>
                                 <field name="loai_tai_san_id" widget="many2one" placeholder="Chọn loại tài sản..."/>
                             </group>
-                            <group string="Vị trí &amp; Nhà cung cấp" class="o_2col">
+                            <group class="o_2col">
                                 <field name="nha_cung_cap_id" widget="many2one" placeholder="Chọn nhà cung cấp..."/>
+                                <field name="quan_ly_id" widget="many2one" placeholder="Chọn người quản lý..."/>
+                                <field name="nguoi_dang_dung_id" widget="many2one" readonly="1"/>
                                 <field name="vi_tri_hien_tai_id" widget="many2one" placeholder="Vị trí hiện tại..."
                                        readonly="1"/>
                             </group>
@@ -39,6 +41,7 @@
                                            options="{'currency_field': 'currency_id'}"/>
                                     <field name="gia_tri_hien_tai" widget="monetary"
                                            options="{'currency_field': 'currency_id'}"/>
+                                    <field name="hinh_anh" widget="image" class="oe_avatar"/>
                                 </group>
                             </page>
                             <page string="Lịch sử sử dụng">
@@ -53,7 +56,6 @@
                                     </tree>
                                 </field>
                             </page>
-
                             <page string="Lịch sử bảo trì">
                                 <field name="lich_su_bao_tri_ids" nolabel="1">
                                     <tree editable="bottom" class="o_list_full_width">
@@ -78,7 +80,7 @@
                                     </tree>
                                 </field>
                             </page>
-                             <page string="Khấu hao">
+                            <page string="Khấu hao">
                                 <field name="khau_hao_ids" nolabel="1">
                                     <tree editable="bottom" class="o_list_full_width">
                                         <field name="ma_khau_hao"/>
@@ -95,7 +97,6 @@
             </field>
         </record>
 
-
         <record id="view_tai_san_tree" model="ir.ui.view">
             <field name="name">tai_san_tree</field>
             <field name="model">tai_san</field>
@@ -111,6 +112,8 @@
                     <field name="loai_tai_san_id" widget="selection"/>
                     <field name="vi_tri_hien_tai_id" widget="selection"/>
                     <field name="nha_cung_cap_id" widget="selection"/>
+                    <field name="quan_ly_id" widget="selection"/>
+                    <field name="nguoi_dang_dung_id" widget="selection"/>
                     <field name="ngay_mua" widget="datetime"/>
                     <field name="gia_tien_mua" widget="monetary"/>
                     <field name="gia_tri_hien_tai" widget="monetary"/>
@@ -119,7 +122,6 @@
                 </tree>
             </field>
         </record>
-
 
         <record id="tai_san_search" model="ir.ui.view">
             <field name="name">tai_san_search</field>
@@ -132,7 +134,6 @@
                             domain="[('ngay_mua', '>=', context_today().strftime('%%Y-%%m-%%d'))]"/>
                     <filter string="Hết bảo hành" name="het_bh"
                             domain="[('ngay_het_han_bao_hanh', '&lt;', context_today().strftime('%%Y-%%m-%%d'))]"/>
-
                     <group expand="1" string="Lọc theo">
                         <filter name="trang_thai" string="Trạng thái" context="{'group_by': 'trang_thai'}"/>
                         <filter name="loai_tai_san" string="Loại tài sản" context="{'group_by': 'loai_tai_san_id'}"/>
@@ -148,7 +149,6 @@
                 </search>
             </field>
         </record>
-
 
         <record id="action_tai_san" model="ir.actions.act_window">
             <field name="name">Tài sản</field>
