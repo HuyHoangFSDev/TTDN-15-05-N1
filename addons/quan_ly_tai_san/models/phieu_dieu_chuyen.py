@@ -45,7 +45,7 @@ class PhieuDieuChuyen(models.Model):
     def action_hoan_thanh(self):
         if self.trang_thai != 'duyet':
             raise UserError(_('Chỉ có thể hoàn thành phiếu đã được duyệt.'))
-        self.env['lich_su_di_chuyen'].create({
+        self.env['lich_su_dieu_chuyen'].create({
             'tai_san_id': self.tai_san.id,
             'vi_tri_chuyen_id': self.vi_tri_hien_tai.id,
             'vi_tri_den_id': self.vi_tri_moi.id,

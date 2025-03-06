@@ -102,8 +102,8 @@ class TaiSan(models.Model):
         help="Thông tin về khấu hao tài sản theo thời gian"
     )
 
-    lich_su_di_chuyen_ids = fields.One2many(
-        comodel_name='lich_su_di_chuyen', inverse_name='tai_san_id',
+    lich_su_dieu_chuyen_ids = fields.One2many(
+        comodel_name='lich_su_dieu_chuyen', inverse_name='tai_san_id',
         string="Lịch sử điều chuyển", readonly=True,
         help="Các lần tài sản được di chuyển giữa các vị trí"
     )
@@ -147,7 +147,7 @@ class TaiSan(models.Model):
             return {
                 'name': 'điều chuyển tài sản',
                 'type': 'ir.actions.act_window',
-                'res_model': 'lich_su_di_chuyen',
+                'res_model': 'lich_su_dieu_chuyen',
                 'view_mode': 'form',
                 'target': 'new',
                 'context': {

@@ -69,7 +69,7 @@
                                 </field>
                             </page>
                             <page string="Lịch sử điều chuyển">
-                                <field name="lich_su_di_chuyen_ids" nolabel="1">
+                                <field name="lich_su_dieu_chuyen_ids" nolabel="1">
                                     <tree editable="bottom" class="o_list_full_width">
                                         <field name="is_current_location" invisible="1"/>
                                         <field name="vi_tri_chuyen_id" widget="selection"/>

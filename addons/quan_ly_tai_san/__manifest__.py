@@ -30,7 +30,7 @@
         'views/nha_cung_cap.xml',
         'views/lich_su_su_dung.xml',
         'views/lich_su_bao_tri.xml',
-        'views/lich_su_di_chuyen.xml',
+        'views/lich_su_dieu_chuyen.xml',
         'views/phieu_dieu_chuyen.xml',
         'views/khau_hao.xml',
         'views/menu.xml',

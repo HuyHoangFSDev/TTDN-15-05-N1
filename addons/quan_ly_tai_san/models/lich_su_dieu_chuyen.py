@@ -1,7 +1,7 @@
 from odoo import models, fields, api
 
 class LichSuDiChuyen(models.Model):
-    _name = 'lich_su_di_chuyen'
+    _name = 'lich_su_dieu_chuyen'
     _description = 'Lịch sử điều chuyển tài sản'
     _order = 'ngay_di_chuyen desc'
 

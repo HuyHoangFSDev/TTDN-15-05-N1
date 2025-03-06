@@ -38,7 +38,7 @@ class ViTri(models.Model):
             return {
                 'name': 'điều chuyển tài sản',
                 'type': 'ir.actions.act_window',
-                'res_model': 'lich_su_di_chuyen',
+                'res_model': 'lich_su_dieu_chuyen',
                 'view_mode': 'form',
                 'target': 'new',
                 'context': {

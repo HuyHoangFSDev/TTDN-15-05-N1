@@ -21,9 +21,3 @@ class NhaCungCap(models.Model):
     tai_san_ids = fields.One2many(
         comodel_name='tai_san',
         inverse_name='nha_cung_cap_id', string="Tài sản", required=True)
-
-    @api.constrains('ma_nha_cung_cap')
-    def _check_ma_nha_cung_cap_format(self):
-        for record in self:
-            if not re.fullmatch(r'NCC-\d{4}', record.ma_nha_cung_cap):
-                raise ValidationError("Mã nhà cung cấp phải có định dạng NCC-XXXX (ví dụ: NCC-1234)")

@@ -2,9 +2,9 @@
 <odoo>
     <data>
 
-        <record id="view_lich_su_di_chuyen_form" model="ir.ui.view">
-            <field name="name">lich_su_di_chuyen_form</field>
-            <field name="model">lich_su_di_chuyen</field>
+        <record id="view_lich_su_dieu_chuyen_form" model="ir.ui.view">
+            <field name="name">lich_su_dieu_chuyen_form</field>
+            <field name="model">lich_su_dieu_chuyen</field>
             <field name="arch" type="xml">
                 <form string="Lịch sử điều chuyển tài sản" class="o_form_full_width">
                     <sheet class="o_form_sheet_full">
@@ -27,9 +27,9 @@
         </record>
 
 
-        <record id="view_lich_su_di_chuyen_tree" model="ir.ui.view">
-            <field name="name">lich_su_di_chuyen_tree</field>
-            <field name="model">lich_su_di_chuyen</field>
+        <record id="view_lich_su_dieu_chuyen_tree" model="ir.ui.view">
+            <field name="name">lich_su_dieu_chuyen_tree</field>
+            <field name="model">lich_su_dieu_chuyen</field>
             <field name="arch" type="xml">
                 <tree string="Danh sách lịch sử điều chuyển"
                       class="o_list_full_width">
@@ -43,9 +43,9 @@
         </record>
 
 
-        <record id="lich_su_di_chuyen_search" model="ir.ui.view">
-            <field name="name">lich_su_di_chuyen_search</field>
-            <field name="model">lich_su_di_chuyen</field>
+        <record id="lich_su_dieu_chuyen_search" model="ir.ui.view">
+            <field name="name">lich_su_dieu_chuyen_search</field>
+            <field name="model">lich_su_dieu_chuyen</field>
             <field name="arch" type="xml">
                 <search string="Tìm kiếm lịch sử điều chuyển">
                     <field name="tai_san_id" string="Tài sản"/>
@@ -64,11 +64,11 @@
         </record>
 
 
-        <record id="action_lich_su_di_chuyen" model="ir.actions.act_window">
+        <record id="action_lich_su_dieu_chuyen" model="ir.actions.act_window">
             <field name="name">Lịch sử điều chuyển</field>
-            <field name="res_model">lich_su_di_chuyen</field>
+            <field name="res_model">lich_su_dieu_chuyen</field>
             <field name="view_mode">tree,form</field>
-            <field name="search_view_id" ref="lich_su_di_chuyen_search"/>
+            <field name="search_view_id" ref="lich_su_dieu_chuyen_search"/>
             <field name="context">{}</field>
         </record>
     </data>
