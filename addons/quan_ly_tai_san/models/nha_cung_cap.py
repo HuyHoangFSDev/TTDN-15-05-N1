@@ -13,7 +13,7 @@ class NhaCungCap(models.Model):
         ('ma_nha_cung_cap_unique', 'unique(ma_nha_cung_cap)', 'Mã nhà cung cấp phải là duy nhất!'),
     ]
 
-    ma_nha_cung_cap = fields.Char("Mã nhà cung cấp", required=True)
+    ma_nha_cung_cap = fields.Char("Mã nhà cung cấp")
     ten_nha_cung_cap = fields.Char("Tên nhà cung cấp", required=True)
     ten_nguoi_dai_dien = fields.Char("Tên người đại diện", required=True)
     so_dien_thoai = fields.Char("Số điện thoại", required=True)

@@ -11,7 +11,7 @@ class ViTri(models.Model):
         ('ma_vi_tri_unique', 'unique(ma_vi_tri)', 'Mã vị trí phải là duy nhất!'),
     ]
 
-    ma_vi_tri = fields.Char("Mã vị trí", required=True, copy=False, readonly=True, default="New")
+    ma_vi_tri = fields.Char("Mã vị trí", copy=False, readonly=True, default="New")
     ten_vi_tri = fields.Char("Tên vị trí", required=True)
     tai_san_ids = fields.One2many(
         comodel_name='tai_san',

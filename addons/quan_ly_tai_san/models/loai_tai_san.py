@@ -1,7 +1,4 @@
-import re
-
 from odoo import models, fields, api
-from odoo.exceptions import ValidationError
 
 
 class LoaiTaiSan(models.Model):
@@ -13,7 +10,7 @@ class LoaiTaiSan(models.Model):
         ('ma_loai_tai_san_unique', 'unique(ma_loai_tai_san)', 'Mã loại tài sản phải là duy nhất!')
     ]
 
-    ma_loai_tai_san = fields.Char("Mã Loại Tài sản", required=True)
+    ma_loai_tai_san = fields.Char("Mã Loại Tài sản")
     ten_loai_tai_san = fields.Char("Tên Loại Tài sản", required=True)
     mo_ta = fields.Text("Mô tả")
     tai_san_ids = fields.One2many(
@@ -26,17 +23,11 @@ class LoaiTaiSan(models.Model):
     bao_tri_count = fields.Integer("Số lượng Bảo trì", compute='_compute_thong_ke_trang_thai')
     hong_count = fields.Integer("Số lượng Hỏng", compute='_compute_thong_ke_trang_thai')
 
-    @api.constrains('ma_loai_tai_san')
-    def _check_ma_loai_tai_san_format(self):
-        for record in self:
-            if not re.fullmatch(r'LTS-\d{4}', record.ma_loai_tai_san):
-                raise ValidationError("Mã loại tài sản phải có định dạng LTS-XXXXX (ví dụ: LTS-12346)")
-
     @api.model
     def create(self, vals):
-        if vals.get('ma_loai_tai_san', 'New') == 'New':
-            last_record = self.search([], order='ma_loai_tai_san desc', limit=1)
-            if last_record and last_record.ma_loai_tai_san.startswith('LTS-'):
+        if not vals.get('ma_loai_tai_san'):
+            last_record = self.search([('ma_loai_tai_san', '=like', 'LTS-%')], order='ma_loai_tai_san desc', limit=1)
+            if last_record:
                 last_number = int(last_record.ma_loai_tai_san.split('-')[1])
                 new_number = last_number + 1
             else:

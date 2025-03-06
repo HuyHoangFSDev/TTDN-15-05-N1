@@ -14,7 +14,7 @@ class PhieuBaoTri(models.Model):
         'cancelled': 'Hủy',
     }
 
-    ma_phieu_bao_tri = fields.Char("Mã phiếu bảo trì", required=True, copy=False, readonly=True, default="New",
+    ma_phieu_bao_tri = fields.Char("Mã phiếu bảo trì",  copy=False, readonly=True, default="New",
                                    states={'draft': [('readonly', False)]})
     ngay_bao_tri = fields.Datetime("Thời gian bảo trì dự kiến", required=True,
                                states={'approved': [('readonly', True)], 'done': [('readonly', True)],

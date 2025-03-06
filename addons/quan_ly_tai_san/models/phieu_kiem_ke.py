@@ -10,7 +10,6 @@ class PhieuKiemKe(models.Model):
 
     ma_phieu_kiem_ke = fields.Char(
         string="Mã phiếu kiểm kê",
-        required=True,
         copy=False,
         readonly=True,
         default="New"

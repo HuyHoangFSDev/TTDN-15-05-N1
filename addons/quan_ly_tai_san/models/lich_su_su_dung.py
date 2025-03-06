@@ -11,7 +11,7 @@ class LichSuSuDung(models.Model):
         ('ma_lich_su_su_dung_unique', 'unique(ma_lich_su_su_dung)', 'Mã lịch sử sử dụng phải là duy nhất!'),
     ]
 
-    ma_lich_su_su_dung = fields.Char("Mã lịch sử sử dụng", required=True, copy=False, readonly=True, default="New")
+    ma_lich_su_su_dung = fields.Char("Mã lịch sử sử dụng",  copy=False, readonly=True, default="New")
     ngay_muon = fields.Datetime("Thời gian mượn", required=True)
     ngay_tra = fields.Datetime("Thời gian trả", required=True)
     ghi_chu = fields.Char("Ghi chú")

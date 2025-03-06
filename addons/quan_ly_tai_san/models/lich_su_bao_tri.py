@@ -10,7 +10,6 @@ class LichSuBaoTri(models.Model):
 
     ma_lich_su_bao_tri = fields.Char(
         "Mã lịch sử bảo trì",
-        required=True,
         copy=False,
         readonly=True,
         default="New"

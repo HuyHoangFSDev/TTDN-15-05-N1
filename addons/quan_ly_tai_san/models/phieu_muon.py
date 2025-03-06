@@ -7,7 +7,7 @@ class PhieuMuon(models.Model):
     _description = 'Phiếu mượn tài sản'
     _order = 'ma_phieu_muon'
 
-    ma_phieu_muon = fields.Char("Mã phiếu mượn", required=True, copy=False, readonly=True, default="New",
+    ma_phieu_muon = fields.Char("Mã phiếu mượn",  copy=False, readonly=True, default="New",
                                 states={'draft': [('readonly', False)]})
     ngay_muon_du_kien = fields.Datetime("Thời gian mượn dự kiến", required=True,
                                         states={'approved': [('readonly', True)], 'done': [('readonly', True)],

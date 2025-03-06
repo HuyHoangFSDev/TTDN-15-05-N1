@@ -10,7 +10,6 @@ class KhauHao(models.Model):
 
     ma_khau_hao = fields.Char(
         "Mã khấu hao",
-        required=True,
         copy=False,
         readonly=True,
         default="New"

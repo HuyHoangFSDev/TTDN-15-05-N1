@@ -10,7 +10,6 @@ class LichSuKiemKe(models.Model):
 
     ma_lich_su_kiem_ke = fields.Char(
         string="Mã lịch sử kiểm kê",
-        required=True,
         copy=False,
         readonly=True,
         default="New"

@@ -1,5 +1,8 @@
+import datetime
 import re
+
 from dateutil.relativedelta import relativedelta
+
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError
 
@@ -19,7 +22,7 @@ class TaiSan(models.Model):
     )
 
     ten_tai_san = fields.Char(
-        "Tên Tài sản", required=True,
+        "Tên Tài sản",
         help="Tên của tài sản, ví dụ: Máy tính, Máy in, Xe ô tô..."
     )
 
@@ -137,7 +140,10 @@ class TaiSan(models.Model):
     def _check_dates(self):
         for record in self:
             if record.ngay_mua and record.ngay_het_han_bao_hanh:
-                if record.ngay_het_han_bao_hanh < record.ngay_mua:
+                ngay_mua = record.ngay_mua.date() if isinstance(record.ngay_mua, datetime.datetime) else record.ngay_mua
+                ngay_het_han = record.ngay_het_han_bao_hanh.date() if isinstance(record.ngay_het_han_bao_hanh,
+                                                                                 datetime.datetime) else record.ngay_het_han_bao_hanh
+                if ngay_het_han < ngay_mua:
                     raise ValidationError("Ngày hết hạn bảo hành phải lớn hơn hoặc bằng ngày mua!")
 
     @api.constrains('ma_tai_san')
@@ -147,14 +153,15 @@ class TaiSan(models.Model):
                 raise ValidationError("Mã tài sản phải có định dạng TS-XXXXX (ví dụ: TS-12345)")
 
     @api.depends_context("date")
-    @api.depends('gia_tien_mua', 'ngay_mua')
+    @api.depends("gia_tien_mua", "ngay_mua")
     def _compute_gia_tri_hien_tai(self):
         for record in self:
             if record.ngay_mua:
-                if record.ngay_mua > fields.Date.today():
+                ngay_mua = record.ngay_mua if isinstance(record.ngay_mua, fields.Date) else record.ngay_mua.date()
+                if ngay_mua > fields.Date.today():
                     raise ValidationError("Ngày mua không thể lớn hơn ngày hiện tại!")
 
-                years = relativedelta(fields.Date.today(), record.ngay_mua).years
+                years = relativedelta(fields.Date.today(), ngay_mua).years
                 depreciation_rate = 0.1
                 record.gia_tri_hien_tai = max(0, record.gia_tien_mua * (1 - depreciation_rate * years))
 
@@ -169,7 +176,6 @@ class TaiSan(models.Model):
                 new_number = 1
             vals['ma_tai_san'] = f"TS-{new_number:05d}"
         return super(TaiSan, self).create(vals)
-
 
     def action_di_chuyen_tai_san(self):
         for record in self:

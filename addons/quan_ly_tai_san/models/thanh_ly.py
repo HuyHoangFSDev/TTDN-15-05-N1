@@ -12,7 +12,6 @@ class ThanhLy(models.Model):
 
     ma_thanh_ly = fields.Char(
         string="Mã thanh lý",
-        required=True,
         copy=False,
         readonly=True,
         default="New",
