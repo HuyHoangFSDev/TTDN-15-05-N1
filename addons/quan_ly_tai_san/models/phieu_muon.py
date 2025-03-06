@@ -46,14 +46,21 @@ class PhieuMuon(models.Model):
     @api.constrains('ma_phieu_muon')
     def _check_ma_phieu_muon_format(self):
         for record in self:
-            if not re.fullmatch(r'PM-\d{4}', record.ma_phieu_muon):
-                raise ValidationError("Mã phải có định dạng PM-XXXX (ví dụ: PM-1234)")
+            if not re.fullmatch(r'PM-\d{5}', record.ma_phieu_muon):
+                raise ValidationError("Mã phải có định dạng PM-XXXXX (ví dụ: PM-12345)")
 
     @api.model
     def create(self, vals):
         if vals.get('ma_phieu_muon', 'New') == 'New':
-            vals['ma_phieu_muon'] = self.env['ir.sequence'].next_by_code('phieu_muon') or 'New'
+            last_record = self.search([], order='ma_phieu_muon desc', limit=1)
+            if last_record and last_record.ma_phieu_muon:
+                last_number = int(last_record.ma_phieu_muon.split('-')[1])
+                new_number = last_number + 1
+            else:
+                new_number = 1
+            vals['ma_phieu_muon'] = f'PM-{new_number:05d}'
         return super(PhieuMuon, self).create(vals)
+
 
     @api.depends('ngay_muon_du_kien', 'ngay_muon_thuc_te', 'ngay_tra_du_kien', 'ngay_tra_thuc_te')
     def _compute_trang_thai_muon(self):

@@ -43,13 +43,19 @@ class PhieuBaoTri(models.Model):
     @api.constrains('ma_phieu_bao_tri')
     def _check_ma_phieu_bao_tri_format(self):
         for record in self:
-            if not re.fullmatch(r'PB-\d{4}', record.ma_phieu_bao_tri):
-                raise ValidationError("Mã phải có định dạng PB-XXXX (ví dụ: PB-1234)")
+            if not re.fullmatch(r'PB-\d{5}', record.ma_phieu_bao_tri):
+                raise ValidationError("Mã phải có định dạng PB-XXXXX (ví dụ: PB-12345)")
 
     @api.model
     def create(self, vals):
         if vals.get('ma_phieu_bao_tri', 'New') == 'New':
-            vals['ma_phieu_bao_tri'] = self.env['ir.sequence'].next_by_code('phieu_bao_tri') or 'New'
+            last_record = self.search([], order='ma_phieu_bao_tri desc', limit=1)
+            if last_record and last_record.ma_phieu_bao_tri.startswith('PB-'):
+                last_number = int(last_record.ma_phieu_bao_tri.split('-')[1])
+                new_number = last_number + 1
+            else:
+                new_number = 1
+            vals['ma_phieu_bao_tri'] = f'PB-{new_number:05d}'
         return super(PhieuBaoTri, self).create(vals)
 
     def action_approve(self):

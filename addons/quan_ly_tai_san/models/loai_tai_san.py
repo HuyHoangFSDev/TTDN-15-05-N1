@@ -30,8 +30,19 @@ class LoaiTaiSan(models.Model):
     def _check_ma_loai_tai_san_format(self):
         for record in self:
             if not re.fullmatch(r'LTS-\d{4}', record.ma_loai_tai_san):
-                raise ValidationError("Mã loại tài sản phải có định dạng LTS-XXXX (ví dụ: LTS-1234)")
+                raise ValidationError("Mã loại tài sản phải có định dạng LTS-XXXXX (ví dụ: LTS-12346)")
 
+    @api.model
+    def create(self, vals):
+        if vals.get('ma_loai_tai_san', 'New') == 'New':
+            last_record = self.search([], order='ma_loai_tai_san desc', limit=1)
+            if last_record and last_record.ma_loai_tai_san.startswith('LTS-'):
+                last_number = int(last_record.ma_loai_tai_san.split('-')[1])
+                new_number = last_number + 1
+            else:
+                new_number = 1
+            vals['ma_loai_tai_san'] = f'LTS-{new_number:05d}'
+        return super(LoaiTaiSan, self).create(vals)
 
     @api.depends('tai_san_ids', 'tai_san_ids.trang_thai')
     def _compute_thong_ke_trang_thai(self):

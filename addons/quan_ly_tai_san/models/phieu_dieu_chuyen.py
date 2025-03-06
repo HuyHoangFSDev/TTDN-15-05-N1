@@ -35,8 +35,14 @@ class PhieuDieuChuyen(models.Model):
 
     @api.model
     def create(self, vals):
-        if vals.get('ten_phieu', 'New') == 'New':
-            vals['ten_phieu'] = self.env['ir.sequence'].next_by_code('phieu_dieu_chuyen') or 'New'
+        if vals.get('ten_phieu', 'Mới') == 'Mới':
+            last_record = self.search([], order='ten_phieu desc', limit=1)
+            if last_record and last_record.ten_phieu.startswith('PDC-'):
+                last_number = int(last_record.ten_phieu.split('-')[1])
+                new_number = last_number + 1
+            else:
+                new_number = 1
+            vals['ten_phieu'] = f'PDC-{new_number:05d}'
         return super(PhieuDieuChuyen, self).create(vals)
 
     def action_duyet(self):

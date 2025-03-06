@@ -25,5 +25,18 @@ class NhaCungCap(models.Model):
     @api.constrains('ma_nha_cung_cap')
     def _check_ma_nha_cung_cap_format(self):
         for record in self:
-            if not re.fullmatch(r'NCC-\d{4}', record.ma_nha_cung_cap):
-                raise ValidationError("Mã nhà cung cấp phải có định dạng NCC-XXXX (ví dụ: NCC-1234)")
+            if not re.fullmatch(r'NCC-\d{5}', record.ma_nha_cung_cap):
+                raise ValidationError("Mã nhà cung cấp phải có định dạng NCC-XXXXX (ví dụ: NCC-12345)")
+
+
+    @api.model
+    def create(self, vals):
+        if vals.get('ma_nha_cung_cap', 'New') == 'New':
+            last_record = self.search([], order='ma_nha_cung_cap desc', limit=1)
+            if last_record and last_record.ma_nha_cung_cap.startswith('NCC-'):
+                last_number = int(last_record.ma_nha_cung_cap.split('-')[1])
+                new_number = last_number + 1
+            else:
+                new_number = 1
+            vals['ma_nha_cung_cap'] = f'NCC-{new_number:05d}'
+        return super(NhaCungCap, self).create(vals)

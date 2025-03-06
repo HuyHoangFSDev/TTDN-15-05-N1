@@ -15,6 +15,11 @@
                                 <i class="fa px-2 fa-exchange"/>
                                 Điều chuyển tài sản
                             </button>
+                            <button name="action_thanh_ly_tai_san" type="object" class="btn btn-warning"
+                                    attrs="{'invisible': [('trang_thai', 'in', ('DaThanhLy', 'Muon', 'BaoTri'))]}">
+                                <i class="fa px-2 fa-trash"/>
+                                Thanh lý tài sản
+                            </button>
                         </div>
 
                         <group string="Thông tin cơ bản" class="o_form_group_full">
@@ -56,14 +61,14 @@
                                     </tree>
                                 </field>
                             </page>
-                            <page string="Lịch sử bảo trì">
-                                <field name="lich_su_bao_tri_ids" nolabel="1">
-                                    <tree editable="bottom" class="o_list_full_width">
+                            <page string="Lịch Sử Bảo Trì">
+                                <field name="lich_su_bao_tri_ids">
+                                    <tree editable="bottom" class="o_list_view">
                                         <field name="ma_lich_su_bao_tri" readonly="1"/>
-                                        <field name="ngay_bao_tri"/>
-                                        <field name="ngay_tra"/>
-                                        <field name="chi_phi"/>
-                                        <field name="tai_san_id"/>
+                                        <field name="ngay_bao_tri" widget="date"/>
+                                        <field name="ngay_tra" widget="date"/>
+                                        <field name="chi_phi" widget="monetary"
+                                               options="{'currency_field': 'currency_id'}"/>
                                         <field name="ghi_chu"/>
                                     </tree>
                                 </field>

@@ -58,6 +58,7 @@ class TaiSan(models.Model):
         ("Muon", "Mượn"),
         ("BaoTri", "Bảo trì"),
         ("Hong", "Hỏng"),
+        ("DaThanhLy", "Đã thanh lý"),
     ]
 
     trang_thai = fields.Selection(
@@ -108,6 +109,27 @@ class TaiSan(models.Model):
         help="Các lần tài sản được di chuyển giữa các vị trí"
     )
 
+    phieu_kiem_ke_ids = fields.Many2many(
+        comodel_name='phieu_kiem_ke',
+        string="Phiếu kiểm kê",
+        relation='tai_san_phieu_kiem_ke_rel',
+        column1='tai_san_id',
+        column2='phieu_kiem_ke_id'
+    )
+
+    lich_su_kiem_ke_ids = fields.One2many(
+        comodel_name='lich_su_kiem_ke', inverse_name='tai_san_id',
+        string="Lịch sử kiểm kê", readonly=True,
+        help="Các lần kiểm kê"
+    )
+
+    thanh_ly_id = fields.Many2one(
+        comodel_name='thanh_ly',
+        string="Phiếu thanh lý",
+        readonly=True,
+        help="Phiếu thanh lý liên quan đến tài sản này (mỗi tài sản chỉ có tối đa một phiếu)"
+    )
+
     quan_ly_id = fields.Many2one(comodel_name="nhan_vien", string="Người quản lý", store=True)
     nguoi_dang_dung_id = fields.Many2one(comodel_name="nhan_vien", string="Người đang sử dụng", store=True)
 
@@ -121,8 +143,8 @@ class TaiSan(models.Model):
     @api.constrains('ma_tai_san')
     def _check_ma_tai_san_format(self):
         for record in self:
-            if not re.fullmatch(r'TS-\d{4}', record.ma_tai_san):
-                raise ValidationError("Mã tài sản phải có định dạng TS-XXXX (ví dụ: TS-1234)")
+            if not re.fullmatch(r'TS-\d{5}', record.ma_tai_san):
+                raise ValidationError("Mã tài sản phải có định dạng TS-XXXXX (ví dụ: TS-12345)")
 
     @api.depends_context("date")
     @api.depends('gia_tien_mua', 'ngay_mua')
@@ -139,8 +161,15 @@ class TaiSan(models.Model):
     @api.model
     def create(self, vals):
         if vals.get('ma_tai_san', 'New') == 'New':
-            vals['ma_tai_san'] = self.env['ir.sequence'].next_by_code('tai_san') or 'New'
+            last_asset = self.search([], order="ma_tai_san desc", limit=1)
+            if last_asset and re.match(r"TS-\d{5}", last_asset.ma_tai_san):
+                last_number = int(last_asset.ma_tai_san.split('-')[1])
+                new_number = last_number + 1
+            else:
+                new_number = 1
+            vals['ma_tai_san'] = f"TS-{new_number:05d}"
         return super(TaiSan, self).create(vals)
+
 
     def action_di_chuyen_tai_san(self):
         for record in self:
@@ -155,3 +184,19 @@ class TaiSan(models.Model):
                     'default_vi_tri_id': record.vi_tri_hien_tai_id.id,
                 },
             }
+
+    def action_thanh_ly_tai_san(self):
+        self.ensure_one()
+        if self.trang_thai in ('DaThanhLy', 'Muon', 'BaoTri'):
+            raise ValidationError("Không thể thanh lý tài sản ở trạng thái hiện tại!")
+        return {
+            'name': 'Thanh lý tài sản',
+            'type': 'ir.actions.act_window',
+            'res_model': 'thanh_ly',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {
+                'default_tai_san_id': self.id,
+                'default_ngay_thanh_ly': fields.Date.today(),
+            },
+        }
