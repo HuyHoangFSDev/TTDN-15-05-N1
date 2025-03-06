@@ -1,15 +1,9 @@
 {
     'name': "Quản lý tài sản",
 
-    'summary': "Quản lý tài sản, lịch sử sử dụng và khấu hao",
+    'summary': "",
 
-    'description': """
-        Module quản lý tài sản trong doanh nghiệp, bao gồm:
-        - Thông tin tài sản (tai_san, loai_tai_san, vi_tri, nha_cung_cap)
-        - Lịch sử sử dụng (lich_su_su_dung)
-        - Lịch sử bảo trì (lich_su_bao_tri)
-        - Khấu hao tài sản (khau_hao)
-    """,
+    'description': "",
 
     'author': "My Company",
     'website': "http://www.yourcompany.com",
@@ -21,7 +15,6 @@
 
     'data': [
         'security/ir.model.access.csv',
-        'sequences.xml',
         'views/tai_san.xml',
         'views/phieu_muon.xml',
         'views/phieu_bao_tri.xml',
@@ -39,12 +32,6 @@
     'demo': [
         'demo/demo.xml',
     ],
-
-    'assets': {
-        'web.assets_backend': [
-            'quan_ly_tai_san/static/src/css/tai_san.css',
-        ],
-    },
 
     'installable': True,
     'application': True,

@@ -5,16 +5,26 @@
             <field name="name">lich_su_su_dung_form</field>
             <field name="model">lich_su_su_dung</field>
             <field name="arch" type="xml">
-                <form>
-                    <sheet>
+                <form string="Lịch Sử Sử Dụng">
+                    <sheet class="bg-white border rounded shadow-sm p-3">
                         <group>
-                            <field name="ma_lich_su_su_dung" readonly="1"/>
-                            <field name="ngay_muon" widget="datetime"/>
-                            <field name="ngay_tra" widget="datetime"/>
-                            <field name="nhan_vien_id"/>
-                            <field name="tai_san_id"/>
-                            <field name="ghi_chu"/>
+                            <field name="ma_lich_su_su_dung" readonly="1" class="font-weight-bold text-primary"/>
                         </group>
+                        <notebook>
+                            <page string="Thông Tin Mượn Trả">
+                                <group>
+                                    <field name="ngay_muon" widget="datetime" required="1"/>
+                                    <field name="ngay_tra" widget="datetime" required="1"/>
+                                    <field name="nhan_vien_id" placeholder="Chọn nhân viên..." required="1"/>
+                                    <field name="tai_san_id" placeholder="Chọn tài sản..." required="1"/>
+                                </group>
+                            </page>
+                            <page string="Ghi Chú">
+                                <group>
+                                    <field name="ghi_chu" widget="text" placeholder="Nhập ghi chú..."/>
+                                </group>
+                            </page>
+                        </notebook>
                     </sheet>
                 </form>
             </field>
@@ -30,7 +40,6 @@
                     <field name="ngay_tra"/>
                     <field name="nhan_vien_id"/>
                     <field name="tai_san_id"/>
-                    <field name="ghi_chu"/>
                 </tree>
             </field>
         </record>
@@ -40,12 +49,11 @@
             <field name="model">lich_su_su_dung</field>
             <field name="arch" type="xml">
                 <search>
-                    <field name="ma_lich_su_su_dung" readonly="1"/>
+                    <field name="ma_lich_su_su_dung"/>
                     <field name="ngay_muon"/>
                     <field name="ngay_tra"/>
                     <field name="nhan_vien_id"/>
                     <field name="tai_san_id"/>
-                    <field name="ghi_chu"/>
                 </search>
             </field>
         </record>

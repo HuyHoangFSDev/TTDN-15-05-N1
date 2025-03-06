@@ -19,7 +19,7 @@ class PhieuMuon(models.Model):
         string="Tài sản",
         required=True,
         store=True,
-        domain=[('trang_thai', '=', 'LuuTru')],
+        domain=[('trang_thai', '=', 'CatGiu')],
     )
     state = fields.Selection(
         [('draft', 'Nháp'), ('approved', 'Đã duyệt'), ('done', 'Hoàn thành'), ('cancelled', 'Hủy')],
@@ -89,7 +89,7 @@ class PhieuMuon(models.Model):
                         'ngay_tra': record.ngay_tra_thuc_te
                     })
                 record.tai_san_id.write({
-                    'trang_thai': 'LuuTru',
+                    'trang_thai': 'CatGiu',
                     'nguoi_dang_dung_id': False
                 })
 
@@ -107,7 +107,7 @@ class PhieuMuon(models.Model):
                     lich_su_su_dung.unlink()
                 record.state = 'cancelled'
                 record.tai_san_id.write({
-                    'trang_thai': 'LuuTru',
+                    'trang_thai': 'CatGiu',
                     'nguoi_dang_dung_id': False
                 })
 
@@ -116,6 +116,6 @@ class PhieuMuon(models.Model):
             if record.state == 'cancelled':
                 record.state = 'draft'
                 record.tai_san_id.write({
-                    'trang_thai': 'LuuTru',
+                    'trang_thai': 'CatGiu',
                     'nguoi_dang_dung_id': False
                 })

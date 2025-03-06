@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-
         <record id="view_lich_su_bao_tri_form" model="ir.ui.view">
             <field name="name">lich_su_bao_tri_form</field>
             <field name="model">lich_su_bao_tri</field>
@@ -9,56 +8,69 @@
                 <form string="Phiếu bảo trì tài sản">
                     <sheet>
                         <group>
-                            <field name="ma_lich_su_bao_tri" />
-                            <field name="ngay_bao_tri" widget="datetime"/>
-                            <field name="ngay_tra" widget="datetime"/>
-                            <field name="chi_phi" />
-                            <field name="tai_san_id" />
-                            <field name="ghi_chu" />
+                            <h1 class="text-primary">Phiếu bảo trì #<field name="ma_lich_su_bao_tri"/></h1>
                         </group>
+                        <notebook>
+                            <page string="Thông tin chung">
+                                <group>
+                                    <field name="tai_san_id" placeholder="Chọn tài sản..." required="1"/>
+                                    <field name="ngay_bao_tri" widget="datetime" required="1"/>
+                                    <field name="ngay_tra" widget="datetime"/>
+                                    <field name="chi_phi" widget="monetary"/>
+                                </group>
+                            </page>
+                            <page string="Ghi chú">
+                                <field name="ghi_chu" widget="html"/>
+                            </page>
+                        </notebook>
                     </sheet>
                 </form>
             </field>
         </record>
 
-
         <record id="view_lich_su_bao_tri_tree" model="ir.ui.view">
             <field name="name">lich_su_bao_tri_tree</field>
             <field name="model">lich_su_bao_tri</field>
             <field name="arch" type="xml">
-                <tree string="Danh sách phiếu bảo trì">
-                    <field name="ma_lich_su_bao_tri" />
-                    <field name="ngay_bao_tri" />
-                    <field name="ngay_tra" />
-                    <field name="chi_phi" />
-                    <field name="tai_san_id" />
-                    <field name="ghi_chu" />
+                <tree string="Danh sách phiếu bảo trì" decoration-danger="ngay_tra == False">
+                    <field name="ma_lich_su_bao_tri"/>
+                    <field name="tai_san_id"/>
+                    <field name="ngay_bao_tri"/>
+                    <field name="ngay_tra"/>
+                    <field name="chi_phi"/>
                 </tree>
             </field>
         </record>
 
+        <record id="view_lich_su_bao_tri_graph" model="ir.ui.view">
+            <field name="name">lich_su_bao_tri_graph</field>
+            <field name="model">lich_su_bao_tri</field>
+            <field name="arch" type="xml">
+                <graph string="Chi phí bảo trì theo tháng" type="bar">
+                    <field name="ngay_bao_tri" interval="month"/>
+                    <field name="chi_phi" type="measure"/>
+                </graph>
+            </field>
+        </record>
 
         <record id="lich_su_bao_tri_search" model="ir.ui.view">
             <field name="name">lich_su_bao_tri_search</field>
             <field name="model">lich_su_bao_tri</field>
             <field name="arch" type="xml">
                 <search string="Tìm kiếm phiếu bảo trì">
-                    <field name="ma_lich_su_bao_tri" string="Mã phiếu bảo trì" />
-                    <field name="ngay_bao_tri" string="Ngày bảo trì" />
-                    <field name="ngay_tra" string="Ngày trả" />
-                    <field name="chi_phi" string="Chi phí" />
-                    <field name="tai_san_id" string="Tài sản" />
-                    <field name="ghi_chu" string="Ghi chú" />
+                    <field name="ma_lich_su_bao_tri"/>
+                    <field name="tai_san_id"/>
+                    <field name="ngay_bao_tri"/>
+                    <field name="chi_phi"/>
                 </search>
             </field>
         </record>
 
-
         <record id="action_lich_su_bao_tri" model="ir.actions.act_window">
             <field name="name">Lịch sử bảo trì</field>
             <field name="res_model">lich_su_bao_tri</field>
-            <field name="view_mode">tree,form</field>
-            <field name="search_view_id" ref="lich_su_bao_tri_search" />
+            <field name="view_mode">tree,form,graph</field>
+            <field name="search_view_id" ref="lich_su_bao_tri_search"/>
             <field name="context">{}</field>
         </record>
     </data>

@@ -17,69 +17,29 @@
                         <field name="trang_thai" widget="statusbar" statusbar_visible="nhap,duyet,hoan_thanh"/>
                         <button name="action_duyet" string="Duyệt" type="object"
                                 attrs="{'invisible': [('trang_thai', '!=', 'nhap')]}"
-                                class="btn-primary" icon="fa-check"/>
+                                class="px-2 btn-primary" icon="fa-check"/>
 
                         <button name="action_hoan_thanh" string="Hoàn thành" type="object"
                                 attrs="{'invisible': [('trang_thai', '!=', 'duyet')]}"
-                                class="btn-success" icon="fa-check-circle"/>
+                                class="px-2 btn-success" icon="fa-check-circle"/>
 
                         <button name="action_huy" string="Hủy" type="object"
                                 attrs="{'invisible': [('trang_thai', '!=', 'nhap')]}"
-                                class="btn-danger" icon="fa-times-circle"/>
+                                class="px-2 btn-danger" icon="fa-times-circle"/>
                     </header>
-                    <sheet class="bg-white border rounded p-3">
-                        <field name="ten_phieu" readonly="1" style="font-size: 1.5em; font-weight: bold;"/>
-                        <notebook class="mt-3 border rounded">
-                            <page string="Thông tin điều chuyển">
-                                <div class="o_form_div bg-light border rounded p-3">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <field name="tai_san"
-                                                   attrs="{'readonly': [('trang_thai', '!=', 'nhap')]}"
-                                                   options="{'no_quick_create': True}"
-                                                   placeholder="Chọn tài sản"
-                                                   class="o_field_many2one"
-                                                   help="Chọn tài sản cần điều chuyển"
-                                                   string="Tài sản"/>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <field name="ngay_dieu_chuyen"
-                                                   attrs="{'readonly': [('trang_thai', '!=', 'nhap')]}"
-                                                   widget="datetime"
-                                                   options="{'datepicker': {'showOn': 'button'}}"
-                                                   placeholder="Chọn ngày"
-                                                   class="o_field_date"
-                                                   help="Chọn ngày điều chuyển tài sản"
-                                                   string="Ngày điều chuyển"/>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <field name="vi_tri_hien_tai"
-                                                   readonly="1"
-                                                   class="o_field_many2one o_readonly"
-                                                   help="Vị trí hiện tại của tài sản"
-                                                   string="Vị trí hiện tại"/>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <field name="vi_tri_moi"
-                                                   attrs="{'readonly': [('trang_thai', '!=', 'nhap')]}"
-                                                   options="{'no_quick_create': True}"
-                                                   placeholder="Chọn vị trí mới"
-                                                   class="o_field_many2one"
-                                                   help="Chọn vị trí mới cho tài sản"
-                                                   domain="[('id', '!=', vi_tri_hien_tai)]"
-                                                   string="Vị trí mới"/>
-                                        </div>
-                                    </div>
-                                    <div class="mt-3">
-                                        <field name="ghi_chu"
-                                               placeholder="Ghi chú (nếu có)"
-                                               class="o_field_text"
-                                               help="Thêm ghi chú nếu cần"
-                                               string="Ghi chú"/>
-                                    </div>
-                                </div>
+                    <sheet class="o_form_sheet bg-white border rounded shadow-sm p-4">
+                        <field name="ten_phieu" readonly="1" class="text-lg font-weight-bold mb-3"/>
+                        <notebook class="mt-3 border rounded shadow-sm">
+                            <page string="Thông tin điều chuyển" class="p-3 bg-light">
+                                <group class="o_form_group">
+                                    <field name="tai_san" placeholder="Chọn tài sản" required="1"/>
+                                    <field name="ngay_dieu_chuyen" widget="datetime" placeholder="Chọn ngày điều chuyển"/>
+                                    <field name="vi_tri_hien_tai" readonly="1"/>
+                                    <field name="vi_tri_moi" placeholder="Chọn vị trí mới" required="1"/>
+                                </group>
+                            </page>
+                            <page string="Ghi chú" class="p-3 bg-light">
+                                <field name="ghi_chu" placeholder="Nhập ghi chú..." widget="textarea"/>
                             </page>
                         </notebook>
                     </sheet>
@@ -87,29 +47,27 @@
             </field>
         </record>
 
-        <record id="view_phieu_dieu_chuyen_tree" model="ir.ui.view">
-            <field name="name">phieu_dieu_chuyen.tree</field>
+        <record id="view_phieu_dieu_chuyen_kanban" model="ir.ui.view">
+            <field name="name">phieu_dieu_chuyen.kanban</field>
             <field name="model">phieu_dieu_chuyen</field>
             <field name="arch" type="xml">
-                <tree string="Danh sách phiếu điều chuyển">
-                    <field name="ten_phieu"/>
-                    <field name="tai_san"/>
-                    <field name="vi_tri_hien_tai"/>
-                    <field name="vi_tri_moi"/>
-                    <field name="ngay_dieu_chuyen" widget="date"/>
-                    <field name="trang_thai"/>
-                    <button name="action_duyet" string="Duyệt" type="object"
-                            attrs="{'invisible': [('trang_thai', '!=', 'nhap')]}"
-                            class="btn-primary" icon="fa-check"/>
-
-                    <button name="action_hoan_thanh" string="Hoàn thành" type="object"
-                            attrs="{'invisible': [('trang_thai', '!=', 'duyet')]}"
-                            class="btn-success" icon="fa-check-circle"/>
-
-                    <button name="action_huy" string="Hủy" type="object"
-                            attrs="{'invisible': [('trang_thai', '!=', 'nhap')]}"
-                            class="btn-danger" icon="fa-times-circle"/>
-                </tree>
+                <kanban class="o_kanban_view">
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="o_kanban_record card shadow-sm p-3">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span class="badge badge-primary" t-esc="record.trang_thai.raw_value"/>
+                                    <span class="font-weight-bold" t-esc="record.ten_phieu.raw_value"/>
+                                </div>
+                                <div>
+                                    <strong>Tài sản:</strong> <t t-esc="record.tai_san.raw_value"/><br/>
+                                    <strong>Vị trí:</strong> <t t-esc="record.vi_tri_hien_tai.raw_value"/> ➝ <t t-esc="record.vi_tri_moi.raw_value"/><br/>
+                                    <strong>Ngày:</strong> <t t-esc="record.ngay_dieu_chuyen.raw_value"/>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
             </field>
         </record>
 
@@ -127,7 +85,31 @@
         <record id="action_phieu_dieu_chuyen" model="ir.actions.act_window">
             <field name="name">Phiếu Điều Chuyển</field>
             <field name="res_model">phieu_dieu_chuyen</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">kanban,form</field>
+        </record>
+
+        <record id="view_phieu_bao_tri_kanban" model="ir.ui.view">
+            <field name="name">phieu_bao_tri.kanban</field>
+            <field name="model">phieu_bao_tri</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_view">
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="o_kanban_record card shadow-sm p-3">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span class="badge badge-primary" t-esc="record.state.raw_value"/>
+                                    <span class="font-weight-bold" t-esc="record.ma_phieu_bao_tri.raw_value"/>
+                                </div>
+                                <div>
+                                    <strong>Tài sản:</strong> <t t-esc="record.tai_san_id.raw_value"/><br/>
+                                    <strong>Ngày bảo trì:</strong> <t t-esc="record.ngay_bao_tri.raw_value"/><br/>
+                                    <strong>Chi phí:</strong> <t t-esc="record.chi_phi.raw_value"/>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
         </record>
     </data>
 </odoo>

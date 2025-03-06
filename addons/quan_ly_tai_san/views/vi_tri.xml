@@ -28,7 +28,7 @@
                                         <field name="ten_tai_san"/>
                                         <field name="vi_tri_hien_tai_id" widget="selection" readonly="1"/>
                                         <field name="trang_thai" widget="badge"
-                                               options="{'clickable': True, 'class_mapping': {'Muon': 'info', 'BaoTri': 'warning', 'LuuTru': 'success', 'Hong': 'danger'}}"/>
+                                               options="{'clickable': True, 'class_mapping': {'Muon': 'info', 'BaoTri': 'warning', 'CatGiu': 'success', 'Hong': 'danger'}}"/>
                                     </tree>
                                 </field>
                             </group>

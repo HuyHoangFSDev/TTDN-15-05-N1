@@ -45,7 +45,7 @@
         />
 
         <menuitem
-                name="Quản lý phiếu &amp; Lịch sử"
+                name="Quản lý phiếu"
                 id="menu_quan_ly_phieu_lich_su"
                 parent="menu_root"
                 sequence="3"

@@ -32,6 +32,6 @@ class LoaiTaiSan(models.Model):
         for record in self:
             tai_sans = record.tai_san_ids
             record.tong_so_luong = len(tai_sans)
-            record.luu_tru_count = len(tai_sans.filtered(lambda t: t.trang_thai == 'LuuTru'))
+            record.luu_tru_count = len(tai_sans.filtered(lambda t: t.trang_thai == 'CatGiu'))
             record.muon_count = len(tai_sans.filtered(lambda t: t.trang_thai == 'Muon'))
             record.bao_tri_count = len(tai_sans.filtered(lambda t: t.trang_thai == 'BaoTri'))
