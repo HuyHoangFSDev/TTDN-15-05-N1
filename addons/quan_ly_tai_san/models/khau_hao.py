@@ -19,9 +19,3 @@ class KhauHao(models.Model):
     gia_tri_con_lai = fields.Integer("Giá trị còn lại", required=True)
     ghi_chu = fields.Char("Ghi chú")
     tai_san_id = fields.Many2one(comodel_name="tai_san", string="Tài sản", store=True)
-
-    @api.constrains('ma_khau_hao')
-    def _check_ma_khau_hao_format(self):
-        for record in self:
-            if not re.fullmatch(r'KH-\d{4}', record.ma_khau_hao):
-                raise ValidationError("Mã phải có định dạng KH-XXXX (ví dụ: KH-1234)")

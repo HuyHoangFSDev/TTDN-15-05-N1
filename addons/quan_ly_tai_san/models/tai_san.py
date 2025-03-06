@@ -23,16 +23,6 @@ class TaiSan(models.Model):
         help="Tên của tài sản, ví dụ: Máy tính, Máy in, Xe ô tô..."
     )
 
-    hinh_anh = fields.Binary(
-        "Hình ảnh", attachment=True,
-        help="Ảnh minh họa của tài sản"
-    )
-
-    so_serial = fields.Char(
-        "Số serial", required=True, copy=False,
-        help="Số serial duy nhất của tài sản, thường được ghi trên nhãn thiết bị"
-    )
-
     ngay_mua = fields.Datetime(
         "Ngày mua",
         help="Ngày mua hoặc nhập kho tài sản"
@@ -57,7 +47,6 @@ class TaiSan(models.Model):
         ("LuuTru", "Lưu trữ"),
         ("Muon", "Mượn"),
         ("BaoTri", "Bảo trì"),
-        ("Hong", "Hỏng"),
     ]
 
     trang_thai = fields.Selection(
@@ -108,41 +97,10 @@ class TaiSan(models.Model):
         help="Các lần tài sản được di chuyển giữa các vị trí"
     )
 
-    quan_ly_id = fields.Many2one(comodel_name="nhan_vien", string="Người quản lý", store=True)
-    nguoi_dang_dung_id = fields.Many2one(comodel_name="nhan_vien", string="Người đang sử dụng", store=True)
+    nguoi_su_dung_id = fields.Many2one(comodel_name="nhan_vien", string="Người đang sử dụng", store=True)
 
-    @api.constrains('ngay_mua', 'ngay_het_han_bao_hanh')
-    def _check_dates(self):
-        for record in self:
-            if record.ngay_mua and record.ngay_het_han_bao_hanh:
-                if record.ngay_het_han_bao_hanh < record.ngay_mua:
-                    raise ValidationError("Ngày hết hạn bảo hành phải lớn hơn hoặc bằng ngày mua!")
 
-    @api.constrains('ma_tai_san')
-    def _check_ma_tai_san_format(self):
-        for record in self:
-            if not re.fullmatch(r'TS-\d{4}', record.ma_tai_san):
-                raise ValidationError("Mã tài sản phải có định dạng TS-XXXX (ví dụ: TS-1234)")
-
-    @api.depends_context("date")
-    @api.depends('gia_tien_mua', 'ngay_mua')
-    def _compute_gia_tri_hien_tai(self):
-        for record in self:
-            if record.ngay_mua:
-                if record.ngay_mua > fields.Date.today():
-                    raise ValidationError("Ngày mua không thể lớn hơn ngày hiện tại!")
-
-                years = relativedelta(fields.Date.today(), record.ngay_mua).years
-                depreciation_rate = 0.1
-                record.gia_tri_hien_tai = max(0, record.gia_tien_mua * (1 - depreciation_rate * years))
-
-    @api.model
-    def create(self, vals):
-        if vals.get('ma_tai_san', 'New') == 'New':
-            vals['ma_tai_san'] = self.env['ir.sequence'].next_by_code('tai_san') or 'New'
-        return super(TaiSan, self).create(vals)
-
-    def action_di_chuyen_tai_san(self):
+    def action_dieu_chuyen_tai_san(self):
         for record in self:
             return {
                 'name': 'điều chuyển tài sản',

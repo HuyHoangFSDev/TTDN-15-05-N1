@@ -14,7 +14,6 @@ class PhieuDieuChuyen(models.Model):
         'cancelled': 'Hủy',
     }
 
-
     ten_phieu = fields.Char(string='Tên phiếu', required=True, copy=False, readonly=True, default="Mới")
     tai_san = fields.Many2one('tai_san', string='Tài sản', required=True)
     vi_tri_hien_tai = fields.Many2one(
@@ -33,11 +32,6 @@ class PhieuDieuChuyen(models.Model):
     ], string='Trạng thái', default='nhap')
     ghi_chu = fields.Text(string='Ghi chú')
 
-    @api.model
-    def create(self, vals):
-        if vals.get('ten_phieu', 'New') == 'New':
-            vals['ten_phieu'] = self.env['ir.sequence'].next_by_code('phieu_dieu_chuyen') or 'New'
-        return super(PhieuDieuChuyen, self).create(vals)
 
     def action_duyet(self):
         self.write({'trang_thai': 'duyet'})

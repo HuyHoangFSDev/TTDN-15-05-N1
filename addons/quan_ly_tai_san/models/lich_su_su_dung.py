@@ -17,12 +17,6 @@ class LichSuSuDung(models.Model):
     nhan_vien_id = fields.Many2one(comodel_name="nhan_vien", string="Nhân sự", store=True)
     tai_san_id = fields.Many2one(comodel_name="tai_san", string="Tài sản", store=True)
 
-    @api.constrains('ma_lich_su_su_dung')
-    def _check_ma_lich_su_su_dung_format(self):
-        for record in self:
-            if not re.fullmatch(r'LS-\d{4}', record.ma_lich_su_su_dung):
-                raise ValidationError("Mã phải có định dạng LS-XXXX (ví dụ: LS-1234)")
-
     @api.model
     def create(self, vals):
         if vals.get('ma_lich_su_su_dung', 'New') == 'New':

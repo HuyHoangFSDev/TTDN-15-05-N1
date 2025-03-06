@@ -13,7 +13,7 @@
                     <sheet class="o_form_sheet_full">
                         <div class="oe_button_box" name="button_box">
 
-                            <button name="action_di_chuyen_tai_san" string="điều chuyển tài sản" type="object"
+                            <button name="action_dieu_chuyen_tai_san" string="điều chuyển tài sản" type="object"
                                     class="btn-primary"/>
                         </div>
                         <group class="o_form_group_full">

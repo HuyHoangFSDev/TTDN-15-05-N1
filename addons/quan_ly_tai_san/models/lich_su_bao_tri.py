@@ -19,12 +19,6 @@ class LichSuBaoTri(models.Model):
     ghi_chu = fields.Char("Ghi chú")
     tai_san_id = fields.Many2one(comodel_name="tai_san", string= "Tài sản",store=True)
 
-    @api.constrains('ma_lich_su_bao_tri')
-    def _check_ma_lich_su_bao_tri_format(self):
-        for record in self:
-            if not re.fullmatch(r'LSBT-\d{4}', record.ma_lich_su_bao_tri):
-                raise ValidationError("Mã phải có định dạng LSBT-XXXX (ví dụ: LSBT-1234)")
-
     @api.model
     def create(self, vals):
         if vals.get('ma_lich_su_bao_tri', 'New') == 'New':

@@ -33,7 +33,7 @@ class ViTri(models.Model):
         return super(ViTri, self).create(vals)
 
 
-    def action_di_chuyen_tai_san(self):
+    def action_dieu_chuyen_tai_san(self):
         for record in self:
             return {
                 'name': 'điều chuyển tài sản',

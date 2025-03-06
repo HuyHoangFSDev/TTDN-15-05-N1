@@ -26,12 +26,6 @@ class LoaiTaiSan(models.Model):
     bao_tri_count = fields.Integer("Số lượng Bảo trì", compute='_compute_thong_ke_trang_thai')
     hong_count = fields.Integer("Số lượng Hỏng", compute='_compute_thong_ke_trang_thai')
 
-    @api.constrains('ma_loai_tai_san')
-    def _check_ma_loai_tai_san_format(self):
-        for record in self:
-            if not re.fullmatch(r'LTS-\d{4}', record.ma_loai_tai_san):
-                raise ValidationError("Mã loại tài sản phải có định dạng LTS-XXXX (ví dụ: LTS-1234)")
-
 
     @api.depends('tai_san_ids', 'tai_san_ids.trang_thai')
     def _compute_thong_ke_trang_thai(self):
@@ -41,4 +35,3 @@ class LoaiTaiSan(models.Model):
             record.luu_tru_count = len(tai_sans.filtered(lambda t: t.trang_thai == 'LuuTru'))
             record.muon_count = len(tai_sans.filtered(lambda t: t.trang_thai == 'Muon'))
             record.bao_tri_count = len(tai_sans.filtered(lambda t: t.trang_thai == 'BaoTri'))
-            record.hong_count = len(tai_sans.filtered(lambda t: t.trang_thai == 'Hong'))
