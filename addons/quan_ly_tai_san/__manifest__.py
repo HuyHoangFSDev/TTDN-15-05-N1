@@ -36,7 +36,7 @@
         'views/lich_su_kiem_ke.xml',
         'views/thanh_ly.xml',
         'views/khau_hao.xml',
-        # 'views/thong_ke.xml',
+        'views/thong_ke.xml',
         'views/menu.xml',
     ],
 

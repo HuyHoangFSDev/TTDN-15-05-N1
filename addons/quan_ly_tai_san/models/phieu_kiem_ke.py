@@ -66,14 +66,14 @@ class PhieuKiemKe(models.Model):
 
     def action_confirm(self):
         self.ensure_one()
-        if self.trang_thai == 'draft':
-            self.trang_thai = 'confirmed'
+        if self.state == 'draft':
+            self.state = 'confirmed'
         else:
             raise models.UserError('Chỉ có thể xác nhận phiếu ở trạng thái Nháp!')
 
     def action_done(self):
         self.ensure_one()
-        if self.trang_thai != 'confirmed':
+        if self.state != 'confirmed':
             raise models.UserError('Phiếu cần được xác nhận trước khi hoàn thành!')
         for tai_san in self.tai_san_ids:
             self.env['lich_su_kiem_ke'].create({
@@ -84,4 +84,4 @@ class PhieuKiemKe(models.Model):
                 'ngay_kiem_ke': self.ngay_kiem_ke,
             })
             tai_san.trang_thai = self.trang_thai_thuc_te
-        self.trang_thai = 'done'
+        self.state = 'done'

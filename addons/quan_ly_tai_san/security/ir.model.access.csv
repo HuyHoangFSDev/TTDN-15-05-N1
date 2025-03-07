@@ -13,5 +13,6 @@ access_phieu_dieu_chuyen,phieu_dieu_chuyen.phieu_dieu_chuyen,model_phieu_dieu_ch
 access_phieu_kiem_ke,phieu_kiem_ke.phieu_kiem_ke,model_phieu_kiem_ke,base.group_user,1,1,1,1
 access_lich_su_kiem_ke,lich_su_kiem_ke.lich_su_kiem_ke,model_lich_su_kiem_ke,base.group_user,1,1,1,1
 access_thanh_ly,thanh_ly.thanh_ly,model_thanh_ly,base.group_user,1,1,1,1
+access_thong_ke,thong_ke.thong_ke,model_thong_ke,base.group_user,1,1,1,1
 
 

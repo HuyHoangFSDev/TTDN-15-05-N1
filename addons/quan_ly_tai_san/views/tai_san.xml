@@ -50,7 +50,7 @@
                                 </group>
                             </page>
                             <page string="Lịch sử sử dụng">
-                                <field name="lich_su_su_dung_ids" nolabel="1">
+                                <field name="lich_su_su_dung_ids" nolabel="1" readonly="1">
                                     <tree editable="bottom" class="o_list_full_width">
                                         <field name="ma_lich_su_su_dung" readonly="1"/>
                                         <field name="ngay_muon"/>
@@ -62,7 +62,7 @@
                                 </field>
                             </page>
                             <page string="Lịch Sử Bảo Trì">
-                                <field name="lich_su_bao_tri_ids">
+                                <field name="lich_su_bao_tri_ids" readonly="1">
                                     <tree editable="bottom" class="o_list_view">
                                         <field name="ma_lich_su_bao_tri" readonly="1"/>
                                         <field name="ngay_bao_tri" widget="date"/>
@@ -74,7 +74,7 @@
                                 </field>
                             </page>
                             <page string="Lịch sử điều chuyển">
-                                <field name="lich_su_di_chuyen_ids" nolabel="1">
+                                <field name="lich_su_di_chuyen_ids" nolabel="1" readonly="1">
                                     <tree editable="bottom" class="o_list_full_width">
                                         <field name="is_current_location" invisible="1"/>
                                         <field name="vi_tri_chuyen_id" widget="selection"/>
@@ -86,7 +86,7 @@
                                 </field>
                             </page>
                             <page string="Khấu hao">
-                                <field name="khau_hao_ids" nolabel="1">
+                                <field name="khau_hao_ids" nolabel="1" readonly="1">
                                     <tree editable="bottom" class="o_list_full_width">
                                         <field name="ma_khau_hao"/>
                                         <field name="phuong_phap_khau_hao"/>
