@@ -9,7 +9,7 @@
                     <sheet>
                         <group>
                             <group>
-                                <field name="ma_phieu_muon" readonly="1"/>
+                                <field name="ma_phieu_muon" />
                                 <field name="state" widget="statusbar" statusbar_visible="draft,approved,done,cancelled"/>
                             </group>
                         </group>

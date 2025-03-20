@@ -9,19 +9,15 @@
                     <sheet>
                         <group>
                             <field name="ten_loai_tai_san" placeholder="Nhập tên loại tài sản..." required="1"/>
-                            <field name="ma_loai_tai_san" readonly="1"/>
+                            <field name="ma_loai_tai_san" placeholder="Nhập mã loại tài sản..."/>
                             <field name="mo_ta" placeholder="Mô tả chi tiết loại tài sản..." widget="textarea"/>
                         </group>
-
-                        <graph type="bar" string="Thống kê tài sản">
-                            <field name="id" operator="count"/>
-                        </graph>
 
                         <notebook>
                             <page string="Danh sách tài sản">
                                 <field name="tai_san_ids">
                                     <tree editable="bottom">
-                                        <field name="ma_tai_san" readonly="1"/>
+                                        <field name="ma_tai_san" />
                                         <field name="ten_tai_san" required="1"/>
                                         <field name="so_serial" required="1"/>
                                         <field name="ngay_mua" widget="date"/>

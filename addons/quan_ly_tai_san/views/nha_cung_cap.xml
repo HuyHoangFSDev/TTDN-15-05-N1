@@ -11,7 +11,7 @@
                         <notebook>
                             <page string="Thông tin cơ bản">
                                 <group>
-                                    <field name="ma_nha_cung_cap" readonly="1" options="{'no_open': True}"/>
+                                    <field name="ma_nha_cung_cap"  options="{'no_open': True}"/>
                                     <field name="ten_nha_cung_cap" placeholder="Nhập tên nhà cung cấp..." required="1"/>
                                 </group>
                             </page>
@@ -25,7 +25,7 @@
                             <page string="Tài sản liên quan">
                                 <field name="tai_san_ids" nolabel="1">
                                     <tree editable="bottom">
-                                        <field name="ma_tai_san" readonly="1"/>
+                                        <field name="ma_tai_san" />
                                         <field name="ten_tai_san"/>
                                         <field name="trang_thai" widget="badge" options="{'clickable': True, 'class_mapping': {'Muon': 'info', 'Hong': 'danger', 'SanSang': 'success'}}"/>
                                     </tree>

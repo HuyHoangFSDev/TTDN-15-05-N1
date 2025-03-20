@@ -11,7 +11,7 @@ class ViTri(models.Model):
         ('ma_vi_tri_unique', 'unique(ma_vi_tri)', 'Mã vị trí phải là duy nhất!'),
     ]
 
-    ma_vi_tri = fields.Char("Mã vị trí", required=True, copy=False, readonly=True, default="New")
+    ma_vi_tri = fields.Char("Mã vị trí", required=True, copy=False, default="New")
     ten_vi_tri = fields.Char("Tên vị trí", required=True)
     tai_san_ids = fields.One2many(
         comodel_name='tai_san',
@@ -19,12 +19,6 @@ class ViTri(models.Model):
         string="Tài sản hiện tại",
         readonly=True
     )
-
-    @api.constrains('ma_vi_tri')
-    def _check_ma_vi_tri_format(self):
-        for record in self:
-            if not re.fullmatch(r'VT-\d{4}', record.ma_vi_tri):
-                raise ValidationError("Mã vị trí phải có định dạng VT-XXXX (ví dụ: VT-1234)")
 
     @api.model
     def create(self, vals):

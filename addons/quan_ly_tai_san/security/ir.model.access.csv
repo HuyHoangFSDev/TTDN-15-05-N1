@@ -10,5 +10,6 @@ access_phieu_muon,phieu_muon.phieu_muon,model_phieu_muon,base.group_user,1,1,1,1
 access_phieu_bao_tri,phieu_bao_tri.phieu_bao_tri,model_phieu_bao_tri,base.group_user,1,1,1,1
 access_lich_su_dieu_chuyen,lich_su_dieu_chuyen.lich_su_dieu_chuyen,model_lich_su_dieu_chuyen,base.group_user,1,1,1,1
 access_phieu_dieu_chuyen,phieu_dieu_chuyen.phieu_dieu_chuyen,model_phieu_dieu_chuyen,base.group_user,1,1,1,1
+access_thanh_ly,thanh_ly.thanh_ly,model_thanh_ly,base.group_user,1,1,1,1
 
 

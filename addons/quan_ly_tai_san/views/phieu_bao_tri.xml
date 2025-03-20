@@ -15,7 +15,7 @@
                     <sheet class="o_form_sheet_full p-4 bg-light border rounded">
                         <group class="o_2col">
                             <group string="Thông tin chung">
-                                <field name="ma_phieu_bao_tri" readonly="1" class="text-lg font-weight-bold"/>
+                                <field name="ma_phieu_bao_tri"  class="text-lg font-weight-bold"/>
                                 <field name="tai_san_id" placeholder="Chọn tài sản..." required="1"/>
                                 <field name="chi_phi" placeholder="Nhập chi phí bảo trì..." required="1"/>
                             </group>

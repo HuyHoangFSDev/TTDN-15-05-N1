@@ -8,7 +8,7 @@
                 <form string="Lịch Sử Sử Dụng">
                     <sheet class="bg-white border rounded shadow-sm p-3">
                         <group>
-                            <field name="ma_lich_su_su_dung" readonly="1" class="font-weight-bold text-primary"/>
+                            <field name="ma_lich_su_su_dung"  class="font-weight-bold text-primary"/>
                         </group>
                         <notebook>
                             <page string="Thông Tin Mượn Trả">
@@ -35,7 +35,7 @@
             <field name="model">lich_su_su_dung</field>
             <field name="arch" type="xml">
                 <tree string="Danh sách lịch sử sử dụng">
-                    <field name="ma_lich_su_su_dung" readonly="1"/>
+                    <field name="ma_lich_su_su_dung" />
                     <field name="ngay_muon"/>
                     <field name="ngay_tra"/>
                     <field name="nhan_vien_id"/>

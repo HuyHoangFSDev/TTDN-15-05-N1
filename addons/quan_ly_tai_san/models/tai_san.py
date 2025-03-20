@@ -84,6 +84,12 @@ class TaiSan(models.Model):
 
     nguoi_su_dung_id = fields.Many2one(comodel_name="nhan_vien", string="Người đang sử dụng", store=True)
 
+
+    thanh_ly_id = fields.Many2one(
+        comodel_name='thanh_ly',
+        string="Phiếu thanh lý",
+    )
+
     def action_dieu_chuyen_tai_san(self):
         for record in self:
             return {

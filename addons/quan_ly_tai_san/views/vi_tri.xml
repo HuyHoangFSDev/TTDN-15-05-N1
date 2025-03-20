@@ -18,15 +18,15 @@
                         </div>
                         <group class="o_form_group_full">
                             <group string="Thông tin cơ bản" class="o_2col">
-                                <field name="ma_vi_tri" class="oe_inline" readonly="1" options="{'no_open': True}"/>
+                                <field name="ma_vi_tri" class="oe_inline" />
                                 <field name="ten_vi_tri" placeholder="Nhập tên vị trí..." required="1"/>
                             </group>
                             <group string="Tài sản liên quan">
                                 <field name="tai_san_ids" nolabel="1">
                                     <tree editable="bottom" class="o_list_full_width">
-                                        <field name="ma_tai_san" readonly="1"/>
+                                        <field name="ma_tai_san" />
                                         <field name="ten_tai_san"/>
-                                        <field name="vi_tri_hien_tai_id" widget="selection" readonly="1"/>
+                                        <field name="vi_tri_hien_tai_id" widget="selection" />
                                         <field name="trang_thai" widget="badge"
                                                options="{'clickable': True, 'class_mapping': {'Muon': 'info', 'BaoTri': 'warning', 'CatGiu': 'success', 'Hong': 'danger'}}"/>
                                     </tree>

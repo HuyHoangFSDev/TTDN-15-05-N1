@@ -26,6 +26,7 @@
         'views/lich_su_dieu_chuyen.xml',
         'views/phieu_dieu_chuyen.xml',
         'views/khau_hao.xml',
+        'views/thanh_ly.xml',
         'views/menu.xml',
     ],
 

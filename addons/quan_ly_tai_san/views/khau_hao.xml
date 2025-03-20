@@ -14,7 +14,7 @@
                             <notebook>
                                 <page string="Thông tin chính">
                                     <group string="Thông tin cơ bản" class="o_3col">
-                                        <field name="ma_khau_hao" class="oe_inline" readonly="1"
+                                        <field name="ma_khau_hao" class="oe_inline"
                                                options="{'no_open': True}"/>
                                         <field name="ngay_khau_hao" widget="date" placeholder="Chọn ngày khấu hao..."
                                                required="1"/>

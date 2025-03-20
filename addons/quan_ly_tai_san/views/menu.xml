@@ -73,6 +73,13 @@
                 action="action_phieu_dieu_chuyen"
         />
         <menuitem
+                name="Phiếu thanh lý"
+                id="menu_phieu_thanh_ly"
+                parent="menu_quan_ly_phieu_lich_su"
+                sequence="3"
+                action="action_thanh_ly"
+        />
+        <menuitem
                 name="Lịch sử điều chuyển"
                 id="menu_lich_su_dieu_chuyen"
                 parent="menu_quan_ly_phieu_lich_su"
@@ -100,5 +107,17 @@
                 sequence="6"
                 action="action_khau_hao"
         />
+
+        <menuitem id="menu_tai_san_statistics" name="Thống kê tài sản" parent="menu_root" sequence="20"/>
+
+        <menuitem id="menu_tai_san_pie_trang_thai" name="Trạng thái tài sản (Pie)" parent="menu_tai_san_statistics"
+                  action="action_tai_san_pie_trang_thai"/>
+        <menuitem id="menu_tai_san_bar_gia_tri" name="Giá trị hiện tại (Bar)" parent="menu_tai_san_statistics"
+                  action="action_tai_san_bar_gia_tri"/>
+        <menuitem id="menu_lich_su_su_dung_line" name="Lịch sử sử dụng (Line)" parent="menu_tai_san_statistics"
+                  action="action_lich_su_su_dung_line"/>
+        <menuitem id="menu_tai_san_pie_nha_cung_cap" name="Nhà cung cấp (Pie)" parent="menu_tai_san_statistics"
+                  action="action_tai_san_pie_nha_cung_cap"/>
+
     </data>
 </odoo>
