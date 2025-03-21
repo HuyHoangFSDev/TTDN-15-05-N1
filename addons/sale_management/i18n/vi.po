@@ -263,7 +263,7 @@ msgid ""
 msgstr "Nếu không chọn, bạn sẽ có thể ẩn mẫu báo giá mà không cần xóa mẫu. "
 
 #. module: sale_management
-#: model:ir.model.fields,field_description:sale_management.field_digest_digest__kpi_all_sale_total_value
+#: model:ir.model.fields,field_description:sale_management.field_digest_digest__kpi_all_sale_tong_gia_tri
 msgid "Kpi All Sale Total Value"
 msgstr "KPI giá trị tổng tất cả doanh số"
 

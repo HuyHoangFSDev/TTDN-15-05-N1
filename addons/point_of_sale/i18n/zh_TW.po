@@ -2808,7 +2808,7 @@ msgid "Keep Session Open"
 msgstr "保持營業點打開"
 
 #. module: point_of_sale
-#: model:ir.model.fields,field_description:point_of_sale.field_digest_digest__kpi_pos_total_value
+#: model:ir.model.fields,field_description:point_of_sale.field_digest_digest__kpi_pos_tong_gia_tri
 msgid "Kpi Pos Total Value"
 msgstr "Kpi Pos 總計值"
 

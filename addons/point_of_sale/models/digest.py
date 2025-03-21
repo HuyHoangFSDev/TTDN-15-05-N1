@@ -9,14 +9,14 @@ class Digest(models.Model):
     _inherit = 'digest.digest'
 
     kpi_pos_total = fields.Boolean('POS Sales')
-    kpi_pos_total_value = fields.Monetary(compute='_compute_kpi_pos_total_value')
+    kpi_pos_tong_gia_tri = fields.Monetary(compute='_compute_kpi_pos_tong_gia_tri')
 
-    def _compute_kpi_pos_total_value(self):
+    def _compute_kpi_pos_tong_gia_tri(self):
         if not self.env.user.has_group('point_of_sale.group_pos_user'):
             raise AccessError(_("Do not have access, skip this data for user's digest email"))
         for record in self:
             start, end, company = record._get_kpi_compute_parameters()
-            record.kpi_pos_total_value = sum(self.env['pos.order'].search([
+            record.kpi_pos_tong_gia_tri = sum(self.env['pos.order'].search([
                 ('date_order', '>=', start),
                 ('date_order', '<', end),
                 ('state', 'not in', ['draft', 'cancel', 'invoiced']),

@@ -1820,7 +1820,7 @@ msgid "Just done"
 msgstr "Precis färdig"
 
 #. module: website_sale
-#: model:ir.model.fields,field_description:website_sale.field_digest_digest__kpi_website_sale_total_value
+#: model:ir.model.fields,field_description:website_sale.field_digest_digest__kpi_website_sale_tong_gia_tri
 msgid "Kpi Website Sale Total Value"
 msgstr "Kpi-webbplatsförsäljning Totalt Värde"
 

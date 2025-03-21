@@ -954,7 +954,7 @@ msgid "Net VAT Due"
 msgstr "صافي الضريبة المستحق"
 
 #. module: l10n_sa
-#: model:account.tax.report.line,name:l10n_sa.tax_report_line_total_value_of_due_tax_for_the_period
+#: model:account.tax.report.line,name:l10n_sa.tax_report_line_tong_gia_tri_of_due_tax_for_the_period
 msgid "Total value of due tax for the period"
 msgstr "إجمالي ضريبة القيمة المستحقة للفترة الحالية"
 

@@ -2819,7 +2819,7 @@ msgid "Keep Session Open"
 msgstr "保持会话打开"
 
 #. module: point_of_sale
-#: model:ir.model.fields,field_description:point_of_sale.field_digest_digest__kpi_pos_total_value
+#: model:ir.model.fields,field_description:point_of_sale.field_digest_digest__kpi_pos_tong_gia_tri
 msgid "Kpi Pos Total Value"
 msgstr "终端销售总额的关键绩效指标"
 

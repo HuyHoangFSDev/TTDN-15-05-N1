@@ -273,7 +273,7 @@ msgid ""
 msgstr "İşaretlenmezse, şablonunu kaldırmadan gizlemenize izin verir"
 
 #. module: sale_management
-#: model:ir.model.fields,field_description:sale_management.field_digest_digest__kpi_all_sale_total_value
+#: model:ir.model.fields,field_description:sale_management.field_digest_digest__kpi_all_sale_tong_gia_tri
 msgid "Kpi All Sale Total Value"
 msgstr "Kpi Tüm Satılık Toplam Değer"
 

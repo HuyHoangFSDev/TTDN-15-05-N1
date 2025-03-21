@@ -39,7 +39,7 @@ class Digest(models.Model):
     kpi_res_users_connected = fields.Boolean('Connected Users')
     kpi_res_users_connected_value = fields.Integer(compute='_compute_kpi_res_users_connected_value')
     kpi_mail_message_total = fields.Boolean('Messages')
-    kpi_mail_message_total_value = fields.Integer(compute='_compute_kpi_mail_message_total_value')
+    kpi_mail_message_tong_gia_tri = fields.Integer(compute='_compute_kpi_mail_message_tong_gia_tri')
 
     @api.depends('user_ids')
     def _compute_is_subscribed(self):
@@ -63,12 +63,12 @@ class Digest(models.Model):
             user_connected = self.env['res.users'].search_count([('company_id', '=', company.id), ('login_date', '>=', start), ('login_date', '<', end)])
             record.kpi_res_users_connected_value = user_connected
 
-    def _compute_kpi_mail_message_total_value(self):
+    def _compute_kpi_mail_message_tong_gia_tri(self):
         discussion_subtype_id = self.env.ref('mail.mt_comment').id
         for record in self:
             start, end, company = record._get_kpi_compute_parameters()
             total_messages = self.env['mail.message'].search_count([('create_date', '>=', start), ('create_date', '<', end), ('subtype_id', '=', discussion_subtype_id), ('message_type', 'in', ['comment', 'email'])])
-            record.kpi_mail_message_total_value = total_messages
+            record.kpi_mail_message_tong_gia_tri = total_messages
 
     @api.onchange('periodicity')
     def _onchange_periodicity(self):

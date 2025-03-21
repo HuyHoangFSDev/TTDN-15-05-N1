@@ -399,7 +399,7 @@
         <field name="formula">((STD_RATE_SUPP_TAX_AB + STD_RATE_SUPP_TAX_DB + STD_RATE_SUPP_TAX_SJ + STD_RATE_SUPP_TAX_AJ + STD_RATE_SUPP_TAX_UM + STD_RATE_SUPP_TAX_RA + STD_RATE_SUPP_TAX_FU) + OUT_OF_SCOPE_TAX_0 + ADJUST_GOODS_IMPORT_IN_UAE_TAX + GOODS_IMPORT_IN_UAE_TAX + EXAMPT_SUPP_TAX + ZERO_RATE_SUPP_TAX + REVERSE_CHARGE_PRO_TAX + TAX_REF_TOUR_SCHEME_TAX) - (OUT_OF_SCOPE_1_TAX + SUPP_REV_CHARGE_PRO_TAX + STD_RATE_EXPENSES_TAX)</field>
     </record>
 
-    <record id="tax_report_line_total_value_due_tax_period" model="account.tax.report.line">
+    <record id="tax_report_line_tong_gia_tri_due_tax_period" model="account.tax.report.line">
         <field name="name">14. Total value of due tax for the period</field>
         <field name="formula">(STD_RATE_SUPP_TAX_AB + STD_RATE_SUPP_TAX_DB + STD_RATE_SUPP_TAX_SJ + STD_RATE_SUPP_TAX_AJ + STD_RATE_SUPP_TAX_UM + STD_RATE_SUPP_TAX_RA + STD_RATE_SUPP_TAX_FU) + OUT_OF_SCOPE_TAX_0 + ADJUST_GOODS_IMPORT_IN_UAE_TAX + GOODS_IMPORT_IN_UAE_TAX + EXAMPT_SUPP_TAX + ZERO_RATE_SUPP_TAX + REVERSE_CHARGE_PRO_TAX + TAX_REF_TOUR_SCHEME_TAX</field>
         <field name="parent_id" ref="tax_report_line_net_vat_due"/>
@@ -407,7 +407,7 @@
         <field name="sequence" eval="1"/>
     </record>
 
-    <record id="tax_report_line_total_value_recoverable_tax_period" model="account.tax.report.line">
+    <record id="tax_report_line_tong_gia_tri_recoverable_tax_period" model="account.tax.report.line">
         <field name="name">15. Total value of recoverable tax for the period</field>
         <field name="formula">OUT_OF_SCOPE_1_TAX + SUPP_REV_CHARGE_PRO_TAX + STD_RATE_EXPENSES_TAX</field>
         <field name="parent_id" ref="tax_report_line_net_vat_due"/>

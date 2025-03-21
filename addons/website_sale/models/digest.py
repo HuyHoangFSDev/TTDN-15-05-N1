@@ -9,9 +9,9 @@ class Digest(models.Model):
     _inherit = 'digest.digest'
 
     kpi_website_sale_total = fields.Boolean('eCommerce Sales')
-    kpi_website_sale_total_value = fields.Monetary(compute='_compute_kpi_website_sale_total_value')
+    kpi_website_sale_tong_gia_tri = fields.Monetary(compute='_compute_kpi_website_sale_tong_gia_tri')
 
-    def _compute_kpi_website_sale_total_value(self):
+    def _compute_kpi_website_sale_tong_gia_tri(self):
         if not self.env.user.has_group('sales_team.group_sale_salesman_all_leads'):
             raise AccessError(_("Do not have access, skip this data for user's digest email"))
         for record in self:
@@ -23,7 +23,7 @@ class Digest(models.Model):
                 ('website_id', '!=', False),
                 ('company_id', '=', company.id)
             ])
-            record.kpi_website_sale_total_value = sum(
+            record.kpi_website_sale_tong_gia_tri = sum(
                 sale.currency_id._convert(sale.amount_total, company.currency_id, company, sale.date_order)
                 for sale in confirmed_website_sales
             )

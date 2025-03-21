@@ -1712,7 +1712,7 @@ msgid "Just done"
 msgstr "Just tehtud"
 
 #. module: website_sale
-#: model:ir.model.fields,field_description:website_sale.field_digest_digest__kpi_website_sale_total_value
+#: model:ir.model.fields,field_description:website_sale.field_digest_digest__kpi_website_sale_tong_gia_tri
 msgid "Kpi Website Sale Total Value"
 msgstr "Kpl veebilehe müügi koguväärtus"
 

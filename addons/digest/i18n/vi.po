@@ -252,7 +252,7 @@ msgid "KPIs"
 msgstr "KPI"
 
 #. module: digest
-#: model:ir.model.fields,field_description:digest.field_digest_digest__kpi_mail_message_total_value
+#: model:ir.model.fields,field_description:digest.field_digest_digest__kpi_mail_message_tong_gia_tri
 msgid "Kpi Mail Message Total Value"
 msgstr "Tổng giá trị tin nhắn trong thư KPI"
 

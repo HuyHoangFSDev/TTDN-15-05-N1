@@ -261,7 +261,7 @@ msgid ""
 msgstr "チェックを外すと、見積書テンプレートを削除せずに非表示にすることができます。"
 
 #. module: sale_management
-#: model:ir.model.fields,field_description:sale_management.field_digest_digest__kpi_all_sale_total_value
+#: model:ir.model.fields,field_description:sale_management.field_digest_digest__kpi_all_sale_tong_gia_tri
 msgid "Kpi All Sale Total Value"
 msgstr "Kpi 全販売総額"
 

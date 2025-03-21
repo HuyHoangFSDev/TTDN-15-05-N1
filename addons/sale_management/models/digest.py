@@ -9,9 +9,9 @@ class Digest(models.Model):
     _inherit = 'digest.digest'
 
     kpi_all_sale_total = fields.Boolean('All Sales')
-    kpi_all_sale_total_value = fields.Monetary(compute='_compute_kpi_sale_total_value')
+    kpi_all_sale_tong_gia_tri = fields.Monetary(compute='_compute_kpi_sale_tong_gia_tri')
 
-    def _compute_kpi_sale_total_value(self):
+    def _compute_kpi_sale_tong_gia_tri(self):
         if not self.env.user.has_group('sales_team.group_sale_salesman_all_leads'):
             raise AccessError(_("Do not have access, skip this data for user's digest email"))
         for record in self:
@@ -21,7 +21,7 @@ class Digest(models.Model):
                 ('date', '<', end),
                 ('state', 'not in', ['draft', 'cancel', 'sent']),
                 ('company_id', '=', company.id)], ['price_total'], ['company_id'])
-            record.kpi_all_sale_total_value = sum([channel_sale['price_total'] for channel_sale in all_channels_sales])
+            record.kpi_all_sale_tong_gia_tri = sum([channel_sale['price_total'] for channel_sale in all_channels_sales])
 
     def _compute_kpis_actions(self, company, user):
         res = super(Digest, self)._compute_kpis_actions(company, user)

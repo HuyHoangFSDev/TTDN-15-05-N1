@@ -1985,11 +1985,11 @@ class AccountMove(models.Model):
         subtotals_list = [] # List, so that we preserve their order
         previous_subtotals_tax_amount = 0
         for subtotal_title in sorted((sub for sub in subtotal_priorities), key=lambda x: subtotal_priorities[x]):
-            subtotal_value = amount_untaxed + previous_subtotals_tax_amount
+            subtong_gia_tri = amount_untaxed + previous_subtotals_tax_amount
             subtotals_list.append({
                 'name': subtotal_title,
-                'amount': subtotal_value,
-                'formatted_amount': formatLang(self.env, subtotal_value, currency_obj=currency),
+                'amount': subtong_gia_tri,
+                'formatted_amount': formatLang(self.env, subtong_gia_tri, currency_obj=currency),
             })
 
             subtotal_tax_amount = sum(group_val['tax_group_amount'] for group_val in groups_by_subtotal[subtotal_title])

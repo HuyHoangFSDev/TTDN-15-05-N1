@@ -1557,7 +1557,7 @@ class TestAngloSaxonValuation(ValuationReconciliationTestCommon):
         self.product.invoice_policy = 'delivery'
 
         svl_values = [10, 15, 65]
-        total_value = sum(svl_values)
+        tong_gia_tri = sum(svl_values)
         in_moves = self.env['stock.move'].create([{
             'name': 'IN move @%s' % p,
             'product_id': self.product.id,
@@ -1618,14 +1618,14 @@ class TestAngloSaxonValuation(ValuationReconciliationTestCommon):
         invoices.button_draft()
         invoices.action_post()
         cogs = invoices.line_ids.filtered(lambda l: l.account_id == out_account)
-        self.assertEqual(sum(cogs.mapped('credit')), total_value)
+        self.assertEqual(sum(cogs.mapped('credit')), tong_gia_tri)
 
         # Reset and repost few invoices (we only check the total value as the
         # distribution changes but does not really matter)
         (invoice01 | invoice03).button_draft()
         (invoice01 | invoice03).action_post()
         cogs = invoices.line_ids.filtered(lambda l: l.account_id == out_account)
-        self.assertEqual(sum(cogs.mapped('credit')), total_value)
+        self.assertEqual(sum(cogs.mapped('credit')), tong_gia_tri)
 
     def test_fifo_reverse_and_create_new_invoice(self):
         """

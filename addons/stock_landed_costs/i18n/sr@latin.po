@@ -412,7 +412,7 @@ msgid "Total"
 msgstr "Ukupno"
 
 #. module: stock_landed_costs
-#: model:ir.model.fields,field_description:stock_landed_costs.field_stock_move_total_value
+#: model:ir.model.fields,field_description:stock_landed_costs.field_stock_move_tong_gia_tri
 msgid "Total Value"
 msgstr ""
 

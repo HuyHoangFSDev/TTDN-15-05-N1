@@ -112,7 +112,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <t t-set="total_value" t-value="0"/>
+                        <t t-set="tong_gia_tri" t-value="0"/>
                         <t t-foreach="o.move_lines" t-as="move">
                             <t t-if="move.quantity_done">
                                 <tr>
@@ -131,7 +131,7 @@
                                             <t t-set="lst_price" t-value="move.product_id.lst_price * move.product_uom._compute_quantity(move.quantity_done, move.product_id.uom_id)"/>
                                         </t>
                                         <span t-esc="lst_price"  t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/>
-                                        <t t-set="total_value" t-value="total_value + lst_price"/>
+                                        <t t-set="tong_gia_tri" t-value="tong_gia_tri + lst_price"/>
                                     </td>
                                 </tr>
                             </t>
@@ -143,7 +143,7 @@
                                 <b>Total:</b>
                             </td>
                             <td>
-                                <span t-esc="total_value"  t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/>
+                                <span t-esc="tong_gia_tri"  t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/>
                             </td>
                         </tr>
                     </tbody>

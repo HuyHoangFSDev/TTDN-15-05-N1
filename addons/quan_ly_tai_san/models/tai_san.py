@@ -52,7 +52,7 @@ class TaiSan(models.Model):
     )
 
     gia_tri_hien_tai = fields.Float(
-        "Giá trị hiện tại", digits=(16, 2),
+        "Giá trị hiện tại", digits=(16, 2), compute='_compute_gia_tri_hien_tai', store=True,
         help="Giá trị tài sản hiện tại sau khi khấu hao"
     )
 
@@ -136,6 +136,20 @@ class TaiSan(models.Model):
     quan_ly_id = fields.Many2one(comodel_name="nhan_vien", string="Người quản lý", store=True)
     nguoi_dang_dung_id = fields.Many2one(comodel_name="nhan_vien", string="Người đang sử dụng", store=True)
 
+    # Các trường computed cho dashboard
+    tong_so_luong = fields.Integer(
+        string="Tổng số tài sản", compute='_compute_dashboard_stats', store=False
+    )
+    tong_gia_tri = fields.Float(
+        string="Tổng giá trị hiện tại", compute='_compute_dashboard_stats', store=False, digits=(16, 2)
+    )
+    tai_san_dang_dung = fields.Integer(
+        string="Tài sản đang dùng", compute='_compute_dashboard_stats', store=False
+    )
+    tai_san_hong = fields.Integer(
+        string="Tài sản hỏng", compute='_compute_dashboard_stats', store=False
+    )
+
     @api.constrains('ngay_mua', 'ngay_het_han_bao_hanh')
     def _check_dates(self):
         for record in self:
@@ -152,18 +166,28 @@ class TaiSan(models.Model):
             if not re.fullmatch(r'TS-\d{5}', record.ma_tai_san):
                 raise ValidationError("Mã tài sản phải có định dạng TS-XXXXX (ví dụ: TS-12345)")
 
-    @api.depends_context("date")
-    @api.depends("gia_tien_mua", "ngay_mua")
+    @api.depends('gia_tien_mua', 'ngay_mua')
     def _compute_gia_tri_hien_tai(self):
         for record in self:
-            if record.ngay_mua:
-                ngay_mua = record.ngay_mua if isinstance(record.ngay_mua, fields.Date) else record.ngay_mua.date()
+            if record.ngay_mua and record.gia_tien_mua:
+                ngay_mua = record.ngay_mua if isinstance(record.ngay_mua,
+                                                         datetime.datetime) else fields.Date.from_string(
+                    record.ngay_mua)
                 if ngay_mua > fields.Date.today():
                     raise ValidationError("Ngày mua không thể lớn hơn ngày hiện tại!")
-
-                years = relativedelta(fields.Date.today(), ngay_mua).years
-                depreciation_rate = 0.1
+                years = relativedelta(fields.Date.today(), ngay_mua.date()).years
+                depreciation_rate = 0.1  # 10% mỗi năm
                 record.gia_tri_hien_tai = max(0, record.gia_tien_mua * (1 - depreciation_rate * years))
+            else:
+                record.gia_tri_hien_tai = 0.0
+
+    @api.depends('trang_thai', 'gia_tri_hien_tai')
+    def _compute_dashboard_stats(self):
+        all_assets = self.search([])
+        self.tong_so_luong = len(all_assets)
+        self.tong_gia_tri = sum(asset.gia_tri_hien_tai for asset in all_assets)
+        self.tai_san_dang_dung = len(all_assets.filtered(lambda r: r.trang_thai == 'Muon'))
+        self.tai_san_hong = len(all_assets.filtered(lambda r: r.trang_thai == 'Hong'))
 
     @api.model
     def create(self, vals):
@@ -180,7 +204,7 @@ class TaiSan(models.Model):
     def action_di_chuyen_tai_san(self):
         for record in self:
             return {
-                'name': 'điều chuyển tài sản',
+                'name': 'Điều chuyển tài sản',
                 'type': 'ir.actions.act_window',
                 'res_model': 'lich_su_di_chuyen',
                 'view_mode': 'form',
@@ -205,4 +229,13 @@ class TaiSan(models.Model):
                 'default_tai_san_id': self.id,
                 'default_ngay_thanh_ly': fields.Date.today(),
             },
+        }
+
+    def get_dashboard_data(self):
+        all_assets = self.search([])
+        return {
+            'tong_so_luong': len(all_assets),
+            'tai_san_dang_dung': len(all_assets.filtered(lambda r: r.trang_thai == 'Muon')),
+            'tai_san_hong': len(all_assets.filtered(lambda r: r.trang_thai == 'Hong')),
+            'last_updated': fields.Datetime.now(),
         }

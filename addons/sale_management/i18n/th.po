@@ -260,7 +260,7 @@ msgid ""
 msgstr "หากไม่เลือก จะอนุญาตให้คุณซ่อนเทมเพลตใบเสนอราคาโดยไม่ต้องลบออก"
 
 #. module: sale_management
-#: model:ir.model.fields,field_description:sale_management.field_digest_digest__kpi_all_sale_total_value
+#: model:ir.model.fields,field_description:sale_management.field_digest_digest__kpi_all_sale_tong_gia_tri
 msgid "Kpi All Sale Total Value"
 msgstr "ค่ารวมการขาย Kpi ทั้งหมด"
 

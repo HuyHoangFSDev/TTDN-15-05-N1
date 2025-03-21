@@ -1796,7 +1796,7 @@ msgid "Just done"
 msgstr "Udført"
 
 #. module: website_sale
-#: model:ir.model.fields,field_description:website_sale.field_digest_digest__kpi_website_sale_total_value
+#: model:ir.model.fields,field_description:website_sale.field_digest_digest__kpi_website_sale_tong_gia_tri
 msgid "Kpi Website Sale Total Value"
 msgstr "KPI Hjemmeside salg total værdi"
 

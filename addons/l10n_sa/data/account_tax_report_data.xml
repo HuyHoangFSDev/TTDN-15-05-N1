@@ -217,14 +217,14 @@
             <field name="report_id" ref="tax_report_vat_filing"/>
             <field name="sequence" eval="5"/>
         </record>
-        <record id="tax_report_line_total_value_of_due_tax_for_the_period" model="account.tax.report.line">
+        <record id="tax_report_line_tong_gia_tri_of_due_tax_for_the_period" model="account.tax.report.line">
             <field name="name">Total value of due tax for the period</field>
             <field name="parent_id" ref="tax_report_line_net_vat_due"/>
             <field name="report_id" ref="tax_report_vat_filing"/>
             <field name="formula">STD_SALE_T + SPCL_SALE_T + ZERO_SALE_T + EXP_SALE_T + EXM_SALE_T</field>
             <field name="sequence" eval="1"/>
         </record>
-        <record id="tax_report_line_total_value_of_recoverable_tax_for_the_period" model="account.tax.report.line">
+        <record id="tax_report_line_tong_gia_tri_of_recoverable_tax_for_the_period" model="account.tax.report.line">
             <field name="name">Total value of recoverable tax for the period</field>
             <field name="parent_id" ref="tax_report_line_net_vat_due"/>
             <field name="report_id" ref="tax_report_vat_filing"/>

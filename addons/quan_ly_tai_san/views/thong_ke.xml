@@ -73,6 +73,6 @@
         </field>
     </record>
 
-    <menuitem id="menu_thong_ke" name="Thống kê tài sản"
+    <menuitem id="menu_thong_ke" name="Tổng quan"
               parent="menu_root" sequence="4" action="action_thong_ke"/>
 </odoo>

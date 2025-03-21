@@ -49,7 +49,6 @@
             'quan_ly_tai_san/static/src/css/tai_san.css',
         ],
     },
-
     'installable': True,
     'application': True,
 }
