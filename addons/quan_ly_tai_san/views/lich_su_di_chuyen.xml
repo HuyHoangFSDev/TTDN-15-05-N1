@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-
         <record id="view_lich_su_di_chuyen_form" model="ir.ui.view">
             <field name="name">lich_su_di_chuyen_form</field>
             <field name="model">lich_su_di_chuyen</field>

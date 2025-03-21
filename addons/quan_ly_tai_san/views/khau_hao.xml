@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-
         <record id="view_khau_hao_form" model="ir.ui.view">
             <field name="name">khau_hao_form</field>
             <field name="model">khau_hao</field>

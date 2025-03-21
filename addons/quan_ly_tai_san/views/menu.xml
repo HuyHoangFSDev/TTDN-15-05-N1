@@ -4,7 +4,6 @@
         <!-- Menu Chính -->
         <menuitem id="menu_root" name="Quản lý tài sản (QLTS)" sequence="0"/>
 
-        <!-- Menu cho Dashboard -->
         <!-- Quản lý Tài Sản -->
         <menuitem id="menu_tai_san" name="Quản lý tài sản" parent="menu_root" sequence="10" action="action_tai_san"/>
 
