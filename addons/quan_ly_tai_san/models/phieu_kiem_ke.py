@@ -79,9 +79,9 @@ class PhieuKiemKe(models.Model):
             self.env['lich_su_kiem_ke'].create({
                 'phieu_kiem_ke_id': self.id,
                 'tai_san_id': tai_san.id,
-                'trang_thai_truoc': tai_san.trang_thai,
+                'trang_thai_truoc': tai_san.trang_thai_kiem_ke,
                 'trang_thai_sau': self.trang_thai_thuc_te,
                 'ngay_kiem_ke': self.ngay_kiem_ke,
             })
-            tai_san.trang_thai = self.trang_thai_thuc_te
+            tai_san.trang_thai_kiem_ke = self.trang_thai_thuc_te
         self.state = 'done'

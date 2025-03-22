@@ -64,6 +64,13 @@ class TaiSan(models.Model):
         ("DaThanhLy", "Đã thanh lý"),
     ]
 
+    TRANG_THAI_KIEM_KE = [
+        ('binh_thuong', 'Bình thường'),
+        ('hong_hoc', 'Hỏng hóc'),
+        ('mat', 'Mất'),
+        ('sua_chua', 'Đang sửa chữa')
+    ]
+
     trang_thai = fields.Selection(
         TRANG_THAI, string="Trạng thái", default="LuuTru", tracking=True,
         help="Trạng thái hiện tại của tài sản:\n"
@@ -71,6 +78,9 @@ class TaiSan(models.Model):
              "- Mượn: Đang có người sử dụng\n"
              "- Bảo trì: Đang được sửa chữa\n"
              "- Hỏng: Không thể sử dụng"
+    )
+    trang_thai_kiem_ke = fields.Selection(
+        TRANG_THAI_KIEM_KE, string="Trạng thái Kiểm Kê", default="binh_thuong", tracking=True,
     )
 
     loai_tai_san_id = fields.Many2one(

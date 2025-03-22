@@ -41,6 +41,7 @@
                             <page string="Thông tin bổ sung" class="oe_grey">
                                 <group class="o_2col">
                                     <field name="ngay_mua" widget="datetime" placeholder="Ngày mua"/>
+                                    <field name="trang_thai_kiem_ke" placeholder="Trạng thái kiểm kê"/>
                                     <field name="ngay_het_han_bao_hanh" widget="date" placeholder="Ngày hết bảo hành"/>
                                     <field name="gia_tien_mua" widget="monetary"
                                            options="{'currency_field': 'currency_id'}"/>
@@ -122,6 +123,7 @@
                     <field name="ngay_mua" widget="datetime"/>
                     <field name="gia_tien_mua" widget="monetary"/>
                     <field name="gia_tri_hien_tai" widget="monetary"/>
+                    <field name="trang_thai_kiem_ke" placeholder="Trạng thái kiểm kê"/>
                     <field name="trang_thai" widget="badge"
                            options="{'clickable': True, 'class_mapping': {'Muon': 'info', 'Hong': 'danger', 'LuuTru': 'success'}}"/>
                 </tree>
@@ -207,7 +209,6 @@
                 </graph>
             </field>
         </record>
-
 
 
         <record id="action_tai_san_pie_trang_thai" model="ir.actions.act_window">

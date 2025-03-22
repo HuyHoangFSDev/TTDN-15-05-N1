@@ -27,9 +27,10 @@ class ThongKeTaiSan(models.Model):
 
     @api.model
     def init(self):
+        self.env.cr.execute("DROP VIEW IF EXISTS thong_ke CASCADE;")
         self.env.cr.execute("""
             CREATE OR REPLACE VIEW thong_ke AS (
-                SELECT 
+                SELECT  
                     ts.id AS id,
                     ts.id AS tai_san_id,
                     ts.trang_thai,
